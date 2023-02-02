@@ -58,10 +58,12 @@ PODS:
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.1.1)
   - Protobuf (3.21.12)
+  - SnapKit (5.0.1)
   - SSZipArchive (2.5.3)
 
 DEPENDENCIES:
   - GoogleMLKit/Translate (= 3.2.0)
+  - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
   trunk:
@@ -77,6 +79,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
+    - SnapKit
     - SSZipArchive
 
 SPEC CHECKSUMS:
@@ -92,8 +95,9 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   Protobuf: 120350fc38646e2dedc26f49ecba778184ea1de2
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SSZipArchive: d3ea9f5e15234229a8d7e164c2789a82b7c19440
 
-PODFILE CHECKSUM: d3c863f3e4d8cc98c4398362613caa34bbc9ea65
+PODFILE CHECKSUM: e7f2c4fe8f9bbb84bbbc9e795841e8c51e4d8c6d
 
 COCOAPODS: 1.11.3
