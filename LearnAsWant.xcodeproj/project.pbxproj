@@ -20,6 +20,8 @@
 		C79C8FE3298C0EC0007E2AB5 /* LanguagesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FDF298C0EC0007E2AB5 /* LanguagesRouter.swift */; };
 		C79C8FE4298C0EC0007E2AB5 /* LanguagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FE0298C0EC0007E2AB5 /* LanguagesViewController.swift */; };
 		C79C8FE5298C0EC0007E2AB5 /* LanguagesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FE1298C0EC0007E2AB5 /* LanguagesAssembly.swift */; };
+		C79C8FE9298C18B5007E2AB5 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FE8298C18B5007E2AB5 /* UIView+Extension.swift */; };
+		C79C8FED298C1935007E2AB5 /* PTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FEC298C1935007E2AB5 /* PTableViewCellModel.swift */; };
 		C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BC29892AED00DE0805 /* AppDelegate.swift */; };
 		C7A836BF29892AED00DE0805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BE29892AED00DE0805 /* SceneDelegate.swift */; };
 		C7A836C629892AEE00DE0805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7A836C529892AEE00DE0805 /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 		C79C8FDF298C0EC0007E2AB5 /* LanguagesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesRouter.swift; sourceTree = "<group>"; };
 		C79C8FE0298C0EC0007E2AB5 /* LanguagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesViewController.swift; sourceTree = "<group>"; };
 		C79C8FE1298C0EC0007E2AB5 /* LanguagesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesAssembly.swift; sourceTree = "<group>"; };
+		C79C8FE8298C18B5007E2AB5 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		C79C8FEC298C1935007E2AB5 /* PTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTableViewCellModel.swift; sourceTree = "<group>"; };
 		C7A836B929892AED00DE0805 /* LearnAsWant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnAsWant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A836BC29892AED00DE0805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7A836BE29892AED00DE0805 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,8 +136,26 @@
 		C79C8FE7298C1858007E2AB5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C79C8FE8298C18B5007E2AB5 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C79C8FEA298C1916007E2AB5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C79C8FEB298C1921007E2AB5 /* Protocols */,
+				C79C8FE7298C1858007E2AB5 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C79C8FEB298C1921007E2AB5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C79C8FEC298C1935007E2AB5 /* PTableViewCellModel.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		C7A836B029892AED00DE0805 = {
@@ -157,7 +179,7 @@
 		C7A836BB29892AED00DE0805 /* LearnAsWant */ = {
 			isa = PBXGroup;
 			children = (
-				C79C8FE7298C1858007E2AB5 /* Extensions */,
+				C79C8FEA298C1916007E2AB5 /* Utils */,
 				C79C8FD3298BD25E007E2AB5 /* Modules */,
 				C7A836BC29892AED00DE0805 /* AppDelegate.swift */,
 				C7A836BE29892AED00DE0805 /* SceneDelegate.swift */,
@@ -312,10 +334,12 @@
 				C79C8FE3298C0EC0007E2AB5 /* LanguagesRouter.swift in Sources */,
 				C722D17629899E8400347F1E /* MainScreenAssembly.swift in Sources */,
 				C79C8FDB298BD2A4007E2AB5 /* AddTranslateViewController.swift in Sources */,
+				C79C8FE9298C18B5007E2AB5 /* UIView+Extension.swift in Sources */,
 				C722D17329899E8400347F1E /* MainScreenPresenter.swift in Sources */,
 				C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */,
 				C79C8FDC298BD2A4007E2AB5 /* AddTranslateAssembly.swift in Sources */,
 				C79C8FDA298BD2A4007E2AB5 /* AddTranslateRouter.swift in Sources */,
+				C79C8FED298C1935007E2AB5 /* PTableViewCellModel.swift in Sources */,
 				C79C8FD9298BD2A4007E2AB5 /* AddTranslatePresenter.swift in Sources */,
 				C722D17429899E8400347F1E /* MainScreenRouter.swift in Sources */,
 				C79C8FE5298C0EC0007E2AB5 /* LanguagesAssembly.swift in Sources */,
