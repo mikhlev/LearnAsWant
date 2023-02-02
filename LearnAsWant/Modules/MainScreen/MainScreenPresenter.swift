@@ -28,4 +28,10 @@ class MainScreenPresenter {
     func openAddTranslateScreen() {
         router.openAddTranslateScreen()
     }
+
+    func openLanguagesScreen() {
+        router.openLanguagesScreen()
+    }
+
+
 }

@@ -14,6 +14,7 @@ class MainScreenViewController: UIViewController {
     private lazy var testLabel = UILabel()
 
     private lazy var addButton = UIButton()
+    private lazy var languagesButton = UIButton()
 
     var presenter: MainScreenPresenter!
 
@@ -33,7 +34,6 @@ class MainScreenViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        addButton.addTarget(self, action: #selector(openAddTranslateScreen), for: .touchUpInside)
 
     }
 }
@@ -41,13 +41,22 @@ class MainScreenViewController: UIViewController {
 // MARK: Setup UI.
 extension MainScreenViewController {
     private func setupViews() {
-        self.view.addSubview(addButton)
+
+        self.view.addSubviews(addButton, languagesButton)
+
+        addButton.addTarget(self, action: #selector(openAddTranslateScreen), for: .touchUpInside)
+        languagesButton.addTarget(self, action: #selector(openLanguagesScreen), for: .touchUpInside)
+
         addButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        languagesButton.setImage(UIImage(systemName: "globe"), for: .normal)
     }
 
     private func setupConstraints() {
         addButton.snp.makeConstraints { make in
             make.center.equalToSuperview()
+        }
+        languagesButton.snp.makeConstraints { make in
+            make.top.right.equalToSuperview().inset(30)
         }
     }
 }
@@ -58,5 +67,9 @@ extension MainScreenViewController {
 extension MainScreenViewController {
     @objc private func openAddTranslateScreen() {
         presenter.openAddTranslateScreen()
+    }
+
+    @objc private func openLanguagesScreen() {
+        presenter.openLanguagesScreen()
     }
 }

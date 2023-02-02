@@ -19,4 +19,9 @@ import UIKit
          let addTranslateVC = AddTranslateAssembly(navigationController: navigationController).create()
          navigationController.present(addTranslateVC, animated: true)
      }
+
+     func openLanguagesScreen() {
+         let languagesVC = LanguagesAssembly(navigationController: navigationController).create()
+         navigationController.present(languagesVC, animated: true)
+     }
  }
