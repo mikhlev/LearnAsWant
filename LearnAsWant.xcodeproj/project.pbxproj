@@ -12,6 +12,10 @@
 		C722D17429899E8400347F1E /* MainScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C722D17029899E8400347F1E /* MainScreenRouter.swift */; };
 		C722D17529899E8400347F1E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C722D17129899E8400347F1E /* MainScreenViewController.swift */; };
 		C722D17629899E8400347F1E /* MainScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C722D17229899E8400347F1E /* MainScreenAssembly.swift */; };
+		C79C8FD9298BD2A4007E2AB5 /* AddTranslatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FD5298BD2A4007E2AB5 /* AddTranslatePresenter.swift */; };
+		C79C8FDA298BD2A4007E2AB5 /* AddTranslateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FD6298BD2A4007E2AB5 /* AddTranslateRouter.swift */; };
+		C79C8FDB298BD2A4007E2AB5 /* AddTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FD7298BD2A4007E2AB5 /* AddTranslateViewController.swift */; };
+		C79C8FDC298BD2A4007E2AB5 /* AddTranslateAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FD8298BD2A4007E2AB5 /* AddTranslateAssembly.swift */; };
 		C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BC29892AED00DE0805 /* AppDelegate.swift */; };
 		C7A836BF29892AED00DE0805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BE29892AED00DE0805 /* SceneDelegate.swift */; };
 		C7A836C629892AEE00DE0805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7A836C529892AEE00DE0805 /* Assets.xcassets */; };
@@ -24,6 +28,10 @@
 		C722D17029899E8400347F1E /* MainScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenRouter.swift; sourceTree = "<group>"; };
 		C722D17129899E8400347F1E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		C722D17229899E8400347F1E /* MainScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenAssembly.swift; sourceTree = "<group>"; };
+		C79C8FD5298BD2A4007E2AB5 /* AddTranslatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTranslatePresenter.swift; sourceTree = "<group>"; };
+		C79C8FD6298BD2A4007E2AB5 /* AddTranslateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTranslateRouter.swift; sourceTree = "<group>"; };
+		C79C8FD7298BD2A4007E2AB5 /* AddTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTranslateViewController.swift; sourceTree = "<group>"; };
+		C79C8FD8298BD2A4007E2AB5 /* AddTranslateAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTranslateAssembly.swift; sourceTree = "<group>"; };
 		C7A836B929892AED00DE0805 /* LearnAsWant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnAsWant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A836BC29892AED00DE0805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7A836BE29892AED00DE0805 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +81,26 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		C79C8FD3298BD25E007E2AB5 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				C79C8FD4298BD275007E2AB5 /* AddTranslate */,
+				C722D16E29899E7300347F1E /* MainScreen */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		C79C8FD4298BD275007E2AB5 /* AddTranslate */ = {
+			isa = PBXGroup;
+			children = (
+				C79C8FD5298BD2A4007E2AB5 /* AddTranslatePresenter.swift */,
+				C79C8FD6298BD2A4007E2AB5 /* AddTranslateRouter.swift */,
+				C79C8FD7298BD2A4007E2AB5 /* AddTranslateViewController.swift */,
+				C79C8FD8298BD2A4007E2AB5 /* AddTranslateAssembly.swift */,
+			);
+			path = AddTranslate;
+			sourceTree = "<group>";
+		};
 		C7A836B029892AED00DE0805 = {
 			isa = PBXGroup;
 			children = (
@@ -94,7 +122,7 @@
 		C7A836BB29892AED00DE0805 /* LearnAsWant */ = {
 			isa = PBXGroup;
 			children = (
-				C722D16E29899E7300347F1E /* MainScreen */,
+				C79C8FD3298BD25E007E2AB5 /* Modules */,
 				C7A836BC29892AED00DE0805 /* AppDelegate.swift */,
 				C7A836BE29892AED00DE0805 /* SceneDelegate.swift */,
 				C7A836C529892AEE00DE0805 /* Assets.xcassets */,
@@ -246,8 +274,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C722D17629899E8400347F1E /* MainScreenAssembly.swift in Sources */,
+				C79C8FDB298BD2A4007E2AB5 /* AddTranslateViewController.swift in Sources */,
 				C722D17329899E8400347F1E /* MainScreenPresenter.swift in Sources */,
 				C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */,
+				C79C8FDC298BD2A4007E2AB5 /* AddTranslateAssembly.swift in Sources */,
+				C79C8FDA298BD2A4007E2AB5 /* AddTranslateRouter.swift in Sources */,
+				C79C8FD9298BD2A4007E2AB5 /* AddTranslatePresenter.swift in Sources */,
 				C722D17429899E8400347F1E /* MainScreenRouter.swift in Sources */,
 				C7A836BF29892AED00DE0805 /* SceneDelegate.swift in Sources */,
 				C722D17529899E8400347F1E /* MainScreenViewController.swift in Sources */,

@@ -22,5 +22,10 @@ class MainScreenPresenter {
    }
 
    func viewDidLoad() {
+
    }
+
+    func openAddTranslateScreen() {
+        router.openAddTranslateScreen()
+    }
 }

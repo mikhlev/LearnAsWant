@@ -14,4 +14,9 @@ import UIKit
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+
+     func openAddTranslateScreen() {
+         let addTranslateVC = AddTranslateAssembly(navigationController: navigationController).create()
+         navigationController.present(addTranslateVC, animated: true)
+     }
  }

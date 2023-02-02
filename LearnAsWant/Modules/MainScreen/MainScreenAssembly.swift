@@ -10,7 +10,7 @@ import UIKit
 
  class MainScreenAssembly {
 
-    func create() -> MainScreenViewController {
+    func create() -> UIViewController {
         let viewController = MainScreenViewController()
 
         let navigationController = UINavigationController(rootViewController: viewController)
@@ -18,6 +18,6 @@ import UIKit
         let presenter = MainScreenPresenter(view: viewController, router: router)
         viewController.presenter = presenter
 
-        return viewController
+        return navigationController
     }
  }
