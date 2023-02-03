@@ -8,10 +8,9 @@
 
 import SnapKit
 import UIKit
+import MLKitTranslate
 
 class MainScreenViewController: UIViewController {
-
-    private lazy var testLabel = UILabel()
 
     private lazy var addButton = UIButton()
     private lazy var languagesButton = UIButton()
@@ -25,6 +24,7 @@ class MainScreenViewController: UIViewController {
         setupViews()
         setupConstraints()
         presenter.viewDidLoad()
+        downLoad()
         self.view.backgroundColor = .green
     }
 
@@ -34,7 +34,21 @@ class MainScreenViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
 
+    func downLoad() {
+        
+        let model = TranslateRemoteModel.translateRemoteModel(language: .russian)
+
+        if !ModelManager.modelManager().isModelDownloaded(model) {
+            ModelManager.modelManager().download(
+                model,
+                conditions: ModelDownloadConditions(
+                    allowsCellularAccess: true,
+                    allowsBackgroundDownloading: true
+                )
+            )
+        }
     }
 }
 
@@ -73,3 +87,5 @@ extension MainScreenViewController {
         presenter.openLanguagesScreen()
     }
 }
+
+

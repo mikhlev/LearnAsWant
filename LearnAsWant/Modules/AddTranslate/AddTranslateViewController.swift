@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MLKitTranslate
 
 class AddTranslateViewController: UIViewController {
 
@@ -39,19 +40,48 @@ class AddTranslateViewController: UIViewController {
         setupConstraints()
         presenter.viewDidLoad()
         self.view.backgroundColor = .blue
+    }
 
-        languageFromButton.setTitle("Language 1", for: .normal)
-        languageToButton.setTitle("Language 1", for: .normal)
+    func setupData(tranlsationModel: TranlsationModel) {
+        languageFromButton.setTitle(tranlsationModel.fromLanguage.rawValue, for: .normal)
+        languageToButton.setTitle(tranlsationModel.toLanguage.rawValue, for: .normal)
         saveButton.setTitle("save", for: .normal)
         changeLanguageButton.setImage(UIImage(systemName: "arrow.left.arrow.right"), for: .normal)
 
+        fromTextView.text = tranlsationModel.fromText
+        toTextView.text = tranlsationModel.toText
     }
+}
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+// MARK: - UITextViewDelegate.
+
+extension AddTranslateViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+
+        switch textView {
+        case fromTextView:
+            presenter.translateTextFromMainLanguage(translatedText: textView.text) { [weak self] result in
+                self?.toTextView.text = result
+            }
+        case toTextView:
+            presenter.translateTextToMainLanguage(translatedText: textView.text) { [weak self] result in
+                self?.fromTextView.text = result
+            }
+        default:
+            break
+        }
     }
+}
+
+// MARK: - Setup UI.
+
+extension AddTranslateViewController {
 
     private func setupViews() {
+
+        self.fromTextView.delegate = self
+        self.toTextView.delegate = self
+
         self.view.addSubviews(fromTextView,
                               toTextView,
                               languageFromButton,

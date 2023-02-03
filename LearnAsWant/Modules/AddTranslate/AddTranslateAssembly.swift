@@ -7,21 +7,26 @@
 //
 
 import UIKit
+import MLKitTranslate
 
  class AddTranslateAssembly {
-    let navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
+     let navigationController: UINavigationController
 
-    func create() -> AddTranslateViewController {
-        let viewController = AddTranslateViewController()
+     var tranlsationModel: TranlsationModel
 
-        let router = AddTranslateRouter(navigationController: navigationController)
-        let presenter = AddTranslatePresenter(view: viewController, router: router)
-        viewController.presenter = presenter
+     init(navigationController: UINavigationController, tranlsationModel: TranlsationModel) {
+         self.navigationController = navigationController
+         self.tranlsationModel = tranlsationModel
+     }
 
-        return viewController
+     func create() -> AddTranslateViewController {
+         let viewController = AddTranslateViewController()
+
+         let router = AddTranslateRouter(navigationController: navigationController)
+         let presenter = AddTranslatePresenter(view: viewController, router: router, tranlsationModel: tranlsationModel)
+         viewController.presenter = presenter
+
+         return viewController
     }
  }

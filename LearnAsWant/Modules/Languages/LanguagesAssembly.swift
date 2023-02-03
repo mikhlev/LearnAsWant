@@ -9,19 +9,20 @@
 import UIKit
 
  class LanguagesAssembly {
-    let navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
+     let navigationController: UINavigationController
 
-    func create() -> LanguagesViewController {
-        let viewController = LanguagesViewController()
+     init(navigationController: UINavigationController) {
+         self.navigationController = navigationController
+     }
 
-        let router = LanguagesRouter(navigationController: navigationController)
-        let presenter = LanguagesPresenter(view: viewController, router: router)
-        viewController.presenter = presenter
+     func create() -> LanguagesViewController {
+         let viewController = LanguagesViewController()
 
-        return viewController
-    }
+         let router = LanguagesRouter(navigationController: navigationController)
+         let presenter = LanguagesPresenter(view: viewController, router: router)
+         viewController.presenter = presenter
+
+         return viewController
+     }
  }
