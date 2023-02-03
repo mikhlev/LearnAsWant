@@ -20,8 +20,11 @@
 		C79C8FE3298C0EC0007E2AB5 /* LanguagesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FDF298C0EC0007E2AB5 /* LanguagesRouter.swift */; };
 		C79C8FE4298C0EC0007E2AB5 /* LanguagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FE0298C0EC0007E2AB5 /* LanguagesViewController.swift */; };
 		C79C8FE5298C0EC0007E2AB5 /* LanguagesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FE1298C0EC0007E2AB5 /* LanguagesAssembly.swift */; };
-		C79C8FE9298C18B5007E2AB5 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FE8298C18B5007E2AB5 /* UIView+Extension.swift */; };
+		C79C8FE9298C18B5007E2AB5 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FE8298C18B5007E2AB5 /* UIView+Extensions.swift */; };
 		C79C8FED298C1935007E2AB5 /* PTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FEC298C1935007E2AB5 /* PTableViewCellModel.swift */; };
+		C79C8FF0298C1D67007E2AB5 /* LanguageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FEF298C1D67007E2AB5 /* LanguageCellModel.swift */; };
+		C79C8FF2298C2071007E2AB5 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FF1298C2071007E2AB5 /* UITableView+Extensions.swift */; };
+		C79C8FF4298C2420007E2AB5 /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FF3298C2420007E2AB5 /* LanguageCell.swift */; };
 		C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BC29892AED00DE0805 /* AppDelegate.swift */; };
 		C7A836BF29892AED00DE0805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BE29892AED00DE0805 /* SceneDelegate.swift */; };
 		C7A836C629892AEE00DE0805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7A836C529892AEE00DE0805 /* Assets.xcassets */; };
@@ -42,8 +45,11 @@
 		C79C8FDF298C0EC0007E2AB5 /* LanguagesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesRouter.swift; sourceTree = "<group>"; };
 		C79C8FE0298C0EC0007E2AB5 /* LanguagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesViewController.swift; sourceTree = "<group>"; };
 		C79C8FE1298C0EC0007E2AB5 /* LanguagesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesAssembly.swift; sourceTree = "<group>"; };
-		C79C8FE8298C18B5007E2AB5 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		C79C8FE8298C18B5007E2AB5 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		C79C8FEC298C1935007E2AB5 /* PTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTableViewCellModel.swift; sourceTree = "<group>"; };
+		C79C8FEF298C1D67007E2AB5 /* LanguageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCellModel.swift; sourceTree = "<group>"; };
+		C79C8FF1298C2071007E2AB5 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		C79C8FF3298C2420007E2AB5 /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
 		C7A836B929892AED00DE0805 /* LearnAsWant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnAsWant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A836BC29892AED00DE0805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7A836BE29892AED00DE0805 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 		C79C8FDD298C0E93007E2AB5 /* Languages */ = {
 			isa = PBXGroup;
 			children = (
+				C79C8FEE298C1D59007E2AB5 /* CellModels */,
 				C79C8FE6298C0FDE007E2AB5 /* Cells */,
 				C79C8FDE298C0EC0007E2AB5 /* LanguagesPresenter.swift */,
 				C79C8FDF298C0EC0007E2AB5 /* LanguagesRouter.swift */,
@@ -129,6 +136,7 @@
 		C79C8FE6298C0FDE007E2AB5 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C79C8FF3298C2420007E2AB5 /* LanguageCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -136,7 +144,8 @@
 		C79C8FE7298C1858007E2AB5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C79C8FE8298C18B5007E2AB5 /* UIView+Extension.swift */,
+				C79C8FE8298C18B5007E2AB5 /* UIView+Extensions.swift */,
+				C79C8FF1298C2071007E2AB5 /* UITableView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -156,6 +165,14 @@
 				C79C8FEC298C1935007E2AB5 /* PTableViewCellModel.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C79C8FEE298C1D59007E2AB5 /* CellModels */ = {
+			isa = PBXGroup;
+			children = (
+				C79C8FEF298C1D67007E2AB5 /* LanguageCellModel.swift */,
+			);
+			path = CellModels;
 			sourceTree = "<group>";
 		};
 		C7A836B029892AED00DE0805 = {
@@ -334,14 +351,17 @@
 				C79C8FE3298C0EC0007E2AB5 /* LanguagesRouter.swift in Sources */,
 				C722D17629899E8400347F1E /* MainScreenAssembly.swift in Sources */,
 				C79C8FDB298BD2A4007E2AB5 /* AddTranslateViewController.swift in Sources */,
-				C79C8FE9298C18B5007E2AB5 /* UIView+Extension.swift in Sources */,
+				C79C8FE9298C18B5007E2AB5 /* UIView+Extensions.swift in Sources */,
 				C722D17329899E8400347F1E /* MainScreenPresenter.swift in Sources */,
 				C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */,
 				C79C8FDC298BD2A4007E2AB5 /* AddTranslateAssembly.swift in Sources */,
 				C79C8FDA298BD2A4007E2AB5 /* AddTranslateRouter.swift in Sources */,
 				C79C8FED298C1935007E2AB5 /* PTableViewCellModel.swift in Sources */,
+				C79C8FF2298C2071007E2AB5 /* UITableView+Extensions.swift in Sources */,
 				C79C8FD9298BD2A4007E2AB5 /* AddTranslatePresenter.swift in Sources */,
+				C79C8FF4298C2420007E2AB5 /* LanguageCell.swift in Sources */,
 				C722D17429899E8400347F1E /* MainScreenRouter.swift in Sources */,
+				C79C8FF0298C1D67007E2AB5 /* LanguageCellModel.swift in Sources */,
 				C79C8FE5298C0EC0007E2AB5 /* LanguagesAssembly.swift in Sources */,
 				C7A836BF29892AED00DE0805 /* SceneDelegate.swift in Sources */,
 				C722D17529899E8400347F1E /* MainScreenViewController.swift in Sources */,

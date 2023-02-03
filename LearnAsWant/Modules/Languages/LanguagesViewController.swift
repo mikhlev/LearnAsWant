@@ -7,32 +7,26 @@
 //
 
 import UIKit
-import MLKitTranslate
 
 class LanguagesViewController: UIViewController {
 
     var presenter: LanguagesPresenter!
 
-    private lazy var tableView = UITableView(frame: .zero, style: .plain)
-
+    private lazy var tableView = UITableView()
     private var cellModels: [PTableViewCellAnyModel] = [] {
         didSet {
             tableView.reloadData()
         }
     }
 
-    private lazy var languagesList = Array(TranslateLanguage.allLanguages()).sorted(by: { $0.rawValue > $1.rawValue })
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
         setupViews()
         setupConstraints()
+        tableView.register(models: [LanguageCellModel.self])
+
         presenter.viewDidLoad()
-        // Create an English-German translator:
-        let options = TranslatorOptions(sourceLanguage: .english, targetLanguage: .german)
-        let englishGermanTranslator = Translator.translator(options: options)
     }
 
     override func viewDidLayoutSubviews() {
@@ -47,7 +41,6 @@ extension LanguagesViewController {
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
-
         self.view.addSubview(tableView)
     }
 
@@ -55,6 +48,14 @@ extension LanguagesViewController {
         tableView.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview()
         }
+    }
+}
+
+// MARK: Table data.
+
+extension LanguagesViewController {
+    func showData(with cellModels: [PTableViewCellAnyModel]) {
+        self.cellModels = cellModels
     }
 }
 
@@ -68,12 +69,10 @@ extension LanguagesViewController: UITableViewDelegate {
 
 extension LanguagesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        languagesList.count
+        cellModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = languagesList[indexPath.row].rawValue
-        return cell
+        tableView.dequeueReusableCell(withModel: cellModels[indexPath.row], for: indexPath)
     }
 }

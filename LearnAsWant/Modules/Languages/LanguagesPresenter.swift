@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MLKitTranslate
 
 class LanguagesPresenter {
 
@@ -22,5 +23,7 @@ class LanguagesPresenter {
    }
 
    func viewDidLoad() {
+      var languagesList = Array(TranslateLanguage.allLanguages()).sorted(by: { $0.rawValue > $1.rawValue })
+       view?.showData(with: languagesList.map { LanguageCellModel(text: $0.rawValue) })
    }
 }
