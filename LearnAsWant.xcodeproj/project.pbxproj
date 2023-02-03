@@ -25,7 +25,11 @@
 		C79C8FF0298C1D67007E2AB5 /* LanguageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FEF298C1D67007E2AB5 /* LanguageCellModel.swift */; };
 		C79C8FF2298C2071007E2AB5 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FF1298C2071007E2AB5 /* UITableView+Extensions.swift */; };
 		C79C8FF4298C2420007E2AB5 /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FF3298C2420007E2AB5 /* LanguageCell.swift */; };
-		C79C8FF8298CF7CF007E2AB5 /* TranlsationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FF7298CF7CF007E2AB5 /* TranlsationModel.swift */; };
+		C79C8FF8298CF7CF007E2AB5 /* TranslationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FF7298CF7CF007E2AB5 /* TranslationModel.swift */; };
+		C79C8FFA298CFDDD007E2AB5 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FF9298CFDDD007E2AB5 /* UserDefaults+Extensions.swift */; };
+		C79C8FFC298D002D007E2AB5 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FFB298D002D007E2AB5 /* CardModel.swift */; };
+		C79C8FFF298D17E9007E2AB5 /* TranslatedCardCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FFE298D17E9007E2AB5 /* TranslatedCardCellModel.swift */; };
+		C79C9001298D1803007E2AB5 /* TranslatedCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C9000298D1803007E2AB5 /* TranslatedCardCell.swift */; };
 		C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BC29892AED00DE0805 /* AppDelegate.swift */; };
 		C7A836BF29892AED00DE0805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BE29892AED00DE0805 /* SceneDelegate.swift */; };
 		C7A836C629892AEE00DE0805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7A836C529892AEE00DE0805 /* Assets.xcassets */; };
@@ -51,7 +55,11 @@
 		C79C8FEF298C1D67007E2AB5 /* LanguageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCellModel.swift; sourceTree = "<group>"; };
 		C79C8FF1298C2071007E2AB5 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		C79C8FF3298C2420007E2AB5 /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
-		C79C8FF7298CF7CF007E2AB5 /* TranlsationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranlsationModel.swift; sourceTree = "<group>"; };
+		C79C8FF7298CF7CF007E2AB5 /* TranslationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationModel.swift; sourceTree = "<group>"; };
+		C79C8FF9298CFDDD007E2AB5 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		C79C8FFB298D002D007E2AB5 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
+		C79C8FFE298D17E9007E2AB5 /* TranslatedCardCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedCardCellModel.swift; sourceTree = "<group>"; };
+		C79C9000298D1803007E2AB5 /* TranslatedCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedCardCell.swift; sourceTree = "<group>"; };
 		C7A836B929892AED00DE0805 /* LearnAsWant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnAsWant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A836BC29892AED00DE0805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7A836BE29892AED00DE0805 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +93,7 @@
 		C722D16E29899E7300347F1E /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				C79C8FFD298D17CA007E2AB5 /* CellModels */,
 				C79C8FD2298AB183007E2AB5 /* Cells */,
 				C722D16F29899E8400347F1E /* MainScreenPresenter.swift */,
 				C722D17029899E8400347F1E /* MainScreenRouter.swift */,
@@ -97,6 +106,7 @@
 		C79C8FD2298AB183007E2AB5 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C79C9000298D1803007E2AB5 /* TranslatedCardCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -148,6 +158,7 @@
 			children = (
 				C79C8FE8298C18B5007E2AB5 /* UIView+Extensions.swift */,
 				C79C8FF1298C2071007E2AB5 /* UITableView+Extensions.swift */,
+				C79C8FF9298CFDDD007E2AB5 /* UserDefaults+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -180,9 +191,18 @@
 		C79C8FF6298CF7C5007E2AB5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C79C8FF7298CF7CF007E2AB5 /* TranlsationModel.swift */,
+				C79C8FF7298CF7CF007E2AB5 /* TranslationModel.swift */,
+				C79C8FFB298D002D007E2AB5 /* CardModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C79C8FFD298D17CA007E2AB5 /* CellModels */ = {
+			isa = PBXGroup;
+			children = (
+				C79C8FFE298D17E9007E2AB5 /* TranslatedCardCellModel.swift */,
+			);
+			path = CellModels;
 			sourceTree = "<group>";
 		};
 		C7A836B029892AED00DE0805 = {
@@ -360,17 +380,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				C79C8FE3298C0EC0007E2AB5 /* LanguagesRouter.swift in Sources */,
+				C79C8FFC298D002D007E2AB5 /* CardModel.swift in Sources */,
 				C722D17629899E8400347F1E /* MainScreenAssembly.swift in Sources */,
 				C79C8FDB298BD2A4007E2AB5 /* AddTranslateViewController.swift in Sources */,
 				C79C8FE9298C18B5007E2AB5 /* UIView+Extensions.swift in Sources */,
+				C79C8FFA298CFDDD007E2AB5 /* UserDefaults+Extensions.swift in Sources */,
 				C722D17329899E8400347F1E /* MainScreenPresenter.swift in Sources */,
-				C79C8FF8298CF7CF007E2AB5 /* TranlsationModel.swift in Sources */,
+				C79C8FF8298CF7CF007E2AB5 /* TranslationModel.swift in Sources */,
 				C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */,
 				C79C8FDC298BD2A4007E2AB5 /* AddTranslateAssembly.swift in Sources */,
+				C79C8FFF298D17E9007E2AB5 /* TranslatedCardCellModel.swift in Sources */,
 				C79C8FDA298BD2A4007E2AB5 /* AddTranslateRouter.swift in Sources */,
 				C79C8FED298C1935007E2AB5 /* PTableViewCellModel.swift in Sources */,
 				C79C8FF2298C2071007E2AB5 /* UITableView+Extensions.swift in Sources */,
 				C79C8FD9298BD2A4007E2AB5 /* AddTranslatePresenter.swift in Sources */,
+				C79C9001298D1803007E2AB5 /* TranslatedCardCell.swift in Sources */,
 				C79C8FF4298C2420007E2AB5 /* LanguageCell.swift in Sources */,
 				C722D17429899E8400347F1E /* MainScreenRouter.swift in Sources */,
 				C79C8FF0298C1D67007E2AB5 /* LanguageCellModel.swift in Sources */,

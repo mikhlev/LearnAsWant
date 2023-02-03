@@ -8,13 +8,15 @@
 
 import UIKit
 
- class MainScreenAssembly {
+class MainScreenAssembly {
 
     func create() -> UINavigationController {
         let viewController = MainScreenViewController()
 
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.isHidden = true
+
+
         let router = MainScreenRouter(navigationController: navigationController)
         let presenter = MainScreenPresenter(view: viewController, router: router)
         viewController.presenter = presenter

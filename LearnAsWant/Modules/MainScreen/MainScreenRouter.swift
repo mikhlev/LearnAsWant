@@ -16,8 +16,9 @@ import UIKit
     }
 
      func openAddTranslateScreen() {
-         let model = TranlsationModel(fromLanguage: .russian, toLanguage: .english)
-         let addTranslateVC = AddTranslateAssembly(navigationController: navigationController, tranlsationModel: model).create()
+         let model = TranslationModel(fromLanguage: .russian, toLanguage: .english)
+         let addTranslateVC = AddTranslateAssembly(navigationController: navigationController,
+                                                   translationModel: model).create()
          navigationController.present(addTranslateVC, animated: true)
      }
 

@@ -8,7 +8,7 @@
 import Foundation
 import MLKitTranslate
 
-class TranlsationModel {
+class TranslationModel {
     var fromLanguage: GlobalLanguage
     var toLanguage: GlobalLanguage
     var fromText: String?

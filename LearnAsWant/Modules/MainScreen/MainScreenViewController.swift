@@ -12,19 +12,41 @@ import MLKitTranslate
 
 class MainScreenViewController: UIViewController {
 
-    private lazy var addButton = UIButton()
+    private lazy var addButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 6
+        button.backgroundColor = .link
+        button.setTitle("Add new", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+
+    private lazy var learnButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 6
+        button.backgroundColor = .link
+        button.setTitle("Learn", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+
     private lazy var languagesButton = UIButton()
+    private lazy var tableView = UITableView()
+    private var cellModels: [PTableViewCellAnyModel] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
 
     var presenter: MainScreenPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view
-
         setupViews()
         setupConstraints()
         presenter.viewDidLoad()
         downLoad()
+
         self.view.backgroundColor = .green
     }
 
@@ -37,7 +59,7 @@ class MainScreenViewController: UIViewController {
     }
 
     func downLoad() {
-        
+
         let model = TranslateRemoteModel.translateRemoteModel(language: .russian)
 
         if !ModelManager.modelManager().isModelDownloaded(model) {
@@ -52,29 +74,56 @@ class MainScreenViewController: UIViewController {
     }
 }
 
-// MARK: Setup UI.
+// MARK: - Table data.
+
+extension MainScreenViewController {
+    func showData(with cellModels: [PTableViewCellAnyModel]) {
+        self.cellModels = cellModels
+    }
+}
+
+// MARK: - Setup UI.
 extension MainScreenViewController {
     private func setupViews() {
 
-        self.view.addSubviews(addButton, languagesButton)
+        self.view.addSubviews(tableView, addButton, learnButton, languagesButton)
+
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        tableView.register(models: [TranslatedCardCellModel.self])
+        self.tableView.contentInset.bottom = 60
 
         addButton.addTarget(self, action: #selector(openAddTranslateScreen), for: .touchUpInside)
         languagesButton.addTarget(self, action: #selector(openLanguagesScreen), for: .touchUpInside)
-
-        addButton.setImage(UIImage(systemName: "plus"), for: .normal)
         languagesButton.setImage(UIImage(systemName: "globe"), for: .normal)
     }
 
     private func setupConstraints() {
-        addButton.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+
+        tableView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(60)
+            make.left.right.bottom.equalToSuperview()
         }
+
+        addButton.snp.makeConstraints { make in
+            make.height.equalTo(40)
+            make.width.equalTo(130)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20)
+            make.left.equalToSuperview().inset(30)
+        }
+
+        learnButton.snp.makeConstraints { make in
+            make.height.equalTo(40)
+            make.width.equalTo(130)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20)
+            make.right.equalToSuperview().inset(30)
+        }
+
         languagesButton.snp.makeConstraints { make in
             make.top.right.equalToSuperview().inset(30)
         }
     }
 }
-
 
 // MARK: Screen action.
 
@@ -88,4 +137,22 @@ extension MainScreenViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
 
+extension MainScreenViewController: UITableViewDelegate {
+
+}
+
+
+// MARK: - UITableViewDataSource
+
+extension MainScreenViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        cellModels.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        tableView.dequeueReusableCell(withModel: cellModels[indexPath.row], for: indexPath)
+    }
+}
