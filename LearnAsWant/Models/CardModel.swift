@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+struct CardModel: Codable {
+    var text: String
+    var translatedText: String
+
+    init(text: String, translatedText: String) {
+        self.text = text
+        self.translatedText = translatedText
+    }
+}

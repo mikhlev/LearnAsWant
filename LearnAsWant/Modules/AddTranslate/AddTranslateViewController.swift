@@ -34,6 +34,8 @@ class AddTranslateViewController: UIViewController {
     private lazy var changeLanguageButton = UIButton()
     private lazy var saveButton = UIButton()
 
+    private var translationModel: TranslationModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -42,14 +44,16 @@ class AddTranslateViewController: UIViewController {
         self.view.backgroundColor = .blue
     }
 
-    func setupData(tranlsationModel: TranlsationModel) {
-        languageFromButton.setTitle(tranlsationModel.fromLanguage.rawValue, for: .normal)
-        languageToButton.setTitle(tranlsationModel.toLanguage.rawValue, for: .normal)
-        saveButton.setTitle("save", for: .normal)
-        changeLanguageButton.setImage(UIImage(systemName: "arrow.left.arrow.right"), for: .normal)
+    func setupData(translationModel: TranslationModel) {
+        self.translationModel = translationModel
 
-        fromTextView.text = tranlsationModel.fromText
-        toTextView.text = tranlsationModel.toText
+        languageFromButton.setTitle(translationModel.fromLanguage.rawValue, for: .normal)
+        languageToButton.setTitle(translationModel.toLanguage.rawValue, for: .normal)
+        saveButton.setTitle("save", for: .normal)
+        changeLanguageButton.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+
+        fromTextView.text = translationModel.fromText
+        toTextView.text = translationModel.toText
     }
 }
 
@@ -62,14 +66,22 @@ extension AddTranslateViewController: UITextViewDelegate {
         case fromTextView:
             presenter.translateTextFromMainLanguage(translatedText: textView.text) { [weak self] result in
                 self?.toTextView.text = result
+                self?.updateModel()
             }
         case toTextView:
             presenter.translateTextToMainLanguage(translatedText: textView.text) { [weak self] result in
                 self?.fromTextView.text = result
+                self?.updateModel()
+
             }
         default:
             break
         }
+    }
+
+    private func updateModel() {
+        translationModel?.fromText = self.fromTextView.text
+        translationModel?.toText = self.toTextView.text
     }
 }
 
@@ -88,6 +100,8 @@ extension AddTranslateViewController {
                               languageToButton,
                               changeLanguageButton,
                               saveButton)
+
+        self.saveButton.addTarget(self, action: #selector(saveText), for: .touchUpInside)
     }
 
     private func setupConstraints() {
@@ -131,5 +145,14 @@ extension AddTranslateViewController {
             make.top.greaterThanOrEqualTo(toTextView.snp.bottom).offset(30)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20)
         }
+    }
+}
+
+// MARK: - Actions.
+
+extension AddTranslateViewController {
+
+    @objc private func saveText() {
+        presenter.saveText(model: translationModel)
     }
 }

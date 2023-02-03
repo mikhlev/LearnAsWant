@@ -13,18 +13,20 @@ import MLKitTranslate
 
      let navigationController: UINavigationController
 
-     var tranlsationModel: TranlsationModel
+     var translationModel: TranslationModel
 
-     init(navigationController: UINavigationController, tranlsationModel: TranlsationModel) {
+     weak var mainRefreshDelegate: MainRefresh?
+
+     init(navigationController: UINavigationController, translationModel: TranslationModel) {
          self.navigationController = navigationController
-         self.tranlsationModel = tranlsationModel
+         self.translationModel = translationModel
      }
 
      func create() -> AddTranslateViewController {
          let viewController = AddTranslateViewController()
 
          let router = AddTranslateRouter(navigationController: navigationController)
-         let presenter = AddTranslatePresenter(view: viewController, router: router, tranlsationModel: tranlsationModel)
+         let presenter = AddTranslatePresenter(view: viewController, router: router, translationModel: translationModel)
          viewController.presenter = presenter
 
          return viewController

@@ -14,29 +14,49 @@ class AddTranslatePresenter {
     private weak var view: AddTranslateViewController?
     private let router: AddTranslateRouter
 
-    private var tranlsationModel: TranlsationModel
+    private var translationModel: TranslationModel
 
-    lazy var mainOptions = TranslatorOptions(sourceLanguage: tranlsationModel.fromLanguage.libraryName,
-                                             targetLanguage: tranlsationModel.toLanguage.libraryName)
+    lazy var mainOptions = TranslatorOptions(sourceLanguage: translationModel.fromLanguage.libraryName,
+                                             targetLanguage: translationModel.toLanguage.libraryName)
 
-    lazy var reverseOptions = TranslatorOptions(sourceLanguage: tranlsationModel.toLanguage.libraryName,
-                                                targetLanguage: tranlsationModel.fromLanguage.libraryName)
+    lazy var reverseOptions = TranslatorOptions(sourceLanguage: translationModel.toLanguage.libraryName,
+                                                targetLanguage: translationModel.fromLanguage.libraryName)
 
     lazy var mainTranslator = Translator.translator(options: mainOptions)
     lazy var reverseTranslator = Translator.translator(options: reverseOptions)
 
+    weak var mainRefreshDelegate: MainRefresh?
+
     init(
         view: AddTranslateViewController,
         router: AddTranslateRouter,
-        tranlsationModel: TranlsationModel
+        translationModel: TranslationModel
     ) {
         self.view = view
         self.router = router
-        self.tranlsationModel = tranlsationModel
+        self.translationModel = translationModel
     }
 
     func viewDidLoad() {
-        self.view?.setupData(tranlsationModel: tranlsationModel)
+        self.view?.setupData(translationModel: translationModel)
+    }
+
+    func saveText(model: TranslationModel?) {
+
+        guard
+            let model = model,
+            let lastUsedLanguage = UserDefaults.lastUsedLanguage,
+            let text = model.fromText,
+            let translatedText = model.toText
+        else { return }
+
+        var allExistedCards = UserDefaults.cards ?? [:]
+        var array = allExistedCards[lastUsedLanguage] ?? []
+        array.append(CardModel(text: text, translatedText: translatedText))
+        allExistedCards.updateValue(array, forKey: lastUsedLanguage)
+        UserDefaults.cards = allExistedCards
+        mainRefreshDelegate?.refreshScreen()
+        
     }
 }
 
