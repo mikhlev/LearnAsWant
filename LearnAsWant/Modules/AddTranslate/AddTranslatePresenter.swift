@@ -25,8 +25,6 @@ class AddTranslatePresenter {
     lazy var mainTranslator = Translator.translator(options: mainOptions)
     lazy var reverseTranslator = Translator.translator(options: reverseOptions)
 
-    weak var mainRefreshDelegate: MainRefresh?
-
     init(
         view: AddTranslateViewController,
         router: AddTranslateRouter,
@@ -55,8 +53,9 @@ class AddTranslatePresenter {
         array.append(CardModel(text: text, translatedText: translatedText))
         allExistedCards.updateValue(array, forKey: lastUsedLanguage)
         UserDefaults.cards = allExistedCards
-        mainRefreshDelegate?.refreshScreen()
         
+        NotificationService.postMessage(for: .newCardAdded)
+        router.closeScreen()
     }
 }
 

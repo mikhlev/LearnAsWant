@@ -16,6 +16,6 @@ import UIKit
     }
 
      func closeScreen() {
-         navigationController.popViewController(animated: true)
+         navigationController.dismiss(animated: true)
      }
  }

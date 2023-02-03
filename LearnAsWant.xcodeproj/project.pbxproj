@@ -30,6 +30,8 @@
 		C79C8FFC298D002D007E2AB5 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FFB298D002D007E2AB5 /* CardModel.swift */; };
 		C79C8FFF298D17E9007E2AB5 /* TranslatedCardCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FFE298D17E9007E2AB5 /* TranslatedCardCellModel.swift */; };
 		C79C9001298D1803007E2AB5 /* TranslatedCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C9000298D1803007E2AB5 /* TranslatedCardCell.swift */; };
+		C79C9003298D648A007E2AB5 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C9002298D648A007E2AB5 /* Strings.swift */; };
+		C79C9006298D6750007E2AB5 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C9005298D6750007E2AB5 /* NotificationService.swift */; };
 		C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BC29892AED00DE0805 /* AppDelegate.swift */; };
 		C7A836BF29892AED00DE0805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BE29892AED00DE0805 /* SceneDelegate.swift */; };
 		C7A836C629892AEE00DE0805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7A836C529892AEE00DE0805 /* Assets.xcassets */; };
@@ -60,6 +62,8 @@
 		C79C8FFB298D002D007E2AB5 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		C79C8FFE298D17E9007E2AB5 /* TranslatedCardCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedCardCellModel.swift; sourceTree = "<group>"; };
 		C79C9000298D1803007E2AB5 /* TranslatedCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedCardCell.swift; sourceTree = "<group>"; };
+		C79C9002298D648A007E2AB5 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		C79C9005298D6750007E2AB5 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		C7A836B929892AED00DE0805 /* LearnAsWant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnAsWant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A836BC29892AED00DE0805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7A836BE29892AED00DE0805 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +172,7 @@
 			children = (
 				C79C8FEB298C1921007E2AB5 /* Protocols */,
 				C79C8FE7298C1858007E2AB5 /* Extensions */,
+				C79C9002298D648A007E2AB5 /* Strings.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -205,6 +210,14 @@
 			path = CellModels;
 			sourceTree = "<group>";
 		};
+		C79C9004298D671E007E2AB5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C79C9005298D6750007E2AB5 /* NotificationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		C7A836B029892AED00DE0805 = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +239,7 @@
 		C7A836BB29892AED00DE0805 /* LearnAsWant */ = {
 			isa = PBXGroup;
 			children = (
+				C79C9004298D671E007E2AB5 /* Services */,
 				C79C8FF6298CF7C5007E2AB5 /* Models */,
 				C79C8FEA298C1916007E2AB5 /* Utils */,
 				C79C8FD3298BD25E007E2AB5 /* Modules */,
@@ -381,11 +395,13 @@
 			files = (
 				C79C8FE3298C0EC0007E2AB5 /* LanguagesRouter.swift in Sources */,
 				C79C8FFC298D002D007E2AB5 /* CardModel.swift in Sources */,
+				C79C9006298D6750007E2AB5 /* NotificationService.swift in Sources */,
 				C722D17629899E8400347F1E /* MainScreenAssembly.swift in Sources */,
 				C79C8FDB298BD2A4007E2AB5 /* AddTranslateViewController.swift in Sources */,
 				C79C8FE9298C18B5007E2AB5 /* UIView+Extensions.swift in Sources */,
 				C79C8FFA298CFDDD007E2AB5 /* UserDefaults+Extensions.swift in Sources */,
 				C722D17329899E8400347F1E /* MainScreenPresenter.swift in Sources */,
+				C79C9003298D648A007E2AB5 /* Strings.swift in Sources */,
 				C79C8FF8298CF7CF007E2AB5 /* TranslationModel.swift in Sources */,
 				C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */,
 				C79C8FDC298BD2A4007E2AB5 /* AddTranslateAssembly.swift in Sources */,

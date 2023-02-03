@@ -13,7 +13,7 @@ class MainScreenPresenter {
     private weak var view: MainScreenViewController?
     private let router: MainScreenRouter
     private var cellModels: [TranslatedCardCellModel] {
-        return getCards().map { TranslatedCardCellModel(text: $0.text, translatedText: $0.translatedText) }
+        return getCards().reversed().map { TranslatedCardCellModel(text: $0.text, translatedText: $0.translatedText) }
     }
 
     init(
@@ -26,6 +26,7 @@ class MainScreenPresenter {
 
     func viewDidLoad() {
         setupTableData()
+        NotificationService.addObserver(vc: self, selector: #selector(refreshScreen), for: .newCardAdded)
     }
 
     func openAddTranslateScreen() {
@@ -48,12 +49,8 @@ class MainScreenPresenter {
     }
 }
 
-extension MainScreenPresenter: MainRefresh {
-    func refreshScreen() {
+extension MainScreenPresenter {
+    @objc func refreshScreen() {
         setupTableData()
     }
-}
-
-protocol MainRefresh: AnyObject {
-    func refreshScreen()
 }

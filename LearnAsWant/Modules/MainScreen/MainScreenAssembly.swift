@@ -16,7 +16,6 @@ class MainScreenAssembly {
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.isHidden = true
 
-
         let router = MainScreenRouter(navigationController: navigationController)
         let presenter = MainScreenPresenter(view: viewController, router: router)
         viewController.presenter = presenter

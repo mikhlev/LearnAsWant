@@ -15,9 +15,8 @@ import MLKitTranslate
 
      var translationModel: TranslationModel
 
-     weak var mainRefreshDelegate: MainRefresh?
-
-     init(navigationController: UINavigationController, translationModel: TranslationModel) {
+     init(navigationController: UINavigationController,
+          translationModel: TranslationModel) {
          self.navigationController = navigationController
          self.translationModel = translationModel
      }
@@ -28,7 +27,6 @@ import MLKitTranslate
          let router = AddTranslateRouter(navigationController: navigationController)
          let presenter = AddTranslatePresenter(view: viewController, router: router, translationModel: translationModel)
          viewController.presenter = presenter
-
          return viewController
     }
  }

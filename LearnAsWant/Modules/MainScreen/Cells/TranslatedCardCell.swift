@@ -44,13 +44,15 @@ extension TranslatedCardCell {
     private func setupConstraints() {
         topLabel.snp.makeConstraints { make in
             make.height.equalTo(24)
-            make.top.left.right.equalToSuperview().inset(4)
+            make.top.equalToSuperview().inset(4)
+            make.left.right.equalToSuperview().inset(16)
         }
 
         bottomLabel.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.top.equalTo(topLabel.snp.bottom).offset(4)
-            make.bottom.left.right.equalToSuperview().inset(4)
+            make.bottom.equalToSuperview().inset(4)
+            make.left.right.equalToSuperview().inset(16)
         }
     }
 }
