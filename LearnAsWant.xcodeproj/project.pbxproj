@@ -32,6 +32,7 @@
 		C79C9001298D1803007E2AB5 /* TranslatedCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C9000298D1803007E2AB5 /* TranslatedCardCell.swift */; };
 		C79C9003298D648A007E2AB5 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C9002298D648A007E2AB5 /* Strings.swift */; };
 		C79C9006298D6750007E2AB5 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C9005298D6750007E2AB5 /* NotificationService.swift */; };
+		C79C9008298D6B4F007E2AB5 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C9007298D6B4F007E2AB5 /* Singleton.swift */; };
 		C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BC29892AED00DE0805 /* AppDelegate.swift */; };
 		C7A836BF29892AED00DE0805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BE29892AED00DE0805 /* SceneDelegate.swift */; };
 		C7A836C629892AEE00DE0805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7A836C529892AEE00DE0805 /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		C79C9000298D1803007E2AB5 /* TranslatedCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedCardCell.swift; sourceTree = "<group>"; };
 		C79C9002298D648A007E2AB5 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		C79C9005298D6750007E2AB5 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		C79C9007298D6B4F007E2AB5 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		C7A836B929892AED00DE0805 /* LearnAsWant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnAsWant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A836BC29892AED00DE0805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7A836BE29892AED00DE0805 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				C79C8FEB298C1921007E2AB5 /* Protocols */,
 				C79C8FE7298C1858007E2AB5 /* Extensions */,
 				C79C9002298D648A007E2AB5 /* Strings.swift */,
+				C79C9007298D6B4F007E2AB5 /* Singleton.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				C722D17329899E8400347F1E /* MainScreenPresenter.swift in Sources */,
 				C79C9003298D648A007E2AB5 /* Strings.swift in Sources */,
 				C79C8FF8298CF7CF007E2AB5 /* TranslationModel.swift in Sources */,
+				C79C9008298D6B4F007E2AB5 /* Singleton.swift in Sources */,
 				C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */,
 				C79C8FDC298BD2A4007E2AB5 /* AddTranslateAssembly.swift in Sources */,
 				C79C8FFF298D17E9007E2AB5 /* TranslatedCardCellModel.swift in Sources */,

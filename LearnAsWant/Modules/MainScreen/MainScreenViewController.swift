@@ -16,7 +16,6 @@ class MainScreenViewController: UIViewController {
         let button = UIButton()
         button.layer.cornerRadius = 6
         button.backgroundColor = .link
-        button.setTitle("Add new", for: .normal)
         button.setTitleColor(.white, for: .normal)
         return button
     }()
@@ -25,7 +24,6 @@ class MainScreenViewController: UIViewController {
         let button = UIButton()
         button.layer.cornerRadius = 6
         button.backgroundColor = .link
-        button.setTitle("Learn", for: .normal)
         button.setTitleColor(.white, for: .normal)
         return button
     }()
@@ -44,6 +42,7 @@ class MainScreenViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        setupStrings()
         presenter.viewDidLoad()
         downLoad()
 
@@ -84,6 +83,12 @@ extension MainScreenViewController {
 
 // MARK: - Setup UI.
 extension MainScreenViewController {
+
+    private func setupStrings() {
+        self.addButton.setTitle(Strings.MainScreen.addNewButton, for: .normal)
+        self.learnButton.setTitle(Strings.MainScreen.learnButtonButton, for: .normal)
+    }
+
     private func setupViews() {
 
         self.view.addSubviews(tableView, addButton, learnButton, languagesButton)
