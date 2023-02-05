@@ -29,7 +29,25 @@ class MainScreenViewController: UIViewController {
     }()
 
     private lazy var languagesButton = UIButton()
+
+    private lazy var languageFromButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemBackground
+        button.setTitleColor(.label, for: .normal)
+        return button
+    }()
+
+    private lazy var languageToButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemBackground
+        button.setTitleColor(.label, for: .normal)
+        return button
+    }()
+
+    private lazy var changeLanguageButton = UIButton()
+
     private lazy var tableView = UITableView()
+
     private var cellModels: [PTableViewCellAnyModel] = [] {
         didSet {
             self.tableView.reloadData()
@@ -45,8 +63,6 @@ class MainScreenViewController: UIViewController {
         setupStrings()
         presenter.viewDidLoad()
         downLoad()
-
-        self.view.backgroundColor = .green
     }
 
     override func viewDidLayoutSubviews() {
@@ -55,6 +71,7 @@ class MainScreenViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        presenter.viewDidAppear()
     }
 
     func downLoad() {
@@ -73,11 +90,15 @@ class MainScreenViewController: UIViewController {
     }
 }
 
-// MARK: - Table data.
-
 extension MainScreenViewController {
     func showData(with cellModels: [PTableViewCellAnyModel]) {
         self.cellModels = cellModels
+    }
+
+    func setupData(mainLanguage: GlobalLanguage, secondaryLanguage: GlobalLanguage) {
+        languageFromButton.setTitle(mainLanguage.rawValue, for: .normal)
+        languageToButton.setTitle(secondaryLanguage.rawValue, for: .normal)
+        changeLanguageButton.setImage(UIImage(systemName: "arrow.right"), for: .normal)
     }
 }
 
@@ -90,23 +111,73 @@ extension MainScreenViewController {
     }
 
     private func setupViews() {
+        self.view.backgroundColor = .systemBackground
+        
+        self.view.addSubviews(tableView,
+                              addButton,
+                              learnButton,
+                              languagesButton,
+                              languageFromButton,
+                              changeLanguageButton,
+                              languageToButton)
+        setupTable()
+        setupButtons()
+    }
 
-        self.view.addSubviews(tableView, addButton, learnButton, languagesButton)
-
+    private func setupTable() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.register(models: [TranslatedCardCellModel.self])
         self.tableView.contentInset.bottom = 60
+    }
 
+    private func setupButtons() {
         addButton.addTarget(self, action: #selector(openAddTranslateScreen), for: .touchUpInside)
         languagesButton.addTarget(self, action: #selector(openLanguagesScreen), for: .touchUpInside)
+
         languagesButton.setImage(UIImage(systemName: "globe"), for: .normal)
+
+        languageFromButton.showsMenuAsPrimaryAction = true
+        languageToButton.showsMenuAsPrimaryAction = true
+    }
+
+    func setupMenuForButton(isMain: Bool, menu: UIMenu) {
+        if isMain {
+            self.languageFromButton.menu = menu
+        } else {
+            self.languageToButton.menu = menu
+        }
     }
 
     private func setupConstraints() {
 
+        languagesButton.snp.makeConstraints { make in
+            make.top.right.equalToSuperview().inset(30)
+        }
+
+        languageFromButton.snp.makeConstraints { make in
+            make.height.equalTo(24)
+            make.left.equalToSuperview().inset(16)
+            make.right.equalTo(changeLanguageButton.snp.left).offset(10)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(20)
+        }
+
+        changeLanguageButton.snp.makeConstraints { make in
+            make.height.equalTo(24)
+            make.width.equalTo(48)
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(languageFromButton.snp.centerY)
+        }
+
+        languageToButton.snp.makeConstraints { make in
+            make.height.equalTo(24)
+//            make.right.equalToSuperview().inset(16)
+            make.left.equalTo(changeLanguageButton.snp.right).offset(10)
+            make.centerY.equalTo(languageFromButton.snp.centerY)
+        }
+
         tableView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(60)
+            make.top.equalTo(languageFromButton.snp.bottom).offset(16)
             make.left.right.bottom.equalToSuperview()
         }
 
@@ -123,14 +194,10 @@ extension MainScreenViewController {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20)
             make.right.equalToSuperview().inset(30)
         }
-
-        languagesButton.snp.makeConstraints { make in
-            make.top.right.equalToSuperview().inset(30)
-        }
     }
 }
 
-// MARK: Screen action.
+// MARK: - Screen action.
 
 extension MainScreenViewController {
     @objc private func openAddTranslateScreen() {
@@ -159,5 +226,23 @@ extension MainScreenViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.dequeueReusableCell(withModel: cellModels[indexPath.row], for: indexPath)
+    }
+}
+
+// MARK: - Onboarding.
+
+extension MainScreenViewController {
+
+    func showOnboardingForFromLanguage(with description: String) {
+        self.showOnboarding(description: description, viewForCopy: languageFromButton)
+    }
+
+    func showOnboardingForToLanguage(with description: String) {
+        self.showOnboarding(description: description, viewForCopy: languageToButton)
+    }
+
+    private func showOnboarding(description: String, viewForCopy: UIView) {
+        let helpView = OnboardingView(descriptionText: description, viewForCopy: viewForCopy)
+        helpView.show(superviewOfCopied: self.view)
     }
 }
