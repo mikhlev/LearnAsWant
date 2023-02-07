@@ -20,6 +20,7 @@ extension UserDefaults {
     enum Keys: String {
         case cards
         case lastUsedLanguage
+        case lastUsedSecondaryLanguage
     }
 
     static var lastUsedLanguage: String? {
@@ -28,6 +29,15 @@ extension UserDefaults {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.lastUsedLanguage.rawValue)
+        }
+    }
+
+    static var lastUsedSecondaryLanguage: String? {
+        get {
+            return UserDefaults.standard.string(forKey: Keys.lastUsedSecondaryLanguage.rawValue)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.lastUsedSecondaryLanguage.rawValue)
         }
     }
 

@@ -79,15 +79,15 @@ final class OnboardingView: UIView {
         UIView.animate(withDuration: 0.3) {
             self.alpha = 1
         } completion: { value in
-//            if value {
-//                UIView.animate(withDuration: 1, delay: 2) {
-//                    self.alpha = 0
-//                } completion: { value in
-//                    if value {
-//                        self.removeFromSuperview()
-//                    }
-//                }
-//            }
+            if value {
+                UIView.animate(withDuration: 1, delay: 2) {
+                    self.alpha = 0
+                } completion: { value in
+                    if value {
+                        self.removeFromSuperview()
+                    }
+                }
+            }
         }
     }
 }

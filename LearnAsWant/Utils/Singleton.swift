@@ -8,8 +8,13 @@
 import Foundation
 
 final class Singleton {
-    static var currentUsingLanguage: GlobalLanguage {
+    static var currentMainLanguage: GlobalLanguage {
         let languageString = UserDefaults.lastUsedLanguage ?? ""
+        return GlobalLanguage(rawValue: languageString) ?? .russian
+    }
+
+    static var currentSecondaryLanguage: GlobalLanguage {
+        let languageString = UserDefaults.lastUsedSecondaryLanguage ?? ""
         return GlobalLanguage(rawValue: languageString) ?? .russian
     }
 }

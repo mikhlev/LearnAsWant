@@ -12,3 +12,14 @@ extension UIView {
         views.forEach { self.addSubview($0) }
     }
 }
+
+extension UIView {
+    var globalFrame: CGRect? {
+        let rootView = UIApplication.shared.keyWindow?.rootViewController?.view
+        return self.superview?.convert(self.frame, to: rootView)
+    }
+
+    func copyView<T: UIView>() -> T {
+        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as! T
+    }
+}
