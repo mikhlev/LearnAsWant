@@ -28,8 +28,6 @@ class MainScreenViewController: UIViewController {
         return button
     }()
 
-    private lazy var languagesButton = UIButton()
-
     private lazy var languageFromButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemBackground
@@ -116,7 +114,6 @@ extension MainScreenViewController {
         self.view.addSubviews(tableView,
                               addButton,
                               learnButton,
-                              languagesButton,
                               languageFromButton,
                               changeLanguageButton,
                               languageToButton)
@@ -133,9 +130,6 @@ extension MainScreenViewController {
 
     private func setupButtons() {
         addButton.addTarget(self, action: #selector(openAddTranslateScreen), for: .touchUpInside)
-        languagesButton.addTarget(self, action: #selector(openLanguagesScreen), for: .touchUpInside)
-
-        languagesButton.setImage(UIImage(systemName: "globe"), for: .normal)
 
         languageFromButton.showsMenuAsPrimaryAction = true
         languageToButton.showsMenuAsPrimaryAction = true
@@ -150,10 +144,6 @@ extension MainScreenViewController {
     }
 
     private func setupConstraints() {
-
-        languagesButton.snp.makeConstraints { make in
-            make.top.right.equalToSuperview().inset(30)
-        }
 
         languageFromButton.snp.makeConstraints { make in
             make.height.equalTo(24)
@@ -171,7 +161,7 @@ extension MainScreenViewController {
 
         languageToButton.snp.makeConstraints { make in
             make.height.equalTo(24)
-//            make.right.equalToSuperview().inset(16)
+            make.right.equalToSuperview().inset(16)
             make.left.equalTo(changeLanguageButton.snp.right).offset(10)
             make.centerY.equalTo(languageFromButton.snp.centerY)
         }

@@ -8,13 +8,34 @@
 import Foundation
 
 final class Singleton {
-    static var currentMainLanguage: GlobalLanguage {
-        let languageString = UserDefaults.lastUsedLanguage ?? ""
-        return GlobalLanguage(rawValue: languageString) ?? .russian
+
+    static var currentLanguageModel: TranslationModel {
+        if let language = UserDefaults.lastUsedLanguageModel {
+            return language
+        } else {
+            let defaultModel = TranslationModel(fromLanguage: .english, toLanguage: .spanish)
+
+            UserDefaults.lastUsedLanguageModel = defaultModel
+            return defaultModel
+        }
     }
 
-    static var currentSecondaryLanguage: GlobalLanguage {
-        let languageString = UserDefaults.lastUsedSecondaryLanguage ?? ""
-        return GlobalLanguage(rawValue: languageString) ?? .russian
+    static func setupNewLanguage(_ language: GlobalLanguage, isMain: Bool) {
+        let currentModel = self.currentLanguageModel
+
+        if (isMain && currentModel.toLanguage == language) || (!isMain && currentModel.fromLanguage == language) {
+
+            UserDefaults.lastUsedLanguageModel = TranslationModel(fromLanguage: currentModel.toLanguage,
+                                                                  toLanguage: currentModel.fromLanguage)
+            return
+        }
+
+        if isMain {
+            UserDefaults.lastUsedLanguageModel = TranslationModel(fromLanguage: language,
+                                                                  toLanguage: currentModel.toLanguage)
+        } else {
+            UserDefaults.lastUsedLanguageModel = TranslationModel(fromLanguage: currentModel.fromLanguage,
+                                                                  toLanguage: language)
+        }
     }
 }

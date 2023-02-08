@@ -31,7 +31,7 @@ class MainScreenPresenter {
     }
 
     func viewDidAppear() {
-        showOnboardingForFromLanguage()
+//        showOnboardingForFromLanguage()
     }
 
     func openAddTranslateScreen() {
@@ -45,58 +45,62 @@ class MainScreenPresenter {
     private func setupTableData() {
         self.view?.showData(with: cellModels)
 
-        let mainLanguage = Singleton.currentMainLanguage
-        let secondaryLanguage = Singleton.currentSecondaryLanguage
+        let mainLanguage = Singleton.currentLanguageModel.fromLanguage
+        let secondaryLanguage = Singleton.currentLanguageModel.toLanguage
         self.view?.setupData(mainLanguage: mainLanguage, secondaryLanguage: secondaryLanguage)
     }
 
     private func getCards() -> [CardModel] {
-        let lastUsedLanguageString = UserDefaults.lastUsedLanguage ?? GlobalLanguage.russian.rawValue
-        UserDefaults.lastUsedLanguage = lastUsedLanguageString
+        let lastUsedMainLanguageString = Singleton.currentLanguageModel.fromLanguage.rawValue
         let allExistedCards = UserDefaults.cards ?? [:]
-        return allExistedCards[lastUsedLanguageString] ?? []
+        return allExistedCards[lastUsedMainLanguageString] ?? []
     }
 }
 
 extension MainScreenPresenter {
     @objc func refreshScreen() {
         setupTableData()
+        setupMenuForButtons()
     }
 }
-
 
 extension MainScreenPresenter {
 
     private func setupMenuForButtons() {
+
         let menuFrom = UIMenu(title: Strings.MainScreen.menuFromTitle,
-                                         children: createChildrenForMenu(languages: [.russian, .english]))
+                              children: createChildrenForMenu(languages: GlobalLanguage.allCases, isMain: true))
 
         let menuTo = UIMenu(title: Strings.MainScreen.menuToTitle,
-                            children: createChildrenForMenu(languages: [.english, .russian]))
+                            children: createChildrenForMenu(languages: GlobalLanguage.allCases, isMain: false))
 
         self.view?.setupMenuForButton(isMain: true, menu: menuFrom)
         self.view?.setupMenuForButton(isMain: false, menu: menuTo)
     }
 
-    private func createChildrenForMenu(languages: [GlobalLanguage]) -> [UIAction] {
+    private func createChildrenForMenu(languages: [GlobalLanguage], isMain: Bool) -> [UIAction] {
 
         let image = UIImage(systemName: "icloud.and.arrow.down.fill")
+
+        let currentLanguage = isMain ? Singleton.currentLanguageModel.fromLanguage : Singleton.currentLanguageModel.toLanguage
+
 
         let actions: [UIAction] = languages.map { language in
             let action = UIAction(title: language.rawValue,
                                   image: image,
-                                  attributes: [.keepsMenuPresented]) { [weak self] action in
-                self?.menuLanguageAction(language)
+                                  state: language == currentLanguage ? .on : .off)
+            { [weak self] action in
+                self?.menuLanguageAction(language, isMain: isMain)
             }
-
             return action
         }
 
         return actions
     }
 
-    private func menuLanguageAction(_ language: GlobalLanguage) {
-        print("language - " + language.rawValue)
+    private func menuLanguageAction(_ language: GlobalLanguage, isMain: Bool) {
+        Singleton.setupNewLanguage(language, isMain: isMain)
+        refreshScreen()
     }
 }
 

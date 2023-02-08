@@ -19,28 +19,32 @@ extension UserDefaults {
 
     enum Keys: String {
         case cards
-        case lastUsedLanguage
-        case lastUsedSecondaryLanguage
+        case lastUsedLanguageModel
     }
 
-    static var lastUsedLanguage: String? {
+    static var lastUsedLanguageModel: TranslationModel? {
         get {
-            return UserDefaults.standard.string(forKey: Keys.lastUsedLanguage.rawValue)
+            if let data = UserDefaults.standard.data(forKey: Keys.lastUsedLanguageModel.rawValue) {
+                do {
+                    return try JSONDecoder().decode(TranslationModel.self, from: data)
+                } catch {
+                    return nil
+                }
+            } else {
+                return nil
+            }
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.lastUsedLanguage.rawValue)
+            do {
+                let encodedDictionary = try JSONEncoder().encode(newValue ?? TranslationModel(fromLanguage: .english, toLanguage: .spanish))
+                print(encodedDictionary)
+                UserDefaults.standard.set(encodedDictionary, forKey: Keys.lastUsedLanguageModel.rawValue)
+            } catch {
+                print("Error: ", error)
+            }
         }
     }
-
-    static var lastUsedSecondaryLanguage: String? {
-        get {
-            return UserDefaults.standard.string(forKey: Keys.lastUsedSecondaryLanguage.rawValue)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Keys.lastUsedSecondaryLanguage.rawValue)
-        }
-    }
-
+    
     static var cards: [String: [CardModel]]? {
         get {
             if let data = UserDefaults.standard.data(forKey: Keys.cards.rawValue) {
@@ -58,14 +62,10 @@ extension UserDefaults {
             do {
                 let encodedDictionary = try JSONEncoder().encode(newValue ?? [:])
                 print(encodedDictionary)
-//                let data = UserDefaults.standard.dictToData(dict: encodedDictionary)
                 UserDefaults.standard.set(encodedDictionary, forKey: Keys.cards.rawValue)
             } catch {
                 print("Error: ", error)
             }
-
-
-
         }
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import MLKitTranslate
 
-class TranslationModel {
+class TranslationModel: Codable {
     var fromLanguage: GlobalLanguage
     var toLanguage: GlobalLanguage
     var fromText: String?
@@ -22,7 +22,7 @@ class TranslationModel {
     }
 }
 
-enum GlobalLanguage: String {
+enum GlobalLanguage: String, CaseIterable, Codable {
     case russian = "Russian"
     case english = "English"
     case german = "German"
