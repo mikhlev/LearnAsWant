@@ -47,12 +47,17 @@ class AddTranslatePresenter {
             let translatedText = model.toText
         else { return }
 
-        let currentMainLanguageString = Singleton.currentLanguageModel.fromLanguage.rawValue
+        let currentLanguage = Singleton.currentLanguageModel
 
         var allExistedCards = UserDefaults.cards ?? [:]
-        var array = allExistedCards[currentMainLanguageString] ?? []
-        array.append(CardModel(text: text, translatedText: translatedText))
-        allExistedCards.updateValue(array, forKey: currentMainLanguageString)
+        var array = allExistedCards[currentLanguage.fromLanguage.rawValue] ?? []
+
+        array.append(TranslationModel(fromLanguage: currentLanguage.fromLanguage,
+                                      toLanguage: currentLanguage.toLanguage,
+                                      fromText: text,
+                                      toText: translatedText))
+
+        allExistedCards.updateValue(array, forKey: currentLanguage.fromLanguage.rawValue)
         UserDefaults.cards = allExistedCards
         
         NotificationService.postMessage(for: .newCardAdded)

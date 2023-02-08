@@ -9,10 +9,9 @@ import Foundation
 
 struct TranslatedCardCellModel: PTableViewCellModel {
 
-    let text: String
-    let translatedText: String
+    let languageModel: TranslationModel
 
     func configure(cell: TranslatedCardCell) {
-        cell.setupData(text: text, translatedText: translatedText)
+        cell.setupData(fromText: languageModel.fromText, toText: languageModel.toText)
     }
 }

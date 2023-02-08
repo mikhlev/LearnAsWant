@@ -45,11 +45,11 @@ extension UserDefaults {
         }
     }
     
-    static var cards: [String: [CardModel]]? {
+    static var cards: [String: [TranslationModel]]? {
         get {
             if let data = UserDefaults.standard.data(forKey: Keys.cards.rawValue) {
                 do {
-                    return try JSONDecoder().decode([String: [CardModel]].self, from: data)
+                    return try JSONDecoder().decode([String: [TranslationModel]].self, from: data)
                 } catch {
                     return [:]
                 }

@@ -217,6 +217,10 @@ extension MainScreenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.dequeueReusableCell(withModel: cellModels[indexPath.row], for: indexPath)
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.openAddTranslateScreenForCell(row: indexPath.row)
+    }
 }
 
 // MARK: - Onboarding.

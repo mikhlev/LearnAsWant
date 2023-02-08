@@ -27,9 +27,9 @@ class TranslatedCardCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func setupData(text: String, translatedText: String) {
-        topLabel.text = text
-        bottomLabel.text = translatedText
+    func setupData(fromText: String?, toText: String?) {
+        topLabel.text = fromText
+        bottomLabel.text = toText
     }
 }
 

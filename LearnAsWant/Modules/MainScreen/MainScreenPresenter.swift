@@ -13,7 +13,9 @@ class MainScreenPresenter {
     private weak var view: MainScreenViewController?
     private let router: MainScreenRouter
     private var cellModels: [TranslatedCardCellModel] {
-        return getCards().reversed().map { TranslatedCardCellModel(text: $0.text, translatedText: $0.translatedText) }
+        return getCards()
+            .reversed()
+            .map { TranslatedCardCellModel(languageModel: $0) }
     }
 
     init(
@@ -35,7 +37,12 @@ class MainScreenPresenter {
     }
 
     func openAddTranslateScreen() {
-        router.openAddTranslateScreen()
+        router.openAddTranslateScreen(model: Singleton.currentLanguageModel)
+    }
+
+    func openAddTranslateScreenForCell(row: Int) {
+        guard row < cellModels.count else { return }
+        router.openAddTranslateScreen(model: cellModels[row].languageModel)
     }
 
     func openLanguagesScreen() {
@@ -50,7 +57,7 @@ class MainScreenPresenter {
         self.view?.setupData(mainLanguage: mainLanguage, secondaryLanguage: secondaryLanguage)
     }
 
-    private func getCards() -> [CardModel] {
+    private func getCards() -> [TranslationModel] {
         let lastUsedMainLanguageString = Singleton.currentLanguageModel.fromLanguage.rawValue
         let allExistedCards = UserDefaults.cards ?? [:]
         return allExistedCards[lastUsedMainLanguageString] ?? []
