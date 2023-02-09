@@ -38,6 +38,8 @@
 		C7A836BF29892AED00DE0805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A836BE29892AED00DE0805 /* SceneDelegate.swift */; };
 		C7A836C629892AEE00DE0805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7A836C529892AEE00DE0805 /* Assets.xcassets */; };
 		C7A836C929892AEE00DE0805 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7A836C729892AEE00DE0805 /* LaunchScreen.storyboard */; };
+		C7BB42E12994FB0000F5783B /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB42E02994FB0000F5783B /* TranslationService.swift */; };
+		C7BB42E42994FB7200F5783B /* TranslationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB42E32994FB7200F5783B /* TranslationAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,8 @@
 		C7A836C529892AEE00DE0805 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7A836C829892AEE00DE0805 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7A836CA29892AEE00DE0805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7BB42E02994FB0000F5783B /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
+		C7BB42E32994FB7200F5783B /* TranslationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationAPI.swift; sourceTree = "<group>"; };
 		CC405EF3C2660E8737C33142 /* Pods-LearnAsWant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.release.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.release.xcconfig"; sourceTree = "<group>"; };
 		D755E2A0C9DC4BD0FA5B8743 /* Pods-LearnAsWant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.debug.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -227,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				C79C9005298D6750007E2AB5 /* NotificationService.swift */,
+				C7BB42E02994FB0000F5783B /* TranslationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 		C7A836BB29892AED00DE0805 /* LearnAsWant */ = {
 			isa = PBXGroup;
 			children = (
+				C7BB42E22994FB4000F5783B /* Network */,
 				C733C08029900EB80008FAD9 /* Views */,
 				C79C9004298D671E007E2AB5 /* Services */,
 				C79C8FF6298CF7C5007E2AB5 /* Models */,
@@ -264,6 +270,14 @@
 				C7A836CA29892AEE00DE0805 /* Info.plist */,
 			);
 			path = LearnAsWant;
+			sourceTree = "<group>";
+		};
+		C7BB42E22994FB4000F5783B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C7BB42E32994FB7200F5783B /* TranslationAPI.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		D687811D0A8D002004369BF0 /* Pods */ = {
@@ -287,7 +301,6 @@
 				C7A836B629892AED00DE0805 /* Frameworks */,
 				C7A836B729892AED00DE0805 /* Resources */,
 				1410032CB7D6085ECEC34909 /* [CP] Embed Pods Frameworks */,
-				84C4CD5C2A310060601E3121 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -383,23 +396,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		84C4CD5C2A310060601E3121 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -435,6 +431,8 @@
 				C722D17529899E8400347F1E /* MainScreenViewController.swift in Sources */,
 				C79C8FE4298C0EC0007E2AB5 /* LanguagesViewController.swift in Sources */,
 				C79C8FE2298C0EC0007E2AB5 /* LanguagesPresenter.swift in Sources */,
+				C7BB42E42994FB7200F5783B /* TranslationAPI.swift in Sources */,
+				C7BB42E12994FB0000F5783B /* TranslationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
