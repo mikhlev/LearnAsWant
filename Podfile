@@ -7,7 +7,9 @@ target 'LearnAsWant' do
 
   # Pods for LearnAsWant
 
-pod 'GoogleMLKit/Translate', '3.2.0'
+pod 'FirebaseCore'
+pod 'FirebaseMessaging'
+
 pod 'SnapKit', '~> 5.0.0'
 
 end
