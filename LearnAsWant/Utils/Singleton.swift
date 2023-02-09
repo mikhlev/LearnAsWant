@@ -9,6 +9,8 @@ import Foundation
 
 final class Singleton {
 
+    static var googleAPIKey: String = ""
+
     static var currentLanguageModel: TranslationModel {
         if let language = UserDefaults.lastUsedLanguageModel {
             return language
@@ -36,6 +38,15 @@ final class Singleton {
         } else {
             UserDefaults.lastUsedLanguageModel = TranslationModel(fromLanguage: currentModel.fromLanguage,
                                                                   toLanguage: language)
+        }
+    }
+
+    static func setupGoogleApiKey() {
+        if
+            let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
+            let dict = NSDictionary(contentsOfFile: path),
+            let apiKey = dict["API_KEY"] as? String {
+                Singleton.googleAPIKey = apiKey
         }
     }
 }
