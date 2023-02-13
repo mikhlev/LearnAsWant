@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import MLKitTranslate
 
 class TranslationModel: Codable {
     var fromLanguage: GlobalLanguage
@@ -23,6 +22,7 @@ class TranslationModel: Codable {
 }
 
 enum GlobalLanguage: String, CaseIterable, Codable {
+
     case russian = "Russian"
     case english = "English"
     case german = "German"
@@ -41,10 +41,6 @@ enum GlobalLanguage: String, CaseIterable, Codable {
         case .ukrainian: return "uk"
         case .belarusian: return "be"
         }
-    }
-
-    var libraryName: TranslateLanguage {
-        return TranslateLanguage(rawValue: self.code)
     }
 
 //    af    Afrikaans

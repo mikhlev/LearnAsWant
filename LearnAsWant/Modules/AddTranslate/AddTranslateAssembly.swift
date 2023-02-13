@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MLKitTranslate
 
  class AddTranslateAssembly {
 

@@ -12,7 +12,7 @@ class TranslationService: NSObject {
     static let shared = TranslationService()
 
     private let apiKey = Singleton.googleAPIKey
-    
+
     var sourceLanguageCode: String?
     var supportedLanguages = [TranslationLanguage]()
     var textToTranslate: String?
@@ -97,6 +97,7 @@ class TranslationService: NSObject {
 
     func detectLanguage(forText text: String, completion: @escaping (_ language: String?) -> Void) {
         let urlParams = ["key": apiKey, "q": text]
+        
         makeRequest(usingTranslationAPI: .detectLanguage, urlParams: urlParams) { (results) in
             guard
                 let results = results,
@@ -114,6 +115,7 @@ class TranslationService: NSObject {
                     if let language = currentDetection["language"] as? String {
                         detectedLanguages.append(language)
                     }
+
                 }
             }
 
