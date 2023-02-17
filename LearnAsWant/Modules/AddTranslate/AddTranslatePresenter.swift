@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MLKitTranslate
 
 class AddTranslatePresenter {
 
@@ -15,15 +14,6 @@ class AddTranslatePresenter {
     private let router: AddTranslateRouter
 
     private var translationModel: TranslationModel
-
-    lazy var mainOptions = TranslatorOptions(sourceLanguage: translationModel.fromLanguage.libraryName,
-                                             targetLanguage: translationModel.toLanguage.libraryName)
-
-    lazy var reverseOptions = TranslatorOptions(sourceLanguage: translationModel.toLanguage.libraryName,
-                                                targetLanguage: translationModel.fromLanguage.libraryName)
-
-    lazy var mainTranslator = Translator.translator(options: mainOptions)
-    lazy var reverseTranslator = Translator.translator(options: reverseOptions)
 
     init(
         view: AddTranslateViewController,
@@ -39,10 +29,11 @@ class AddTranslatePresenter {
         self.view?.setupData(translationModel: translationModel)
     }
 
-    func saveText(model: TranslationModel?) {
+    func saveText() {
+
+        let model = self.translationModel
 
         guard
-            let model = model,
             let text = model.fromText,
             let translatedText = model.toText
         else { return }
@@ -63,26 +54,77 @@ class AddTranslatePresenter {
         NotificationService.postMessage(for: .newCardAdded)
         router.closeScreen()
     }
+
+    private func updateModel(sourceText: String?, targetedText: String?) {
+        translationModel.fromText = sourceText
+        translationModel.toText = targetedText
+    }
 }
 
 // MARK: - Traslate methods.
 
 extension AddTranslatePresenter {
-    func translateTextFromMainLanguage(translatedText: String?, completion: @escaping (String) -> Void) {
-        guard let translatedText = translatedText else { return }
 
-        mainTranslator.translate(translatedText) { text, error in
-            guard error == nil else { return }
-            completion(text ?? "")
+    func translate(text: String, fromSourceLanguage: Bool) {
+        if text != "" {
+
+            TranslationService.shared.textToTranslate = text
+            TranslationService.shared.targetLanguageCode = translationModel.toLanguage.code
+
+            TranslationService.shared.detectLanguage(forText: text) { [weak self] (language) in
+                guard
+                    let lang = TranslationService.shared.supportedLanguages.first(where: { $0.code == language }),
+                    let name = lang.name
+                else { return }
+
+                DispatchQueue.main.async {
+                    self?.view?.setupSourceLanguage(name)
+                }
+
+                TranslationService.shared.translate { translation in
+                    if let translation = translation {
+                        DispatchQueue.main.async {
+                            self?.updateModel(sourceText: text, targetedText: translation)
+                            self?.view?.setupTranslatedData(text: translation)
+                        }
+                    }
+                }
+            }
         }
     }
 
-    func translateTextToMainLanguage(translatedText: String?, completion: @escaping (String) -> Void) {
-        guard let translatedText = translatedText else { return }
+    func checkForLanguagesExistence() {
 
-        reverseTranslator.translate(translatedText) { text, error in
-            guard error == nil else { return }
-            completion(text ?? "")
+        if TranslationService.shared.supportedLanguages.count == 0 {
+            self.fetchSupportedLanguages()
         }
+    }
+
+    func fetchSupportedLanguages() {
+        // Show a "Please wait..." alert.
+//        alertCollection.presentActivityAlert(withTitle: "Supported Languages", message: "Please wait while translation supported languages are being fetched...") { (presented) in
+
+//            if presented {
+                TranslationService.shared.fetchSupportedLanguages(completion: { (success) in
+                    // Dismiss the alert.
+//                    self.alertCollection.dismissAlert(completion: nil)
+
+                    // Check if supported languages were fetched successfully or not.
+                    if success {
+                        // Display languages in the tableview.
+                        DispatchQueue.main.async { [unowned self] in
+                            router.openLanguagesScreen(languages: TranslationService.shared.supportedLanguages)
+                        }
+                    } else {
+                        // Show an alert saying that something went wrong.
+//                        self.alertCollection.presentSingleButtonAlert(withTitle: "Supported Languages", message: "Oops! It seems that something went wrong and supported languages cannot be fetched.", buttonTitle: "OK", actionHandler: {
+//
+//                        })
+                    }
+
+                })
+//            }
+
+//        }
     }
 }

@@ -18,4 +18,9 @@ import UIKit
      func closeScreen() {
          navigationController.dismiss(animated: true)
      }
+
+     func openLanguagesScreen(languages: [TranslationLanguage]) {
+         let languagesVC = LanguagesAssembly(navigationController: navigationController, languages: languages).create()
+         navigationController.present(languagesVC, animated: true)
+     }
  }
