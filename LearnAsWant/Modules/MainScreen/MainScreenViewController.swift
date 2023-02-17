@@ -8,7 +8,6 @@
 
 import SnapKit
 import UIKit
-import MLKitTranslate
 
 class MainScreenViewController: UIViewController {
 
@@ -60,7 +59,6 @@ class MainScreenViewController: UIViewController {
         setupConstraints()
         setupStrings()
         presenter.viewDidLoad()
-        downLoad()
     }
 
     override func viewDidLayoutSubviews() {
@@ -70,21 +68,6 @@ class MainScreenViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter.viewDidAppear()
-    }
-
-    func downLoad() {
-
-        let model = TranslateRemoteModel.translateRemoteModel(language: .russian)
-
-        if !ModelManager.modelManager().isModelDownloaded(model) {
-            ModelManager.modelManager().download(
-                model,
-                conditions: ModelDownloadConditions(
-                    allowsCellularAccess: true,
-                    allowsBackgroundDownloading: true
-                )
-            )
-        }
     }
 }
 
