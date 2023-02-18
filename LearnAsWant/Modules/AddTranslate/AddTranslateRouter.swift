@@ -19,8 +19,9 @@ import UIKit
          navigationController.dismiss(animated: true)
      }
 
-     func openLanguagesScreen(languages: [TranslationLanguage]) {
-         let languagesVC = LanguagesAssembly(navigationController: navigationController, languages: languages).create()
+     func openLanguagesScreen(forSource: Bool) {
+         let languagesVC = LanguagesAssembly(navigationController: navigationController,
+                                             forSourceLanguage: forSource).create()
          navigationController.present(languagesVC, animated: true)
      }
  }

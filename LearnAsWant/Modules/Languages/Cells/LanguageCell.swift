@@ -75,7 +75,7 @@ class LanguageCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.left.equalToSuperview().inset(16)
-            make.height.equalTo(36)
+            make.height.equalTo(40)
         }
 
         labelForAutoDetectCell.snp.makeConstraints { make in

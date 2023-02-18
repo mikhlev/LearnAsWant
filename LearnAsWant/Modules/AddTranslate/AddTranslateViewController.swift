@@ -28,14 +28,15 @@ class AddTranslateViewController: UIViewController {
         return textView
     }()
 
-    private lazy var languageFromButton = UIButton()
-    private lazy var languageToButton = UIButton()
+    private lazy var sourceLanguageButton = UIButton()
+    private lazy var targetLanguageButton = UIButton()
     private lazy var changeLanguageButton = UIButton()
     private lazy var saveButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setupActions()
         setupConstraints()
         presenter.viewDidLoad()
         self.view.backgroundColor = .blue
@@ -48,8 +49,8 @@ class AddTranslateViewController: UIViewController {
         fromTextView.text = translationModel.fromText
         toTextView.text = translationModel.toText
 
-        languageFromButton.setTitle(translationModel.sourceLanguage.name, for: .normal)
-        languageToButton.setTitle(translationModel.targetLanguage.name, for: .normal)
+        sourceLanguageButton.setTitle(translationModel.sourceLanguage.name, for: .normal)
+        targetLanguageButton.setTitle(translationModel.targetLanguage.name, for: .normal)
     }
 
     func setupTranslatedData(text: String) {
@@ -57,7 +58,7 @@ class AddTranslateViewController: UIViewController {
     }
 
     func setupSourceLanguage(_ name: String) {
-        self.languageFromButton.setTitle(name, for: .normal)
+        self.sourceLanguageButton.setTitle(name, for: .normal)
     }
 }
 
@@ -88,8 +89,8 @@ extension AddTranslateViewController {
 
         self.view.addSubviews(fromTextView,
                               toTextView,
-                              languageFromButton,
-                              languageToButton,
+                              sourceLanguageButton,
+                              targetLanguageButton,
                               changeLanguageButton,
                               saveButton)
 
@@ -104,7 +105,7 @@ extension AddTranslateViewController {
             make.top.equalToSuperview().inset(30)
         }
 
-        languageFromButton.snp.makeConstraints { make in
+        sourceLanguageButton.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.left.equalToSuperview().inset(16)
             make.right.equalTo(changeLanguageButton.snp.left).offset(10)
@@ -115,20 +116,20 @@ extension AddTranslateViewController {
             make.height.equalTo(24)
             make.width.equalTo(48)
             make.centerX.equalToSuperview()
-            make.centerY.equalTo(languageFromButton.snp.centerY)
+            make.centerY.equalTo(sourceLanguageButton.snp.centerY)
         }
 
-        languageToButton.snp.makeConstraints { make in
+        targetLanguageButton.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.right.equalToSuperview().inset(16)
             make.left.equalTo(changeLanguageButton.snp.right).offset(10)
-            make.centerY.equalTo(languageFromButton.snp.centerY)
+            make.centerY.equalTo(sourceLanguageButton.snp.centerY)
         }
 
         toTextView.snp.makeConstraints { make in
             make.height.equalTo(200)
             make.left.right.equalToSuperview().inset(20)
-            make.top.equalTo(languageFromButton.snp.bottom).offset(30)
+            make.top.equalTo(sourceLanguageButton.snp.bottom).offset(30)
         }
 
         saveButton.snp.makeConstraints { make in
@@ -147,5 +148,23 @@ extension AddTranslateViewController {
 
     @objc private func saveText() {
         presenter.saveText()
+    }
+}
+
+// MARK: - Actions.
+
+extension AddTranslateViewController {
+
+    private func setupActions() {
+        sourceLanguageButton.addTarget(self, action: #selector(sourceLanguageTapped), for: .touchUpInside)
+        targetLanguageButton.addTarget(self, action: #selector(targetLanguageTapped), for: .touchUpInside)
+    }
+
+    @objc private func sourceLanguageTapped() {
+        presenter.openLanguagesScreen(forSource: true)
+    }
+
+    @objc private func targetLanguageTapped() {
+        presenter.openLanguagesScreen(forSource: false)
     }
 }

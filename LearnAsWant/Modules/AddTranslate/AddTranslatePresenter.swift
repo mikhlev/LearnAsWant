@@ -61,6 +61,14 @@ final class AddTranslatePresenter {
     }
 }
 
+// MARK: - Navigation.
+
+extension AddTranslatePresenter {
+    func openLanguagesScreen(forSource: Bool) {
+        router.openLanguagesScreen(forSource: forSource)
+    }
+}
+
 // MARK: - Traslate methods.
 
 extension AddTranslatePresenter {
