@@ -41,14 +41,14 @@ class AddTranslatePresenter {
         let currentLanguage = Singleton.currentLanguageModel
 
         var allExistedCards = UserDefaults.cards ?? [:]
-        var array = allExistedCards[currentLanguage.fromLanguage.rawValue] ?? []
+        var array = allExistedCards[currentLanguage.sourceLanguage.code] ?? []
 
-        array.append(TranslationModel(fromLanguage: currentLanguage.fromLanguage,
-                                      toLanguage: currentLanguage.toLanguage,
+        array.append(TranslationModel(sourceLanguage: currentLanguage.sourceLanguage,
+                                      targetLanguage: currentLanguage.targetLanguage,
                                       fromText: text,
                                       toText: translatedText))
 
-        allExistedCards.updateValue(array, forKey: currentLanguage.fromLanguage.rawValue)
+        allExistedCards.updateValue(array, forKey: currentLanguage.sourceLanguage.code)
         UserDefaults.cards = allExistedCards
         
         NotificationService.postMessage(for: .newCardAdded)
@@ -69,13 +69,14 @@ extension AddTranslatePresenter {
         if text != "" {
 
             TranslationService.shared.textToTranslate = text
-            TranslationService.shared.targetLanguageCode = translationModel.toLanguage.code
+            TranslationService.shared.targetLanguageCode = translationModel.targetLanguage.code
 
             TranslationService.shared.detectLanguage(forText: text) { [weak self] (language) in
                 guard
-                    let lang = TranslationService.shared.supportedLanguages.first(where: { $0.code == language }),
-                    let name = lang.name
+                    let lang = TranslationService.shared.supportedLanguages.first(where: { $0.code == language })
                 else { return }
+
+                let name = lang.name
 
                 DispatchQueue.main.async {
                     self?.view?.setupSourceLanguage(name)

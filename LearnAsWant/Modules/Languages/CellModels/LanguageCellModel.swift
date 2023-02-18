@@ -9,9 +9,9 @@ import UIKit
 
 struct LanguageCellModel: PTableViewCellModel {
 
-    let text: String
+    let model: TranslationLanguage
 
     func configure(cell: LanguageCell) {
-        cell.textLabel?.text = text
+        cell.textLabel?.text = model.name
     }
 }

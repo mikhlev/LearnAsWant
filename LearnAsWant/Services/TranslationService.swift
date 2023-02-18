@@ -77,21 +77,17 @@ class TranslationService: NSObject {
                 return
             }
 
-                for lang in languages {
-                    var languageCode: String?
-                    var languageName: String?
+            for lang in languages {
 
-                    if let code = lang["language"] as? String {
-                        languageCode = code
-                    }
-                    if let name = lang["name"] as? String {
-                        languageName = name
-                    }
+                guard
+                    let languageCode = lang["language"] as? String,
+                    let languageName = lang["name"] as? String
+                else { return }
 
-                    self.supportedLanguages.append(TranslationLanguage(code: languageCode, name: languageName))
-                }
-
-                completion(true)
+                self.supportedLanguages.append(TranslationLanguage(code: languageCode, name: languageName))
+            }
+            
+            completion(true)
         }
     }
 

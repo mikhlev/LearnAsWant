@@ -36,7 +36,7 @@ extension UserDefaults {
         }
         set {
             do {
-                let encodedDictionary = try JSONEncoder().encode(newValue ?? TranslationModel(fromLanguage: .english, toLanguage: .spanish))
+                let encodedDictionary = try JSONEncoder().encode(newValue ?? TranslationModel(sourceLanguage: .defaultEnglish, targetLanguage: .defaultSpanish))
                 print(encodedDictionary)
                 UserDefaults.standard.set(encodedDictionary, forKey: Keys.lastUsedLanguageModel.rawValue)
             } catch {

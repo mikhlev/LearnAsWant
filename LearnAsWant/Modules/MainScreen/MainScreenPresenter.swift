@@ -28,12 +28,14 @@ class MainScreenPresenter {
 
     func viewDidLoad() {
         setupTableData()
-        setupMenuForButtons()
+        checkForLanguagesExistence()
         NotificationService.addObserver(vc: self, selector: #selector(refreshScreen), for: .newCardAdded)
+        NotificationService.addObserver(vc: self, selector: #selector(refreshScreen), for: .languageFromChanged)
+        NotificationService.addObserver(vc: self, selector: #selector(refreshScreen), for: .languageToChanged)
     }
 
     func viewDidAppear() {
-//        showOnboardingForFromLanguage()
+//        showOnboardingForsourceLanguage()
     }
 
     func openAddTranslateScreen() {
@@ -45,20 +47,14 @@ class MainScreenPresenter {
         router.openAddTranslateScreen(model: cellModels[row].languageModel)
     }
 
-    func openLanguagesScreen() {
-        router.openLanguagesScreen()
-    }
-
     private func setupTableData() {
         self.view?.showData(with: cellModels)
-
-        let mainLanguage = Singleton.currentLanguageModel.fromLanguage
-        let secondaryLanguage = Singleton.currentLanguageModel.toLanguage
-        self.view?.setupData(mainLanguage: mainLanguage, secondaryLanguage: secondaryLanguage)
+        self.view?.setupData(sourceLanguage: Singleton.currentLanguageModel.sourceLanguage,
+                             targetLanguage: Singleton.currentLanguageModel.targetLanguage)
     }
 
     private func getCards() -> [TranslationModel] {
-        let lastUsedMainLanguageString = Singleton.currentLanguageModel.fromLanguage.rawValue
+        let lastUsedMainLanguageString = Singleton.currentLanguageModel.sourceLanguage.code
         let allExistedCards = UserDefaults.cards ?? [:]
         return allExistedCards[lastUsedMainLanguageString] ?? []
     }
@@ -67,60 +63,85 @@ class MainScreenPresenter {
 extension MainScreenPresenter {
     @objc func refreshScreen() {
         setupTableData()
-        setupMenuForButtons()
+    }
+
+    func openLanguagesScreen(forSource: Bool) {
+        router.openLanguagesScreen(forSource: forSource)
     }
 }
 
 extension MainScreenPresenter {
 
-    private func setupMenuForButtons() {
-
-        let menuFrom = UIMenu(title: Strings.MainScreen.menuFromTitle,
-                              children: createChildrenForMenu(languages: GlobalLanguage.allCases, isMain: true))
-
-        let menuTo = UIMenu(title: Strings.MainScreen.menuToTitle,
-                            children: createChildrenForMenu(languages: GlobalLanguage.allCases, isMain: false))
-
-        self.view?.setupMenuForButton(isMain: true, menu: menuFrom)
-        self.view?.setupMenuForButton(isMain: false, menu: menuTo)
-    }
-
-    private func createChildrenForMenu(languages: [GlobalLanguage], isMain: Bool) -> [UIAction] {
-
-        let image = UIImage(systemName: "icloud.and.arrow.down.fill")
-
-        let currentLanguage = isMain ? Singleton.currentLanguageModel.fromLanguage : Singleton.currentLanguageModel.toLanguage
-
-
-        let actions: [UIAction] = languages.map { language in
-            let action = UIAction(title: language.rawValue,
-                                  image: image,
-                                  state: language == currentLanguage ? .on : .off)
-            { [weak self] action in
-                self?.menuLanguageAction(language, isMain: isMain)
-            }
-            return action
-        }
-
-        return actions
-    }
-
-    private func menuLanguageAction(_ language: GlobalLanguage, isMain: Bool) {
-        Singleton.setupNewLanguage(language, isMain: isMain)
-        refreshScreen()
-    }
+//    private func setupMenuForButtons() {
+//
+//        let menuFrom = UIMenu(title: Strings.MainScreen.menuFromTitle,
+//                              children: createChildrenForMenu(languages: GlobalLanguage.allCases, isMain: true))
+//
+//        let menuTo = UIMenu(title: Strings.MainScreen.menuToTitle,
+//                            children: createChildrenForMenu(languages: GlobalLanguage.allCases, isMain: false))
+//
+//        self.view?.setupMenuForButton(isMain: true, menu: menuFrom)
+//        self.view?.setupMenuForButton(isMain: false, menu: menuTo)
+//    }
+//
+//    private func createChildrenForMenu(languages: [GlobalLanguage], isMain: Bool) -> [UIAction] {
+//
+//        let image = UIImage(systemName: "icloud.and.arrow.down.fill")
+//
+//        let currentLanguage = isMain ? Singleton.currentLanguageModel.sourceLanguage : Singleton.currentLanguageModel.targetLanguage
+//
+//
+//        let actions: [UIAction] = languages.map { language in
+//            let action = UIAction(title: language.rawValue,
+//                                  image: image,
+//                                  state: language == currentLanguage ? .on : .off)
+//            { [weak self] action in
+//                self?.menuLanguageAction(language, isMain: isMain)
+//            }
+//            return action
+//        }
+//
+//        return actions
+//    }
+//
+// 
 }
 
 // MARK: - Onboarding.
 
 extension MainScreenPresenter {
 
-    private func showOnboardingForFromLanguage() {
-        self.view?.showOnboardingForFromLanguage(with: "Please choose first language")
+    private func showOnboardingForsourceLanguage() {
+        self.view?.showOnboardingForsourceLanguage(with: "Please choose first language")
 
     }
 
-    private func showOnboardingForToLanguage() {
-        self.view?.showOnboardingForToLanguage(with: "Please choose second language")
+    private func showOnboardingFortargetLanguage() {
+        self.view?.showOnboardingFortargetLanguage(with: "Please choose second language")
+    }
+}
+
+extension MainScreenPresenter {
+    func checkForLanguagesExistence() {
+        if TranslationService.shared.supportedLanguages.count == 0 {
+            self.fetchSupportedLanguages()
+        }
+    }
+
+    func fetchSupportedLanguages() {
+        TranslationService.shared.fetchSupportedLanguages(completion: { (success) in
+                    if success {
+                        // Display languages in the tableview.
+//                        DispatchQueue.main.async { [unowned self] in
+//                            router.openLanguagesScreen(languages: TranslationService.shared.supportedLanguages)
+//                        }
+                    } else {
+                        // Show an alert saying that something went wrong.
+//                        self.alertCollection.presentSingleButtonAlert(withTitle: "Supported Languages", message: "Oops! It seems that something went wrong and supported languages cannot be fetched.", buttonTitle: "OK", actionHandler: {
+//
+//                        })
+                    }
+
+                })
     }
 }

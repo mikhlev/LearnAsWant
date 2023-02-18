@@ -48,8 +48,8 @@ class AddTranslateViewController: UIViewController {
         fromTextView.text = translationModel.fromText
         toTextView.text = translationModel.toText
 
-        languageFromButton.setTitle(translationModel.fromLanguage.rawValue, for: .normal)
-        languageToButton.setTitle(translationModel.toLanguage.rawValue, for: .normal)
+        languageFromButton.setTitle(translationModel.sourceLanguage.name, for: .normal)
+        languageToButton.setTitle(translationModel.targetLanguage.name, for: .normal)
     }
 
     func setupTranslatedData(text: String) {

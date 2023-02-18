@@ -76,9 +76,9 @@ extension MainScreenViewController {
         self.cellModels = cellModels
     }
 
-    func setupData(mainLanguage: GlobalLanguage, secondaryLanguage: GlobalLanguage) {
-        languageFromButton.setTitle(mainLanguage.rawValue, for: .normal)
-        languageToButton.setTitle(secondaryLanguage.rawValue, for: .normal)
+    func setupData(sourceLanguage: TranslationLanguage, targetLanguage: TranslationLanguage) {
+        languageFromButton.setTitle(sourceLanguage.name, for: .normal)
+        languageToButton.setTitle(targetLanguage.name, for: .normal)
         changeLanguageButton.setImage(UIImage(systemName: "arrow.right"), for: .normal)
     }
 }
@@ -114,16 +114,8 @@ extension MainScreenViewController {
     private func setupButtons() {
         addButton.addTarget(self, action: #selector(openAddTranslateScreen), for: .touchUpInside)
 
-        languageFromButton.showsMenuAsPrimaryAction = true
-        languageToButton.showsMenuAsPrimaryAction = true
-    }
-
-    func setupMenuForButton(isMain: Bool, menu: UIMenu) {
-        if isMain {
-            self.languageFromButton.menu = menu
-        } else {
-            self.languageToButton.menu = menu
-        }
+        languageFromButton.addTarget(self, action: #selector(openLanguagesScreenForSourceLanguage), for: .touchUpInside)
+        languageToButton.addTarget(self, action: #selector(openLanguagesScreenForTargetLanguage), for: .touchUpInside)
     }
 
     private func setupConstraints() {
@@ -177,8 +169,12 @@ extension MainScreenViewController {
         presenter.openAddTranslateScreen()
     }
 
-    @objc private func openLanguagesScreen() {
-        presenter.openLanguagesScreen()
+    @objc private func openLanguagesScreenForSourceLanguage() {
+        presenter.openLanguagesScreen(forSource: true)
+    }
+
+    @objc private func openLanguagesScreenForTargetLanguage() {
+        presenter.openLanguagesScreen(forSource: false)
     }
 }
 
@@ -210,11 +206,11 @@ extension MainScreenViewController: UITableViewDataSource {
 
 extension MainScreenViewController {
 
-    func showOnboardingForFromLanguage(with description: String) {
+    func showOnboardingForsourceLanguage(with description: String) {
         self.showOnboarding(description: description, viewForCopy: languageFromButton)
     }
 
-    func showOnboardingForToLanguage(with description: String) {
+    func showOnboardingFortargetLanguage(with description: String) {
         self.showOnboarding(description: description, viewForCopy: languageToButton)
     }
 

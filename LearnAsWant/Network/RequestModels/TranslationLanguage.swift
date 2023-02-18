@@ -7,7 +7,22 @@
 
 import Foundation
 
-struct TranslationLanguage {
-    var code: String?
-    var name: String?
+struct TranslationLanguage: Codable {
+    var code: String = ""
+    var name: String = ""
+}
+
+extension TranslationLanguage {
+
+    static var autoDetect: TranslationLanguage {
+        return TranslationLanguage(code: "auto", name: "Auto detect")
+    }
+
+    static var defaultEnglish: TranslationLanguage {
+        return TranslationLanguage(code: "en", name: "English")
+    }
+
+    static var defaultSpanish: TranslationLanguage {
+        return TranslationLanguage(code: "es", name: "Spanish")
+    }
 }

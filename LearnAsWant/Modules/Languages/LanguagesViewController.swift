@@ -8,9 +8,34 @@
 
 import UIKit
 
-class LanguagesViewController: UIViewController {
+final class LanguagesViewController: UIViewController {
 
     var presenter: LanguagesPresenter!
+
+    private lazy var titleContainer = UIView()
+    private lazy var textFieldContainer = UIView()
+
+    private lazy var titleLabel: UILabel = UILabel()
+
+    private lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        return button
+    }()
+
+    private lazy var searchButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        return button
+    }()
+
+    private lazy var searchTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Search"
+        textField.clearButtonMode = .whileEditing
+        textField.returnKeyType = .done
+        return textField
+    }()
 
     private lazy var tableView = UITableView()
     private var cellModels: [PTableViewCellAnyModel] = [] {
@@ -21,11 +46,9 @@ class LanguagesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view
         setupViews()
+        setupColors()
         setupConstraints()
-        tableView.register(models: [LanguageCellModel.self])
-
         presenter.viewDidLoad()
     }
 
@@ -34,28 +57,81 @@ class LanguagesViewController: UIViewController {
     }
 }
 
-// MARK: Setup UI.
+// MARK: - Setup screen data.
+
 extension LanguagesViewController {
-
-    private func setupViews() {
-
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.view.addSubview(tableView)
-    }
-
-    private func setupConstraints() {
-        tableView.snp.makeConstraints { make in
-            make.top.bottom.left.right.equalToSuperview()
-        }
+    func setupTitle(text: String) {
+        self.titleLabel.text = text
     }
 }
 
-// MARK: Table data.
+// MARK: - Setup Table data.
 
 extension LanguagesViewController {
     func showData(with cellModels: [PTableViewCellAnyModel]) {
         self.cellModels = cellModels
+    }
+}
+
+// MARK: - Setup UI.
+extension LanguagesViewController {
+
+    private func setupColors() {
+        titleContainer.backgroundColor = .systemBackground
+        textFieldContainer.backgroundColor = .systemBackground
+    }
+
+    private func setupViews() {
+        self.tableView.register(models: [LanguageCellModel.self])
+        self.searchTextField.delegate = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.view.addSubviews(titleContainer, textFieldContainer, tableView)
+        self.titleContainer.addSubviews(titleLabel, closeButton)
+        self.textFieldContainer.addSubviews(searchButton, searchTextField)
+        self.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+    }
+
+    private func setupConstraints() {
+
+        titleContainer.snp.makeConstraints { make in
+           // make.top.equalToSuperview().inset(10)//.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(8)
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(50)
+        }
+
+        textFieldContainer.snp.makeConstraints { make in
+            make.top.equalTo(titleContainer.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(40)
+        }
+
+        searchButton.snp.makeConstraints { make in
+            make.height.width.equalTo(40)
+            make.left.top.bottom.equalToSuperview()
+        }
+
+        searchTextField.snp.makeConstraints { make in
+            make.top.bottom.right.equalToSuperview()
+            make.left.equalTo(searchButton.snp.right)
+        }
+
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview()
+        }
+
+        closeButton.snp.makeConstraints { make in
+            make.height.width.equalTo(40)
+            make.top.bottom.equalToSuperview()
+            make.right.equalToSuperview().inset(10)
+            make.left.equalTo(titleLabel.snp.right)
+        }
+
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(textFieldContainer.snp.bottom)
+            make.bottom.left.right.equalToSuperview()
+        }
     }
 }
 
@@ -74,5 +150,26 @@ extension LanguagesViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.dequeueReusableCell(withModel: cellModels[indexPath.row], for: indexPath)
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let model = cellModels[indexPath.row] as? LanguageCellModel else { return }
+        presenter.languageSelected(model: model)
+    }
+}
+
+//MARK: - Actions
+
+extension LanguagesViewController {
+    @objc private func closeAction() {
+        presenter.closeScreen()
+    }
+}
+
+//MARK: - TextFieldDelegate.
+
+extension LanguagesViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
     }
 }

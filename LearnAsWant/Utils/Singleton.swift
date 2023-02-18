@@ -15,29 +15,38 @@ final class Singleton {
         if let language = UserDefaults.lastUsedLanguageModel {
             return language
         } else {
-            let defaultModel = TranslationModel(fromLanguage: .english, toLanguage: .spanish)
+            let defaultModel = TranslationModel(sourceLanguage: .defaultEnglish, targetLanguage: .defaultSpanish)
 
             UserDefaults.lastUsedLanguageModel = defaultModel
             return defaultModel
         }
     }
 
-    static func setupNewLanguage(_ language: GlobalLanguage, isMain: Bool) {
+    static func setupNewLanguage(_ language: TranslationLanguage, isMain: Bool) {
         let currentModel = self.currentLanguageModel
 
-        if (isMain && currentModel.toLanguage == language) || (!isMain && currentModel.fromLanguage == language) {
+        let currentSourceLanguage = currentModel.sourceLanguage
+        let currentTargetLanguage = currentModel.targetLanguage
 
-            UserDefaults.lastUsedLanguageModel = TranslationModel(fromLanguage: currentModel.toLanguage,
-                                                                  toLanguage: currentModel.fromLanguage)
+        let newLanguageCode = language.code
+
+        if
+            (isMain && currentSourceLanguage.code == newLanguageCode) ||
+            (!isMain && currentTargetLanguage.code == newLanguageCode)
+        {
+            // reverse model if language already set
+            UserDefaults.lastUsedLanguageModel = TranslationModel(sourceLanguage: currentTargetLanguage,
+                                                                  targetLanguage: currentSourceLanguage)
             return
         }
 
+
         if isMain {
-            UserDefaults.lastUsedLanguageModel = TranslationModel(fromLanguage: language,
-                                                                  toLanguage: currentModel.toLanguage)
+            UserDefaults.lastUsedLanguageModel = TranslationModel(sourceLanguage: language,
+                                                                  targetLanguage: currentTargetLanguage)
         } else {
-            UserDefaults.lastUsedLanguageModel = TranslationModel(fromLanguage: currentModel.fromLanguage,
-                                                                  toLanguage: language)
+            UserDefaults.lastUsedLanguageModel = TranslationModel(sourceLanguage: currentSourceLanguage,
+                                                                  targetLanguage: language)
         }
     }
 
