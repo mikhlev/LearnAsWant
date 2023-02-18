@@ -31,8 +31,8 @@ final class Singleton {
         let newLanguageCode = language.code
 
         if
-            (isMain && currentSourceLanguage.code == newLanguageCode) ||
-            (!isMain && currentTargetLanguage.code == newLanguageCode)
+            (isMain && currentTargetLanguage.code == newLanguageCode) ||
+            (!isMain && currentSourceLanguage.code == newLanguageCode)
         {
             // reverse model if language already set
             UserDefaults.lastUsedLanguageModel = TranslationModel(sourceLanguage: currentTargetLanguage,
