@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AddTranslatePresenter {
+final class AddTranslatePresenter {
 
     private weak var view: AddTranslateViewController?
     private let router: AddTranslateRouter
@@ -66,29 +66,41 @@ class AddTranslatePresenter {
 extension AddTranslatePresenter {
 
     func translate(text: String, fromSourceLanguage: Bool) {
-        if text != "" {
+        guard !text.isEmpty else { return }
+        
+        TranslationService.shared.textToTranslate = text
+        TranslationService.shared.targetLanguageCode = translationModel.targetLanguage.code
 
-            TranslationService.shared.textToTranslate = text
-            TranslationService.shared.targetLanguageCode = translationModel.targetLanguage.code
+        // Check if it is language autodetect mode
+        if translationModel.sourceLanguage.code == TranslationLanguage.autoDetect.code {
+            translateWithDetectLanguage(text: text)
+        } else {
+            translateWithLanguage(translationModel.sourceLanguage, text: text)
+        }
+    }
 
-            TranslationService.shared.detectLanguage(forText: text) { [weak self] (language) in
-                guard
-                    let lang = TranslationService.shared.supportedLanguages.first(where: { $0.code == language })
-                else { return }
+    private func translateWithDetectLanguage(text: String) {
+        // Check text language and setup as source language
+        TranslationService.shared.detectLanguage(forText: text) { [weak self] (language) in
+            guard
+                let lang = TranslationService.shared.supportedLanguages.first(where: { $0.code == language })
+            else { return }
 
-                let name = lang.name
+            let name = lang.name
 
+            DispatchQueue.main.async {
+                self?.view?.setupSourceLanguage(name)
+            }
+            self?.translateWithLanguage(lang, text: text)
+        }
+    }
+
+    private func translateWithLanguage(_ language: TranslationLanguage, text: String) {
+        TranslationService.shared.translate { [weak self] translation in
+            if let translation = translation {
                 DispatchQueue.main.async {
-                    self?.view?.setupSourceLanguage(name)
-                }
-
-                TranslationService.shared.translate { translation in
-                    if let translation = translation {
-                        DispatchQueue.main.async {
-                            self?.updateModel(sourceText: text, targetedText: translation)
-                            self?.view?.setupTranslatedData(text: translation)
-                        }
-                    }
+                    self?.updateModel(sourceText: text, targetedText: translation)
+                    self?.view?.setupTranslatedData(text: translation)
                 }
             }
         }

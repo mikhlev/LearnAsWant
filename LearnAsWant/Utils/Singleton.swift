@@ -48,6 +48,13 @@ final class Singleton {
             UserDefaults.lastUsedLanguageModel = TranslationModel(sourceLanguage: currentSourceLanguage,
                                                                   targetLanguage: language)
         }
+
+        setupTranslationServiceOptions()
+    }
+
+    private static func setupTranslationServiceOptions() {
+        TranslationService.shared.sourceLanguageCode = Singleton.currentLanguageModel.sourceLanguage.code
+        TranslationService.shared.targetLanguageCode = Singleton.currentLanguageModel.targetLanguage.code
     }
 
     static func setupGoogleApiKey() {
