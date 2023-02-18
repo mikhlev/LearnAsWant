@@ -65,11 +65,7 @@ extension LanguagesViewController {
     func setupTitle(text: String) {
         self.titleLabel.text = text
     }
-}
 
-// MARK: - Setup Table data.
-
-extension LanguagesViewController {
     func showData(with cellModels: [PTableViewCellAnyModel]) {
         self.cellModels = cellModels
     }
@@ -88,6 +84,9 @@ extension LanguagesViewController {
         self.view.addSubviews(titleContainer, textFieldContainer, tableView)
         self.titleContainer.addSubviews(titleLabel, closeButton)
         self.textFieldContainer.addSubviews(searchButton, searchTextField)
+
+        self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.tableView.separatorColor = .lightGray
     }
 
     private func setupDelegates() {
@@ -183,5 +182,13 @@ extension LanguagesViewController {
 extension LanguagesViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
+    }
+}
+
+extension LanguagesViewController {
+
+    func updateVisibleCells() {
+        guard let visibleCells = tableView.visibleCells as? [LanguageCell] else { return }
+        visibleCells.forEach({ $0.animateAdditionalLabel() })
     }
 }

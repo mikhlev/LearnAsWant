@@ -21,6 +21,8 @@ final class LanguagesPresenter {
         }
     }
 
+    var timer: Timer?
+
    init(
        view: LanguagesViewController,
        router: LanguagesRouter,
@@ -38,6 +40,7 @@ final class LanguagesPresenter {
         view?.setupTitle(text: title)
 
         languages = TranslationService.shared.supportedLanguages
+        createTimer()
     }
 
     func closeScreen() {
@@ -66,5 +69,23 @@ extension LanguagesPresenter {
         let models = languages.map { LanguageCellModel(model: $0) }
         let autoDetectModel = LanguageCellModel(model: .autoDetect)
         view?.showData(with: [autoDetectModel] + models)
+    }
+}
+
+// MARK: - Timer
+
+extension LanguagesPresenter {
+    func createTimer() {
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 2,
+                                         target: self,
+                                         selector: #selector(updateVisibleCells),
+                                         userInfo: nil,
+                                         repeats: true)
+        }
+    }
+
+    @objc private func updateVisibleCells() {
+        view?.updateVisibleCells()
     }
 }

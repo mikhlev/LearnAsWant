@@ -12,6 +12,6 @@ struct LanguageCellModel: PTableViewCellModel {
     let model: TranslationLanguage
 
     func configure(cell: LanguageCell) {
-        cell.textLabel?.text = model.name
+        cell.setupData(title: model.name, isAutoDetectCell: model.code == TranslationLanguage.autoDetect.code)
     }
 }
