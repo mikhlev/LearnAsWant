@@ -11,12 +11,10 @@ import UIKit
  class LanguagesAssembly {
 
      let navigationController: UINavigationController
-     let languages: [TranslationLanguage]
      let forSourceLanguage: Bool
 
-     init(navigationController: UINavigationController, languages: [TranslationLanguage], forSourceLanguage: Bool) {
+     init(navigationController: UINavigationController, forSourceLanguage: Bool) {
          self.navigationController = navigationController
-         self.languages = languages
          self.forSourceLanguage = forSourceLanguage
      }
 
@@ -26,7 +24,6 @@ import UIKit
          let router = LanguagesRouter(navigationController: navigationController)
          let presenter = LanguagesPresenter(view: viewController,
                                             router: router,
-                                            languages: languages,
                                             forSourceLanguage: forSourceLanguage)
          
          viewController.presenter = presenter

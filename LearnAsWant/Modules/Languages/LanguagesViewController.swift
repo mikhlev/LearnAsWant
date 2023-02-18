@@ -47,6 +47,8 @@ final class LanguagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setupDelegates()
+        addTargets()
         setupColors()
         setupConstraints()
         presenter.viewDidLoad()
@@ -83,19 +85,25 @@ extension LanguagesViewController {
 
     private func setupViews() {
         self.tableView.register(models: [LanguageCellModel.self])
-        self.searchTextField.delegate = self
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
         self.view.addSubviews(titleContainer, textFieldContainer, tableView)
         self.titleContainer.addSubviews(titleLabel, closeButton)
         self.textFieldContainer.addSubviews(searchButton, searchTextField)
+    }
+
+    private func setupDelegates() {
+        self.searchTextField.delegate = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+    }
+
+    private func addTargets() {
         self.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        self.searchTextField.addTarget(self, action: #selector(updateTableBySearch), for: .editingChanged)
     }
 
     private func setupConstraints() {
 
         titleContainer.snp.makeConstraints { make in
-           // make.top.equalToSuperview().inset(10)//.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(8)
             make.top.left.right.equalToSuperview()
             make.height.equalTo(50)
         }
@@ -163,6 +171,10 @@ extension LanguagesViewController: UITableViewDataSource {
 extension LanguagesViewController {
     @objc private func closeAction() {
         presenter.closeScreen()
+    }
+
+    @objc private func updateTableBySearch() {
+        presenter.updateTable(by: searchTextField.text)
     }
 }
 

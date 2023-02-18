@@ -23,7 +23,6 @@ import UIKit
 
      func openLanguagesScreen(forSource: Bool) {
          let languagesVC = LanguagesAssembly(navigationController: navigationController,
-                                             languages: TranslationService.shared.supportedLanguages,
                                              forSourceLanguage: forSource).create()
          navigationController.present(languagesVC, animated: true)
      }
