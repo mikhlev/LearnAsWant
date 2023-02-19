@@ -34,35 +34,7 @@ class MainScreenViewController: UIViewController {
 
     // MARK: - AddTranslate container.
 
-    private lazy var addTranslateButton = UIButton()
-
-    private lazy var addTranslateContainer = UIView()
-
-    private lazy var sourceTextView: UITextView = {
-        let textView = UITextView()
-        textView.layer.borderColor = UIColor.red.cgColor
-        textView.layer.borderWidth = 1
-        textView.layer.cornerRadius = 10
-        return textView
-    }()
-
-    private lazy var translatedTextView: UITextView = {
-        let textView = UITextView()
-        textView.layer.borderColor = UIColor.red.cgColor
-        textView.layer.borderWidth = 1
-        textView.layer.cornerRadius = 10
-        return textView
-    }()
-
-    private lazy var translateArrowButton = UIButton()
-
-    private lazy var saveButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Save", for: .normal)
-        return button
-    }()
-
-    private let translateAnimationDuration = 0.1
+    private lazy var addTranslateView = AddTranslateView()
 
     // MARK: - Other UI elements.
     private lazy var tableView = UITableView()
@@ -121,7 +93,6 @@ extension MainScreenViewController {
 
     private func setupButtons() {
         self.changeLanguageButton.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        self.addTranslateButton.setImage(UIImage(systemName: "plus.square.fill.on.square.fill"), for: .normal)
         self.learnButton.setTitle(Strings.MainScreen.learnButtonButton, for: .normal)
     }
 
@@ -135,16 +106,19 @@ extension MainScreenViewController {
     private func setupViews() {
         self.view.backgroundColor = .systemBackground
 
-        self.view.addSubviews(tableView, learnButton)
+        self.view.addSubviews(tableView, learnButton, addTranslateView)
         // must be after adding table view
         setupTopContainerViews()
-        setupAddTranslateViews()
     }
 
     private func setupConstraints() {
 
         setupTopContainerConstraints()
-        setupAddTranslateConstraints()
+
+        addTranslateView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(topContainer.snp.bottom)
+        }
 
         tableView.snp.makeConstraints { make in
             make.top.equalTo(topContainer.snp.bottom).offset(16)
@@ -199,7 +173,10 @@ extension MainScreenViewController {
     private func setupActions() {
         sourceLanguageButton.addTarget(self, action: #selector(openLanguagesScreenForSourceLanguage), for: .touchUpInside)
         targetLanguageButton.addTarget(self, action: #selector(openLanguagesScreenForTargetLanguage), for: .touchUpInside)
-        addTranslateButton.addTarget(self, action: #selector(updateTranslateViewState), for: .touchUpInside)
+
+        addTranslateView.updateViewStateButtonTapped = {[weak self] in
+            self?.presenter.updateTranslateViewState()
+        }
     }
 
     @objc private func openAddTranslateScreen() {
@@ -260,117 +237,32 @@ extension MainScreenViewController {
     }
 }
 
-// MARK: - Add translate view.
+//MARK: - Add Translate settings.
 
 extension MainScreenViewController {
 
-    private func setupAddTranslateViews() {
-        addTranslateContainer.backgroundColor = .lightGray
-        translateArrowButton.setImage(UIImage(systemName: "arrow.down"), for: .normal)
-
-        self.view.addSubviews(addTranslateContainer)
-
-        self.addTranslateContainer.addSubviews(addTranslateButton,
-                                               translatedTextView,
-                                               translateArrowButton,
-                                               sourceTextView,
-                                               saveButton)
-
-        [translatedTextView, translateArrowButton, sourceTextView, saveButton].forEach { $0.alpha = 0 }
+    func updateViewState(toShow: Bool) {
+        self.addTranslateView.updateViewState(toShow: toShow)
+        self.updateTableState(toDisable: toShow)
     }
 
-    private func setupAddTranslateConstraints() {
+    private func updateTableState(toDisable: Bool) {
 
-        addTranslateContainer.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(topContainer.snp.bottom)
-        }
-
-        addTranslateButton.snp.makeConstraints { make in
-            make.height.width.equalTo(40)
-            make.top.equalTo(topContainer.snp.bottom).offset(6)
-            make.right.equalToSuperview().inset(10)
-        }
-        setupFirstState()
-    }
-    private func setupFirstState() {
-
-        sourceTextView.snp.makeConstraints { make in
-            make.bottom.equalTo(addTranslateButton.snp.bottom).offset(0)
-            make.left.right.equalToSuperview().inset(20)
-            make.height.equalTo(40)
-        }
-
-        translateArrowButton.snp.makeConstraints { make in
-            make.bottom.equalTo(sourceTextView.snp.bottom).offset(0)
-            make.height.width.equalTo(40)
-            make.centerX.equalToSuperview()
-        }
-
-        translatedTextView.snp.makeConstraints { make in
-            make.bottom.equalTo(translateArrowButton.snp.bottom).offset(0)
-            make.left.right.equalToSuperview().inset(20)
-            make.height.equalTo(40)
-        }
-
-        saveButton.snp.makeConstraints { make in
-            make.height.equalTo(36)
-            make.width.equalTo(100)
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(20)
-            make.bottom.equalTo(translatedTextView.snp.bottom).offset(0)
+        tableView.alpha = toDisable ? 0.5 : 1
+        UIView.animate(withDuration: 0.1) {
+            self.view.layoutIfNeeded()
         }
     }
 
-    // Views animation.
-    private func showOrHideSourceTextView(toShow: Bool) -> UIView {
-        sourceTextView.snp.updateConstraints { make in
-            make.bottom.equalTo(addTranslateButton.snp.bottom).offset(toShow ? 50 : 0)
-        }
-        return sourceTextView
+    @objc private func saveText() {
+        let model = TranslationModel(sourceLanguage: Singleton.currentLanguageModel.sourceLanguage,
+                                     targetLanguage: Singleton.currentLanguageModel.sourceLanguage,
+                                     fromText: nil,
+                                     toText: nil)
+        presenter.saveText(model: model)
     }
+}
 
-    private func showOrHideTranslateArrowButton(toShow: Bool) -> UIView {
-        translateArrowButton.snp.updateConstraints { make in
-            make.bottom.equalTo(sourceTextView.snp.bottom).offset(toShow ? 50 : 0)
-        }
-        return translateArrowButton
-    }
+extension MainScreenViewController: UITextViewDelegate {
 
-    private func showOrHideTargetTextView(toShow: Bool) -> UIView {
-        translatedTextView.snp.updateConstraints { make in
-            make.bottom.equalTo(translateArrowButton.snp.bottom).offset(toShow ? 50 : 0)
-        }
-        return translatedTextView
-    }
-
-    private func showOrHideSaveButton(toShow: Bool) -> UIView {
-        saveButton.snp.updateConstraints { make in
-            make.bottom.equalTo(translatedTextView.snp.bottom).offset(toShow ? 50 : 0)
-        }
-        return saveButton
-    }
-
-    func animateUpdateTranslateView(toShow: Bool) {
-
-        let commonActions = [showOrHideSourceTextView,
-                             showOrHideTranslateArrowButton,
-                             showOrHideTargetTextView,
-                             showOrHideSaveButton]
-
-        let actions = toShow ? commonActions : commonActions.reversed()
-
-        for index in 0..<actions.count {
-            let animateView = actions[index](toShow)
-
-            let duration = translateAnimationDuration
-            let delay = translateAnimationDuration * Double((index + 1))
-
-            UIView.animate(withDuration: duration, delay: delay, options: [.curveEaseIn], animations: {[weak self] in
-                guard let self = self else { return }
-                animateView.alpha = toShow ? 1 : 0
-                self.view.layoutIfNeeded()
-            })
-        }
-    }
 }

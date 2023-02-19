@@ -62,8 +62,17 @@ class MainScreenPresenter {
     }
 
     func updateTranslateViewState() {
-        addTranslateIsOpened.toggle()
-        view?.animateUpdateTranslateView(toShow: addTranslateIsOpened)
+        addTranslateIsOpened ? hideTranslateView() : showTranslateView()
+    }
+
+    private func hideTranslateView() {
+        addTranslateIsOpened = false
+        view?.updateViewState(toShow: addTranslateIsOpened)
+    }
+
+    private func showTranslateView() {
+        addTranslateIsOpened = true
+        view?.updateViewState(toShow: addTranslateIsOpened)
     }
 }
 
