@@ -52,6 +52,23 @@ final class Singleton {
         setupTranslationServiceOptions()
     }
 
+    static func setupNewCard(sourceText: String, translatedText: String) {
+        let currentLanguage = Singleton.currentLanguageModel
+
+        var allExistedCards = UserDefaults.cards ?? [:]
+        var array = allExistedCards[currentLanguage.sourceLanguage.code] ?? []
+
+        array.append(TranslationModel(sourceLanguage: currentLanguage.sourceLanguage,
+                                      targetLanguage: currentLanguage.targetLanguage,
+                                      fromText: sourceText,
+                                      toText: translatedText))
+
+        allExistedCards.updateValue(array, forKey: currentLanguage.sourceLanguage.code)
+        UserDefaults.cards = allExistedCards
+
+        NotificationService.postMessage(for: .newCardAdded)
+    }
+
     private static func setupTranslationServiceOptions() {
         TranslationService.shared.sourceLanguageCode = Singleton.currentLanguageModel.sourceLanguage.code
         TranslationService.shared.targetLanguageCode = Singleton.currentLanguageModel.targetLanguage.code

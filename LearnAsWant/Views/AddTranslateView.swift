@@ -11,8 +11,6 @@ final class AddTranslateView: UIView {
 
     private lazy var addTranslateButton = UIButton()
 
-//    private lazy var addTranslateContainer = UIView()
-
     private lazy var sourceTextView: UITextView = {
         let textView = UITextView()
         textView.layer.borderColor = UIColor.red.cgColor
@@ -40,7 +38,7 @@ final class AddTranslateView: UIView {
     private let translateAnimationDuration = 0.1
 
     var updateViewStateButtonTapped: (() -> Void)?
-    var saveTextButtonTapped: (() -> Void)?
+    var saveTextButtonTapped: ((String?, String?) -> Void)?
     var sourceTextChanged: ((String?) -> Void)?
 
     init() {
@@ -55,6 +53,11 @@ final class AddTranslateView: UIView {
 
     func setupTranslatedtext(text: String) {
         self.translatedTextView.text = text
+    }
+
+    func clearView() {
+        self.sourceTextView.text = ""
+        self.translatedTextView.text = ""
     }
 }
 
@@ -77,12 +80,8 @@ extension AddTranslateView {
         saveButton.addTarget(self, action: #selector(saveText), for: .touchUpInside)
     }
 
-    @objc private func sourceTextUpdated() {
-        saveTextButtonTapped?()
-    }
-
     @objc private func saveText() {
-        saveTextButtonTapped?()
+        saveTextButtonTapped?(sourceTextView.text, translatedTextView.text)
     }
 
     @objc private func updateTranslateViewState() {

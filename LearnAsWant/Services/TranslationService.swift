@@ -23,6 +23,10 @@ class TranslationService: NSObject {
         super.init()
     }
 
+    func clearTexts() {
+        textToTranslate = nil
+    }
+
     func translate(completion: @escaping (_ translations: String?) -> Void) {
         guard let textToTranslate = textToTranslate, let targetLanguage = targetLanguageCode else { completion(nil); return }
 

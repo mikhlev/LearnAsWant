@@ -181,6 +181,10 @@ extension MainScreenViewController {
         addTranslateView.sourceTextChanged = {[weak self] text in
             self?.presenter.translate(text: text, fromSourceLanguage: true)
         }
+
+        addTranslateView.saveTextButtonTapped = {[weak self] sourceText, translatedText in
+            self?.saveText(sourceText: sourceText, translatedText: translatedText)
+        }
     }
 
     @objc private func openAddTranslateScreen() {
@@ -253,7 +257,8 @@ extension MainScreenViewController {
     private func updateTableState(toDisable: Bool) {
 
         tableView.alpha = toDisable ? 0.5 : 1
-        UIView.animate(withDuration: 0.1) {
+        tableView.isUserInteractionEnabled = !toDisable
+        UIView.animate(withDuration: toDisable ? 0.1 : 0.4) {
             self.view.layoutIfNeeded()
         }
     }
@@ -262,11 +267,11 @@ extension MainScreenViewController {
         self.addTranslateView.setupTranslatedtext(text: text)
     }
 
-    @objc private func saveText() {
-        let model = TranslationModel(sourceLanguage: Singleton.currentLanguageModel.sourceLanguage,
-                                     targetLanguage: Singleton.currentLanguageModel.sourceLanguage,
-                                     fromText: nil,
-                                     toText: nil)
-        presenter.saveText(model: model)
+    func clearTranslateView() {
+        self.addTranslateView.clearView()
+    }
+
+    private func saveText(sourceText: String?, translatedText: String?) {
+        presenter.saveText(sourceText: sourceText, translatedText: translatedText)
     }
 }

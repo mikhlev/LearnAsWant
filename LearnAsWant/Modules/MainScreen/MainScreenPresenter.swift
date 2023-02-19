@@ -68,6 +68,7 @@ class MainScreenPresenter {
     private func hideTranslateView() {
         addTranslateIsOpened = false
         view?.updateViewState(toShow: addTranslateIsOpened)
+        self.view?.clearTranslateView()
     }
 
     private func showTranslateView() {
@@ -129,27 +130,17 @@ extension MainScreenPresenter {
 // MARK: - Add transalte.
 
 extension MainScreenPresenter {
-    func saveText(model: TranslationModel) {
+    func saveText(sourceText: String?, translatedText: String?) {
 
         guard
-            let text = model.fromText,
-            let translatedText = model.toText
+            let sourceText = sourceText,
+            let translatedText = translatedText,
+            !sourceText.isEmpty,
+            !translatedText.isEmpty
         else { return }
 
-        let currentLanguage = Singleton.currentLanguageModel
-
-        var allExistedCards = UserDefaults.cards ?? [:]
-        var array = allExistedCards[currentLanguage.sourceLanguage.code] ?? []
-
-        array.append(TranslationModel(sourceLanguage: currentLanguage.sourceLanguage,
-                                      targetLanguage: currentLanguage.targetLanguage,
-                                      fromText: text,
-                                      toText: translatedText))
-
-        allExistedCards.updateValue(array, forKey: currentLanguage.sourceLanguage.code)
-        UserDefaults.cards = allExistedCards
-
-        NotificationService.postMessage(for: .newCardAdded)
+        Singleton.setupNewCard(sourceText: sourceText, translatedText: translatedText)
+        TranslationService.shared.clearTexts()
         self.hideTranslateView()
     }
 
