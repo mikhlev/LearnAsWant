@@ -41,6 +41,7 @@ final class AddTranslateView: UIView {
 
     var updateViewStateButtonTapped: (() -> Void)?
     var saveTextButtonTapped: (() -> Void)?
+    var sourceTextChanged: ((String?) -> Void)?
 
     init() {
         super.init(frame: .zero)
@@ -51,6 +52,22 @@ final class AddTranslateView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func setupTranslatedtext(text: String) {
+        self.translatedTextView.text = text
+    }
+}
+
+extension AddTranslateView: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+
+        switch textView {
+        case sourceTextView:
+            sourceTextChanged?(textView.text)
+        default:
+            break
+        }
+    }
 }
 
 extension AddTranslateView {
@@ -58,6 +75,10 @@ extension AddTranslateView {
     private func addActions() {
         addTranslateButton.addTarget(self, action: #selector(updateTranslateViewState), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(saveText), for: .touchUpInside)
+    }
+
+    @objc private func sourceTextUpdated() {
+        saveTextButtonTapped?()
     }
 
     @objc private func saveText() {
@@ -76,6 +97,8 @@ extension AddTranslateView {
     private func setupViews() {
 
         self.backgroundColor = .lightGray
+
+        self.sourceTextView.delegate = self
 
         self.addTranslateButton.setImage(UIImage(systemName: "plus.square.fill.on.square.fill"), for: .normal)
         translateArrowButton.setImage(UIImage(systemName: "arrow.down"), for: .normal)

@@ -37,7 +37,7 @@ class MainScreenPresenter {
     }
 
     func viewDidAppear() {
-//        showOnboardingForsourceLanguage()
+        //        showOnboardingForsourceLanguage()
     }
 
     func openAddTranslateScreen() {
@@ -86,43 +86,6 @@ extension MainScreenPresenter {
     }
 }
 
-extension MainScreenPresenter {
-
-//    private func setupMenuForButtons() {
-//
-//        let menuFrom = UIMenu(title: Strings.MainScreen.menuFromTitle,
-//                              children: createChildrenForMenu(languages: GlobalLanguage.allCases, isMain: true))
-//
-//        let menuTo = UIMenu(title: Strings.MainScreen.menuToTitle,
-//                            children: createChildrenForMenu(languages: GlobalLanguage.allCases, isMain: false))
-//
-//        self.view?.setupMenuForButton(isMain: true, menu: menuFrom)
-//        self.view?.setupMenuForButton(isMain: false, menu: menuTo)
-//    }
-//
-//    private func createChildrenForMenu(languages: [GlobalLanguage], isMain: Bool) -> [UIAction] {
-//
-//        let image = UIImage(systemName: "icloud.and.arrow.down.fill")
-//
-//        let currentLanguage = isMain ? Singleton.currentLanguageModel.sourceLanguage : Singleton.currentLanguageModel.targetLanguage
-//
-//
-//        let actions: [UIAction] = languages.map { language in
-//            let action = UIAction(title: language.rawValue,
-//                                  image: image,
-//                                  state: language == currentLanguage ? .on : .off)
-//            { [weak self] action in
-//                self?.menuLanguageAction(language, isMain: isMain)
-//            }
-//            return action
-//        }
-//
-//        return actions
-//    }
-//
-// 
-}
-
 // MARK: - Onboarding.
 
 extension MainScreenPresenter {
@@ -159,5 +122,70 @@ extension MainScreenPresenter {
                     }
 
                 })
+    }
+}
+
+
+// MARK: - Add transalte.
+
+extension MainScreenPresenter {
+    func saveText(model: TranslationModel) {
+
+        guard
+            let text = model.fromText,
+            let translatedText = model.toText
+        else { return }
+
+        let currentLanguage = Singleton.currentLanguageModel
+
+        var allExistedCards = UserDefaults.cards ?? [:]
+        var array = allExistedCards[currentLanguage.sourceLanguage.code] ?? []
+
+        array.append(TranslationModel(sourceLanguage: currentLanguage.sourceLanguage,
+                                      targetLanguage: currentLanguage.targetLanguage,
+                                      fromText: text,
+                                      toText: translatedText))
+
+        allExistedCards.updateValue(array, forKey: currentLanguage.sourceLanguage.code)
+        UserDefaults.cards = allExistedCards
+
+        NotificationService.postMessage(for: .newCardAdded)
+        self.hideTranslateView()
+    }
+
+    func translate(text: String?, fromSourceLanguage: Bool) {
+        guard let text = text, !text.isEmpty else { return }
+
+        TranslationService.shared.textToTranslate = text
+        TranslationService.shared.targetLanguageCode = Singleton.currentLanguageModel.targetLanguage.code
+
+        // Check if it is language autodetect mode
+        if Singleton.currentLanguageModel.sourceLanguage.code == TranslationLanguage.autoDetect.code {
+            translateWithDetectLanguage(text: text)
+        } else {
+            translateWithLanguage(Singleton.currentLanguageModel.sourceLanguage, text: text)
+        }
+    }
+
+    private func translateWithDetectLanguage(text: String) {
+//         Check text language and setup as source language
+        TranslationService.shared.detectLanguage(forText: text) { [weak self] (language) in
+            guard
+                let lang = TranslationService.shared.supportedLanguages.first(where: { $0.code == language })
+            else { return }
+
+            let name = lang.name
+            self?.translateWithLanguage(lang, text: text)
+        }
+    }
+
+    private func translateWithLanguage(_ language: TranslationLanguage, text: String) {
+        TranslationService.shared.translate { [weak self] translation in
+            if let translation = translation {
+                DispatchQueue.main.async {
+                    self?.view?.setupTranslatedtext(text: translation)
+                }
+            }
+        }
     }
 }

@@ -177,6 +177,10 @@ extension MainScreenViewController {
         addTranslateView.updateViewStateButtonTapped = {[weak self] in
             self?.presenter.updateTranslateViewState()
         }
+
+        addTranslateView.sourceTextChanged = {[weak self] text in
+            self?.presenter.translate(text: text, fromSourceLanguage: true)
+        }
     }
 
     @objc private func openAddTranslateScreen() {
@@ -254,6 +258,10 @@ extension MainScreenViewController {
         }
     }
 
+    func setupTranslatedtext(text: String) {
+        self.addTranslateView.setupTranslatedtext(text: text)
+    }
+
     @objc private func saveText() {
         let model = TranslationModel(sourceLanguage: Singleton.currentLanguageModel.sourceLanguage,
                                      targetLanguage: Singleton.currentLanguageModel.sourceLanguage,
@@ -261,8 +269,4 @@ extension MainScreenViewController {
                                      toText: nil)
         presenter.saveText(model: model)
     }
-}
-
-extension MainScreenViewController: UITextViewDelegate {
-
 }
