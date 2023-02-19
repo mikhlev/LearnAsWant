@@ -42,6 +42,7 @@
 		C7BB42E42994FB7200F5783B /* TranslationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB42E32994FB7200F5783B /* TranslationAPI.swift */; };
 		C7BB42E6299505F100F5783B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7BB42E5299505F100F5783B /* GoogleService-Info.plist */; };
 		C7BB42E9299F345000F5783B /* TranslationLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB42E8299F345000F5783B /* TranslationLanguage.swift */; };
+		C7BB42EB29A1F20100F5783B /* AddTranslateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB42EA29A1F20100F5783B /* AddTranslateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		C7BB42E32994FB7200F5783B /* TranslationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationAPI.swift; sourceTree = "<group>"; };
 		C7BB42E5299505F100F5783B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7BB42E8299F345000F5783B /* TranslationLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationLanguage.swift; sourceTree = "<group>"; };
+		C7BB42EA29A1F20100F5783B /* AddTranslateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTranslateView.swift; sourceTree = "<group>"; };
 		CC405EF3C2660E8737C33142 /* Pods-LearnAsWant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.release.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.release.xcconfig"; sourceTree = "<group>"; };
 		D755E2A0C9DC4BD0FA5B8743 /* Pods-LearnAsWant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.debug.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				C733C08129900EC80008FAD9 /* OnboardingView.swift */,
+				C7BB42EA29A1F20100F5783B /* AddTranslateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				C79C8FE3298C0EC0007E2AB5 /* LanguagesRouter.swift in Sources */,
 				C79C8FFC298D002D007E2AB5 /* CardModel.swift in Sources */,
 				C7BB42E9299F345000F5783B /* TranslationLanguage.swift in Sources */,
+				C7BB42EB29A1F20100F5783B /* AddTranslateView.swift in Sources */,
 				C79C9006298D6750007E2AB5 /* NotificationService.swift in Sources */,
 				C722D17629899E8400347F1E /* MainScreenAssembly.swift in Sources */,
 				C79C8FDB298BD2A4007E2AB5 /* AddTranslateViewController.swift in Sources */,
