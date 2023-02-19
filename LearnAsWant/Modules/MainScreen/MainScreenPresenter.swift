@@ -18,6 +18,8 @@ class MainScreenPresenter {
             .map { TranslatedCardCellModel(languageModel: $0) }
     }
 
+    private var addTranslateIsOpened: Bool = false
+
     init(
         view: MainScreenViewController,
         router: MainScreenRouter
@@ -57,6 +59,11 @@ class MainScreenPresenter {
         let lastUsedMainLanguageString = Singleton.currentLanguageModel.sourceLanguage.code
         let allExistedCards = UserDefaults.cards ?? [:]
         return allExistedCards[lastUsedMainLanguageString] ?? []
+    }
+
+    func updateTranslateViewState() {
+        addTranslateIsOpened.toggle()
+        view?.animateUpdateTranslateView(toShow: addTranslateIsOpened)
     }
 }
 

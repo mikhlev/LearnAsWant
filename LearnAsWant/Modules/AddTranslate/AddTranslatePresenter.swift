@@ -134,7 +134,7 @@ extension AddTranslatePresenter {
                     if success {
                         // Display languages in the tableview.
                         DispatchQueue.main.async { [unowned self] in
-                            router.openLanguagesScreen(languages: TranslationService.shared.supportedLanguages)
+//                            router.openLanguagesScreen(languages: TranslationService.shared.supportedLanguages)
                         }
                     } else {
                         // Show an alert saying that something went wrong.
