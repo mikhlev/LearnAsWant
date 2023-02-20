@@ -32,6 +32,7 @@ final class AddTranslateView: UIView {
     private lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Save", for: .normal)
+        button.setTitleColor(.label, for: .normal)
         return button
     }()
 
@@ -95,8 +96,7 @@ extension AddTranslateView {
 
     private func setupViews() {
 
-        self.backgroundColor = .lightGray
-
+        self.backgroundColor = .label.withAlphaComponent(0.2)
         self.sourceTextView.delegate = self
 
         self.addTranslateButton.setImage(UIImage(systemName: "plus.square.fill.on.square.fill"), for: .normal)
@@ -118,7 +118,8 @@ extension AddTranslateView {
 
         addTranslateButton.snp.makeConstraints { make in
             make.height.width.equalTo(40)
-            make.top.right.equalToSuperview().inset(10)
+            make.top.equalToSuperview().inset(16)
+            make.right.equalToSuperview().inset(10)
         }
 
         setupFirstState()

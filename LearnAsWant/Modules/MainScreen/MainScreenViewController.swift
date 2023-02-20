@@ -37,7 +37,12 @@ class MainScreenViewController: UIViewController {
     private lazy var addTranslateView = AddTranslateView()
 
     // MARK: - Other UI elements.
-    private lazy var tableView = UITableView()
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.contentInset.top = 20
+        return tableView
+    }()
+
     private lazy var learnButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 6
