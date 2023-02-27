@@ -9,6 +9,11 @@ import UIKit
 
 final class AddTranslateView: UIView {
 
+    enum ViewMode {
+        case full
+        case short
+    }
+
     private lazy var addTranslateButton = UIButton()
 
     private lazy var sourceTextView: UITextView = {
@@ -36,11 +41,30 @@ final class AddTranslateView: UIView {
         return button
     }()
 
+    private var viewMode: ViewMode = .short
+
     private let translateAnimationDuration = 0.1
 
+    private let heightForAddTransalteButton: Double = 40
+
+    private let heightForTextView: Double = 70
+
+    private let heightForArrowButton: Double = 40
+
+    private let heightForSaveButton: Double = 70
+
+    private var offsetForTextView: Double {
+        return viewMode == .full ? heightForTextView + 10 : 0
+    }
+
+    private var offsetForButtons: Double {
+        return viewMode == .full ? heightForArrowButton + 10 : 0
+    }
+    
     var updateViewStateButtonTapped: (() -> Void)?
     var saveTextButtonTapped: ((String?, String?) -> Void)?
     var sourceTextChanged: ((String?) -> Void)?
+
 
     init() {
         super.init(frame: .zero)
@@ -128,21 +152,21 @@ extension AddTranslateView {
     private func setupFirstState() {
 
         sourceTextView.snp.makeConstraints { make in
-            make.bottom.equalTo(addTranslateButton.snp.bottom).offset(0)
+            make.bottom.equalTo(addTranslateButton.snp.bottom).offset(offsetForTextView)
             make.left.right.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.height.equalTo(heightForTextView)
         }
 
         translateArrowButton.snp.makeConstraints { make in
-            make.bottom.equalTo(sourceTextView.snp.bottom).offset(0)
+            make.bottom.equalTo(sourceTextView.snp.bottom).offset(offsetForButtons)
             make.height.width.equalTo(40)
             make.centerX.equalToSuperview()
         }
 
         translatedTextView.snp.makeConstraints { make in
-            make.bottom.equalTo(translateArrowButton.snp.bottom).offset(0)
+            make.bottom.equalTo(translateArrowButton.snp.bottom).offset(offsetForTextView)
             make.left.right.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.height.equalTo(heightForTextView)
         }
 
         saveButton.snp.makeConstraints { make in
@@ -150,35 +174,35 @@ extension AddTranslateView {
             make.width.equalTo(100)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().inset(20)
-            make.bottom.equalTo(translatedTextView.snp.bottom).offset(0)
+            make.bottom.equalTo(translatedTextView.snp.bottom).offset(offsetForButtons)
         }
     }
 
     // Views animation.
-    private func showOrHideSourceTextView(toShow: Bool) -> UIView {
+    private func showOrHideSourceTextView() -> UIView {
         sourceTextView.snp.updateConstraints { make in
-            make.bottom.equalTo(addTranslateButton.snp.bottom).offset(toShow ? 50 : 0)
+            make.bottom.equalTo(addTranslateButton.snp.bottom).offset(offsetForTextView)
         }
         return sourceTextView
     }
 
-    private func showOrHideTranslateArrowButton(toShow: Bool) -> UIView {
+    private func showOrHideTranslateArrowButton() -> UIView {
         translateArrowButton.snp.updateConstraints { make in
-            make.bottom.equalTo(sourceTextView.snp.bottom).offset(toShow ? 50 : 0)
+            make.bottom.equalTo(sourceTextView.snp.bottom).offset(offsetForButtons)
         }
         return translateArrowButton
     }
 
-    private func showOrHideTargetTextView(toShow: Bool) -> UIView {
+    private func showOrHideTargetTextView() -> UIView {
         translatedTextView.snp.updateConstraints { make in
-            make.bottom.equalTo(translateArrowButton.snp.bottom).offset(toShow ? 50 : 0)
+            make.bottom.equalTo(translateArrowButton.snp.bottom).offset(offsetForTextView)
         }
         return translatedTextView
     }
 
-    private func showOrHideSaveButton(toShow: Bool) -> UIView {
+    private func showOrHideSaveButton() -> UIView {
         saveButton.snp.updateConstraints { make in
-            make.bottom.equalTo(translatedTextView.snp.bottom).offset(toShow ? 50 : 0)
+            make.bottom.equalTo(translatedTextView.snp.bottom).offset(offsetForButtons)
         }
         return saveButton
     }
@@ -190,17 +214,19 @@ extension AddTranslateView {
                              showOrHideTargetTextView,
                              showOrHideSaveButton]
 
-        let actions = toShow ? commonActions : commonActions.reversed()
+        viewMode = toShow ? .full : .short
+
+        let actions = viewMode == .full ? commonActions : commonActions.reversed()
 
         for index in 0..<actions.count {
-            let animateView = actions[index](toShow)
+            let animateView = actions[index]()
 
             let duration = translateAnimationDuration
             let delay = translateAnimationDuration * Double((index + 1))
 
             UIView.animate(withDuration: duration, delay: delay, options: [.curveEaseIn], animations: {[weak self] in
                 guard let self = self else { return }
-                animateView.alpha = toShow ? 1 : 0
+                animateView.alpha = self.viewMode == .full ? 1 : 0
                 self.superview?.layoutIfNeeded()
             })
         }

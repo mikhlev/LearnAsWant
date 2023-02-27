@@ -126,7 +126,6 @@ extension MainScreenPresenter {
     }
 }
 
-
 // MARK: - Add transalte.
 
 extension MainScreenPresenter {
