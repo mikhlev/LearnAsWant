@@ -45,22 +45,22 @@ extension UserDefaults {
         }
     }
     
-    static var cards: [String: [TranslationModel]]? {
+    static var cards: [TranslationModel]? {
         get {
             if let data = UserDefaults.standard.data(forKey: Keys.cards.rawValue) {
                 do {
-                    return try JSONDecoder().decode([String: [TranslationModel]].self, from: data)
+                    return try JSONDecoder().decode([TranslationModel].self, from: data)
                 } catch {
-                    return [:]
+                    return []
                 }
             } else {
-                return [:]
+                return []
             }
         }
         set {
 
             do {
-                let encodedDictionary = try JSONEncoder().encode(newValue ?? [:])
+                let encodedDictionary = try JSONEncoder().encode(newValue ?? [])
                 print(encodedDictionary)
                 UserDefaults.standard.set(encodedDictionary, forKey: Keys.cards.rawValue)
             } catch {

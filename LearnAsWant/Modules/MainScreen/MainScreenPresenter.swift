@@ -56,9 +56,7 @@ class MainScreenPresenter {
     }
 
     private func getCards() -> [TranslationModel] {
-        let lastUsedMainLanguageString = Singleton.currentLanguageModel.sourceLanguage.code
-        let allExistedCards = UserDefaults.cards ?? [:]
-        return allExistedCards[lastUsedMainLanguageString] ?? []
+        return UserDefaults.cards ?? []
     }
 
     func updateTranslateViewState() {

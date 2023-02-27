@@ -31,6 +31,14 @@ final class Singleton {
         let newLanguageCode = language.code
 
         if
+            isMain &&
+            currentSourceLanguage.code == TranslationLanguage.autoDetect.code &&
+            currentTargetLanguage.code == newLanguageCode
+        {
+            return
+        }
+
+        if
             (isMain && currentTargetLanguage.code == newLanguageCode) ||
             (!isMain && currentSourceLanguage.code == newLanguageCode)
         {
@@ -55,15 +63,13 @@ final class Singleton {
     static func setupNewCard(sourceText: String, translatedText: String) {
         let currentLanguage = Singleton.currentLanguageModel
 
-        var allExistedCards = UserDefaults.cards ?? [:]
-        var array = allExistedCards[currentLanguage.sourceLanguage.code] ?? []
+        var allExistedCards = UserDefaults.cards ?? []
 
-        array.append(TranslationModel(sourceLanguage: currentLanguage.sourceLanguage,
-                                      targetLanguage: currentLanguage.targetLanguage,
-                                      fromText: sourceText,
-                                      toText: translatedText))
+        allExistedCards.append(TranslationModel(sourceLanguage: currentLanguage.sourceLanguage,
+                                                targetLanguage: currentLanguage.targetLanguage,
+                                                fromText: sourceText,
+                                                toText: translatedText))
 
-        allExistedCards.updateValue(array, forKey: currentLanguage.sourceLanguage.code)
         UserDefaults.cards = allExistedCards
 
         NotificationService.postMessage(for: .newCardAdded)
