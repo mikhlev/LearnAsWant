@@ -32,6 +32,12 @@ class TranslationService: NSObject {
         textToTranslate = nil
     }
 
+    func refreshTranslate(completion: @escaping (_ translations: String?) -> Void) {
+        self.translate { translations in
+            completion(translations)
+        }
+    }
+
     func translate(completion: @escaping (_ translations: String?) -> Void) {
         guard let textToTranslate = textToTranslate, let targetLanguage = targetLanguageCode else { completion(nil); return }
 

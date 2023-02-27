@@ -77,6 +77,10 @@ class MainScreenPresenter {
 extension MainScreenPresenter {
     @objc func refreshScreen() {
         setupScreenData()
+
+        if addTranslateIsOpened {
+            refreshTranslate()
+        }
     }
 
     func openLanguagesScreen(forSource: Bool) {
@@ -126,6 +130,7 @@ extension MainScreenPresenter {
 // MARK: - Add transalte.
 
 extension MainScreenPresenter {
+    
     func saveText(sourceText: String?, translatedText: String?) {
 
         guard
@@ -148,30 +153,40 @@ extension MainScreenPresenter {
 
         // Check if it is language autodetect mode
         if Singleton.currentLanguageModel.sourceLanguage.code == TranslationLanguage.autoDetect.code {
-            translateWithDetectLanguage(text: text)
+            translateWithDetectedLanguage(text: text)
         } else {
-            translateWithLanguage(Singleton.currentLanguageModel.sourceLanguage, text: text)
+            translateWithLanguage(Singleton.currentLanguageModel.sourceLanguage)
         }
     }
 
-    private func translateWithDetectLanguage(text: String) {
-//         Check text language and setup as source language
+    private func translateWithDetectedLanguage(text: String) {
+        // Check text language and setup as source language
         TranslationService.shared.detectLanguage(forText: text) { [weak self] (language) in
             guard
                 let lang = TranslationService.shared.supportedLanguages.first(where: { $0.code == language })
             else { return }
 
             let name = lang.name
-            self?.translateWithLanguage(lang, text: text)
+            self?.translateWithLanguage(lang)
         }
     }
 
-    private func translateWithLanguage(_ language: TranslationLanguage, text: String) {
+    private func translateWithLanguage(_ language: TranslationLanguage) {
         TranslationService.shared.translate { [weak self] translation in
-            if let translation = translation {
-                DispatchQueue.main.async {
-                    self?.view?.setupTranslatedtext(text: translation)
-                }
+            self?.setupTranslatedText(translation)
+        }
+    }
+
+    private func refreshTranslate() {
+        TranslationService.shared.refreshTranslate {[weak self] translation in
+            self?.setupTranslatedText(translation)
+        }
+    }
+
+    private func setupTranslatedText(_ text: String?) {
+        if let translation = text {
+            DispatchQueue.main.async {
+                self.view?.setupTranslatedText(translation)
             }
         }
     }

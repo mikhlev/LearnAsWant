@@ -50,8 +50,8 @@ final class LanguagesPresenter {
     func languageSelected(model: LanguageCellModel) {
         
         Singleton.setupNewLanguage(model.model, isMain: forSourceLanguage)
-        NotificationService.postMessage(for: .languageChanged)
         TranslationService.shared.updateLanguages()
+        NotificationService.postMessage(for: .languageChanged)
 
         router.closeScreen()
     }
@@ -71,7 +71,10 @@ extension LanguagesPresenter {
     private func updateTable() {
         let models = languages.map { LanguageCellModel(model: $0) }
         let autoDetectModel = LanguageCellModel(model: .autoDetect)
-        view?.showData(with: [autoDetectModel] + models)
+
+        // Do not show auto detect for target language
+        let resultModel = forSourceLanguage ? [autoDetectModel] + models : models
+        view?.showData(with: resultModel)
     }
 }
 

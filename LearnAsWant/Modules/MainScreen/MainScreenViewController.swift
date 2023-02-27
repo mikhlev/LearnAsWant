@@ -39,7 +39,7 @@ class MainScreenViewController: UIViewController {
     // MARK: - Other UI elements.
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.contentInset.top = 20
+        tableView.contentInset.top = 60
         return tableView
     }()
 
@@ -268,8 +268,8 @@ extension MainScreenViewController {
         }
     }
 
-    func setupTranslatedtext(text: String) {
-        self.addTranslateView.setupTranslatedtext(text: text)
+    func setupTranslatedText(_ text: String) {
+        self.addTranslateView.setupTranslatedText(text)
     }
 
     func clearTranslateView() {

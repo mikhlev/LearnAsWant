@@ -76,7 +76,7 @@ final class AddTranslateView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setupTranslatedtext(text: String) {
+    func setupTranslatedText(_ text: String) {
         self.translatedTextView.text = text
     }
 
