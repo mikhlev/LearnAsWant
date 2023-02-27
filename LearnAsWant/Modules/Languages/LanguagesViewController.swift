@@ -15,7 +15,11 @@ final class LanguagesViewController: UIViewController {
     private lazy var titleContainer = UIView()
     private lazy var textFieldContainer = UIView()
 
-    private lazy var titleLabel: UILabel = UILabel()
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20)
+        return label
+    }()
 
     private lazy var closeButton: UIButton = {
         let button = UIButton()
