@@ -43,10 +43,4 @@ enum Strings {
         }
 
     }
-
-    enum GlobalNotification: String {
-        case newCardAdded
-        case languageFromChanged
-        case languageToChanged
-    }
 }

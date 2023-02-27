@@ -56,8 +56,6 @@ final class Singleton {
             UserDefaults.lastUsedLanguageModel = TranslationModel(sourceLanguage: currentSourceLanguage,
                                                                   targetLanguage: language)
         }
-
-        setupTranslationServiceOptions()
     }
 
     static func setupNewCard(sourceText: String, translatedText: String) {
@@ -73,11 +71,6 @@ final class Singleton {
         UserDefaults.cards = allExistedCards
 
         NotificationService.postMessage(for: .newCardAdded)
-    }
-
-    private static func setupTranslationServiceOptions() {
-        TranslationService.shared.sourceLanguageCode = Singleton.currentLanguageModel.sourceLanguage.code
-        TranslationService.shared.targetLanguageCode = Singleton.currentLanguageModel.targetLanguage.code
     }
 
     static func setupGoogleApiKey() {

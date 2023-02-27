@@ -48,8 +48,11 @@ final class LanguagesPresenter {
     }
 
     func languageSelected(model: LanguageCellModel) {
+        
         Singleton.setupNewLanguage(model.model, isMain: forSourceLanguage)
-        NotificationService.postMessage(for: forSourceLanguage ? .languageFromChanged : .languageToChanged)
+        NotificationService.postMessage(for: .languageChanged)
+        TranslationService.shared.updateLanguages()
+
         router.closeScreen()
     }
 

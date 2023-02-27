@@ -23,6 +23,11 @@ class TranslationService: NSObject {
         super.init()
     }
 
+    func updateLanguages() {
+        self.sourceLanguageCode = Singleton.currentLanguageModel.sourceLanguage.code
+        self.targetLanguageCode = Singleton.currentLanguageModel.targetLanguage.code
+    }
+
     func clearTexts() {
         textToTranslate = nil
     }

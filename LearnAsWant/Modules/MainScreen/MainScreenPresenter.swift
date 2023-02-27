@@ -29,11 +29,10 @@ class MainScreenPresenter {
     }
 
     func viewDidLoad() {
-        setupTableData()
+        setupScreenData()
         checkForLanguagesExistence()
         NotificationService.addObserver(vc: self, selector: #selector(refreshScreen), for: .newCardAdded)
-        NotificationService.addObserver(vc: self, selector: #selector(refreshScreen), for: .languageFromChanged)
-        NotificationService.addObserver(vc: self, selector: #selector(refreshScreen), for: .languageToChanged)
+        NotificationService.addObserver(vc: self, selector: #selector(refreshScreen), for: .languageChanged)
     }
 
     func viewDidAppear() {
@@ -49,7 +48,7 @@ class MainScreenPresenter {
         router.openAddTranslateScreen(model: cellModels[row].languageModel)
     }
 
-    private func setupTableData() {
+    private func setupScreenData() {
         self.view?.showData(with: cellModels)
         self.view?.setupData(sourceLanguage: Singleton.currentLanguageModel.sourceLanguage,
                              targetLanguage: Singleton.currentLanguageModel.targetLanguage)
@@ -77,7 +76,7 @@ class MainScreenPresenter {
 
 extension MainScreenPresenter {
     @objc func refreshScreen() {
-        setupTableData()
+        setupScreenData()
     }
 
     func openLanguagesScreen(forSource: Bool) {
