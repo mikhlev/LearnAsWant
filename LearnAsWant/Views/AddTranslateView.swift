@@ -18,18 +18,20 @@ final class AddTranslateView: UIView {
 
     private lazy var sourceTextView: UITextView = {
         let textView = UITextView()
-        textView.layer.borderColor = UIColor.red.cgColor
-        textView.layer.borderWidth = 1
-        textView.layer.cornerRadius = 10
+        textView.textAlignment = .center
+        textView.font = UIFont.systemFont(ofSize: 20)
+        textView.text = " Text here "
+        textView.backgroundColor = .clear
         return textView
     }()
 
-    private lazy var translatedTextView: UITextView = {
-        let textView = UITextView()
-        textView.layer.borderColor = UIColor.red.cgColor
-        textView.layer.borderWidth = 1
-        textView.layer.cornerRadius = 10
-        return textView
+    private lazy var translatedTextLabel: CopyableLabel = {
+        let label = CopyableLabel()
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        label.text = " ... "
+        label.font = UIFont.systemFont(ofSize: 20)
+        return label
     }()
 
     private lazy var translateArrowButton = UIButton()
@@ -77,12 +79,12 @@ final class AddTranslateView: UIView {
     }
 
     func setupTranslatedText(_ text: String) {
-        self.translatedTextView.text = text
+        self.translatedTextLabel.text = text
     }
 
     func clearView() {
-        self.sourceTextView.text = ""
-        self.translatedTextView.text = ""
+        self.sourceTextView.text = " Text here "
+        self.translatedTextLabel.text = " ... "
     }
 }
 
@@ -106,7 +108,7 @@ extension AddTranslateView {
     }
 
     @objc private func saveText() {
-        saveTextButtonTapped?(sourceTextView.text, translatedTextView.text)
+        saveTextButtonTapped?(sourceTextView.text, translatedTextLabel.text)
     }
 
     @objc private func updateTranslateViewState() {
@@ -120,7 +122,7 @@ extension AddTranslateView {
 
     private func setupViews() {
 
-        self.backgroundColor = .label.withAlphaComponent(0.2)
+        self.backgroundColor = .clear//.label.withAlphaComponent(0.2)
         self.sourceTextView.delegate = self
 
         self.addTranslateButton.setImage(UIImage(systemName: "plus.square.fill.on.square.fill"), for: .normal)
@@ -128,12 +130,12 @@ extension AddTranslateView {
 
         // EACH VIEW MUST HAVE THIS POSITION!!!
         self.addSubviews(saveButton,
-                         translatedTextView,
+                         translatedTextLabel,
                          translateArrowButton,
                          sourceTextView,
                          addTranslateButton)
 
-        [translatedTextView, translateArrowButton, sourceTextView, saveButton].forEach { $0.alpha = 0 }
+        [translatedTextLabel, translateArrowButton, sourceTextView, saveButton].forEach { $0.alpha = 0 }
 
         addActions()
     }
@@ -153,7 +155,7 @@ extension AddTranslateView {
 
         sourceTextView.snp.makeConstraints { make in
             make.bottom.equalTo(addTranslateButton.snp.bottom).offset(offsetForTextView)
-            make.left.right.equalToSuperview().inset(20)
+            make.left.right.equalToSuperview().inset(40)
             make.height.equalTo(heightForTextView)
         }
 
@@ -163,9 +165,9 @@ extension AddTranslateView {
             make.centerX.equalToSuperview()
         }
 
-        translatedTextView.snp.makeConstraints { make in
+        translatedTextLabel.snp.makeConstraints { make in
             make.bottom.equalTo(translateArrowButton.snp.bottom).offset(offsetForTextView)
-            make.left.right.equalToSuperview().inset(20)
+            make.left.right.equalToSuperview().inset(40)
             make.height.equalTo(heightForTextView)
         }
 
@@ -174,7 +176,7 @@ extension AddTranslateView {
             make.width.equalTo(100)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().inset(20)
-            make.bottom.equalTo(translatedTextView.snp.bottom).offset(offsetForButtons)
+            make.bottom.equalTo(translatedTextLabel.snp.bottom).offset(offsetForButtons)
         }
     }
 
@@ -194,15 +196,15 @@ extension AddTranslateView {
     }
 
     private func showOrHideTargetTextView() -> UIView {
-        translatedTextView.snp.updateConstraints { make in
+        translatedTextLabel.snp.updateConstraints { make in
             make.bottom.equalTo(translateArrowButton.snp.bottom).offset(offsetForTextView)
         }
-        return translatedTextView
+        return translatedTextLabel
     }
 
     private func showOrHideSaveButton() -> UIView {
         saveButton.snp.updateConstraints { make in
-            make.bottom.equalTo(translatedTextView.snp.bottom).offset(offsetForButtons)
+            make.bottom.equalTo(translatedTextLabel.snp.bottom).offset(offsetForButtons)
         }
         return saveButton
     }
@@ -218,6 +220,11 @@ extension AddTranslateView {
 
         let actions = viewMode == .full ? commonActions : commonActions.reversed()
 
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {[weak self] in
+            guard let self = self else { return }
+            self.backgroundColor = self.viewMode == .full ? .label.withAlphaComponent(0.3) : .clear
+        })
+
         for index in 0..<actions.count {
             let animateView = actions[index]()
 
@@ -230,5 +237,7 @@ extension AddTranslateView {
                 self.superview?.layoutIfNeeded()
             })
         }
+
+        toShow ? sourceTextView.becomeFirstResponder() : sourceTextView.resignFirstResponder()
     }
 }

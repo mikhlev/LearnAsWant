@@ -261,9 +261,9 @@ extension MainScreenViewController {
 
     private func updateTableState(toDisable: Bool) {
 
-        tableView.alpha = toDisable ? 0.5 : 1
+        tableView.alpha = toDisable ? 0.3 : 1
         tableView.isUserInteractionEnabled = !toDisable
-        UIView.animate(withDuration: toDisable ? 0.1 : 0.4) {
+        UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
         }
     }
