@@ -48,6 +48,7 @@
 		C7C9D77B29B1C83F000B5E77 /* CardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D77729B1C83F000B5E77 /* CardRouter.swift */; };
 		C7C9D77C29B1C83F000B5E77 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D77829B1C83F000B5E77 /* CardViewController.swift */; };
 		C7C9D77D29B1C83F000B5E77 /* CardAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D77929B1C83F000B5E77 /* CardAssembly.swift */; };
+		C7C9D77F29B1CFCC000B5E77 /* CardDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D77E29B1CFCC000B5E77 /* CardDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		C7C9D77729B1C83F000B5E77 /* CardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRouter.swift; sourceTree = "<group>"; };
 		C7C9D77829B1C83F000B5E77 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		C7C9D77929B1C83F000B5E77 /* CardAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAssembly.swift; sourceTree = "<group>"; };
+		C7C9D77E29B1CFCC000B5E77 /* CardDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsView.swift; sourceTree = "<group>"; };
 		CC405EF3C2660E8737C33142 /* Pods-LearnAsWant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.release.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.release.xcconfig"; sourceTree = "<group>"; };
 		D755E2A0C9DC4BD0FA5B8743 /* Pods-LearnAsWant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.debug.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 				C733C08129900EC80008FAD9 /* OnboardingView.swift */,
 				C7BB42EA29A1F20100F5783B /* AddTranslateView.swift */,
 				C7C9D77329B1B2BF000B5E77 /* CopyableLabel.swift */,
+				C7C9D77E29B1CFCC000B5E77 /* CardDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				C79C8FE2298C0EC0007E2AB5 /* LanguagesPresenter.swift in Sources */,
 				C7C9D77C29B1C83F000B5E77 /* CardViewController.swift in Sources */,
 				C7BB42E42994FB7200F5783B /* TranslationAPI.swift in Sources */,
+				C7C9D77F29B1CFCC000B5E77 /* CardDetailsView.swift in Sources */,
 				C7C9D77A29B1C83F000B5E77 /* CardPresenter.swift in Sources */,
 				C7BB42E12994FB0000F5783B /* TranslationService.swift in Sources */,
 			);

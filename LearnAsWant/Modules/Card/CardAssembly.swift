@@ -9,17 +9,20 @@
 import UIKit
 
  class CardAssembly {
-    let navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
+     let navigationController: UINavigationController
+     let model: TranslationModel
 
-    func create() -> CardViewController {
-        let viewController = CardViewController()
+     init(navigationController: UINavigationController, model: TranslationModel) {
+         self.navigationController = navigationController
+         self.model = model
+     }
 
-        let router = CardRouter(navigationController: navigationController)
-        let presenter = CardPresenter(view: viewController, router: router)
+     func create() -> CardViewController {
+         let viewController = CardViewController()
+
+    let router = CardRouter(navigationController: navigationController)
+        let presenter = CardPresenter(view: viewController, router: router, model: model)
         viewController.presenter = presenter
 
         return viewController

@@ -8,17 +8,37 @@
 
 import UIKit
 
-class CardViewController: UIViewController {
+final class CardViewController: UIViewController {
+
+    private let cardDetailsView = CardDetailsView()
 
     var presenter: CardPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBackground
-       presenter.viewDidLoad()
+
+        setupViews()
+        setupConstraints()
+        presenter.viewDidLoad()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+
+    func setupDetails(model: TranslationModel) {
+        cardDetailsView.setupData(model: model)
+    }
+
+    private func setupViews() {
+        self.view.addSubview(cardDetailsView)
+    }
+
+    private func setupConstraints() {
+        cardDetailsView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+        }
+
     }
 }
