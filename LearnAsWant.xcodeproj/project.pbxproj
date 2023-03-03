@@ -43,6 +43,7 @@
 		C7BB42E6299505F100F5783B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7BB42E5299505F100F5783B /* GoogleService-Info.plist */; };
 		C7BB42E9299F345000F5783B /* TranslationLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB42E8299F345000F5783B /* TranslationLanguage.swift */; };
 		C7BB42EB29A1F20100F5783B /* AddTranslateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB42EA29A1F20100F5783B /* AddTranslateView.swift */; };
+		C7C9D77429B1B2BF000B5E77 /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D77329B1B2BF000B5E77 /* CopyableLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		C7BB42E5299505F100F5783B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7BB42E8299F345000F5783B /* TranslationLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationLanguage.swift; sourceTree = "<group>"; };
 		C7BB42EA29A1F20100F5783B /* AddTranslateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTranslateView.swift; sourceTree = "<group>"; };
+		C7C9D77329B1B2BF000B5E77 /* CopyableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
 		CC405EF3C2660E8737C33142 /* Pods-LearnAsWant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.release.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.release.xcconfig"; sourceTree = "<group>"; };
 		D755E2A0C9DC4BD0FA5B8743 /* Pods-LearnAsWant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.debug.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,6 +128,7 @@
 			children = (
 				C733C08129900EC80008FAD9 /* OnboardingView.swift */,
 				C7BB42EA29A1F20100F5783B /* AddTranslateView.swift */,
+				C7C9D77329B1B2BF000B5E77 /* CopyableLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				C7BB42E9299F345000F5783B /* TranslationLanguage.swift in Sources */,
 				C7BB42EB29A1F20100F5783B /* AddTranslateView.swift in Sources */,
 				C79C9006298D6750007E2AB5 /* NotificationService.swift in Sources */,
+				C7C9D77429B1B2BF000B5E77 /* CopyableLabel.swift in Sources */,
 				C722D17629899E8400347F1E /* MainScreenAssembly.swift in Sources */,
 				C79C8FDB298BD2A4007E2AB5 /* AddTranslateViewController.swift in Sources */,
 				C79C8FE9298C18B5007E2AB5 /* UIView+Extensions.swift in Sources */,
