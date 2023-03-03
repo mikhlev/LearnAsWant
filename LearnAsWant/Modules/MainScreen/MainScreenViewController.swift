@@ -192,8 +192,8 @@ extension MainScreenViewController {
         }
     }
 
-    @objc private func openAddTranslateScreen() {
-        presenter.openAddTranslateScreen()
+    @objc private func openCardScreen() {
+//        presenter.openCardScreen()
     }
 
     @objc private func openLanguagesScreenForSourceLanguage() {
@@ -228,7 +228,7 @@ extension MainScreenViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.openAddTranslateScreenForCell(row: indexPath.row)
+        presenter.openCardScreen(index: indexPath.row)
     }
 }
 

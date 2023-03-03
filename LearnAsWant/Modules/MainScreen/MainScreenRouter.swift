@@ -21,6 +21,11 @@ import UIKit
          navigationController.present(addTranslateVC, animated: true)
      }
 
+     func openCardScreen(model: TranslationModel) {
+         let cardVC = CardAssembly(navigationController: navigationController).create()
+         navigationController.present(cardVC, animated: true)
+     }
+
      func openLanguagesScreen(forSource: Bool) {
          let languagesVC = LanguagesAssembly(navigationController: navigationController,
                                              forSourceLanguage: forSource).create()

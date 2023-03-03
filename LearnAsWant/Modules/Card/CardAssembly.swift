@@ -16,12 +16,7 @@ import UIKit
     }
 
     func create() -> CardViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let viewController = storyboard.instantiateViewController(
-            identifier: String(describing: CardViewController.self)
-        ) as? CardViewController else {
-            preconditionFailure("Cannot create CardViewController")
-        }
+        let viewController = CardViewController()
 
         let router = CardRouter(navigationController: navigationController)
         let presenter = CardPresenter(view: viewController, router: router)

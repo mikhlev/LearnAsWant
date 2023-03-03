@@ -58,20 +58,7 @@ final class Singleton {
         }
     }
 
-    static func setupNewCard(sourceText: String, translatedText: String) {
-        let currentLanguage = Singleton.currentLanguageModel
 
-        var allExistedCards = UserDefaults.cards ?? []
-
-        allExistedCards.append(TranslationModel(sourceLanguage: currentLanguage.sourceLanguage,
-                                                targetLanguage: currentLanguage.targetLanguage,
-                                                fromText: sourceText,
-                                                toText: translatedText))
-
-        UserDefaults.cards = allExistedCards
-
-        NotificationService.postMessage(for: .newCardAdded)
-    }
 
     static func setupGoogleApiKey() {
         if
