@@ -85,8 +85,12 @@ extension MainScreenPresenter {
         router.openLanguagesScreen(forSource: forSource)
     }
 
+    func openAllCardsScreen() {
+        router.openCardScreen(models: model.cardList.reversed())
+    }
+
     func openCardScreen(index: Int) {
-        router.openCardScreen(model: model.cardList[index])
+        router.openCardScreen(models: [model.cardList.reversed()[index]])
     }
 }
 

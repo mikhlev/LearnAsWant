@@ -179,6 +179,8 @@ extension MainScreenViewController {
         sourceLanguageButton.addTarget(self, action: #selector(openLanguagesScreenForSourceLanguage), for: .touchUpInside)
         targetLanguageButton.addTarget(self, action: #selector(openLanguagesScreenForTargetLanguage), for: .touchUpInside)
 
+        learnButton.addTarget(self, action: #selector(openCardsScreen), for: .touchUpInside)
+        
         addTranslateView.updateViewStateButtonTapped = {[weak self] in
             self?.presenter.updateTranslateViewState()
         }
@@ -192,8 +194,8 @@ extension MainScreenViewController {
         }
     }
 
-    @objc private func openCardScreen() {
-//        presenter.openCardScreen()
+    @objc private func openCardsScreen() {
+        presenter.openAllCardsScreen()
     }
 
     @objc private func openLanguagesScreenForSourceLanguage() {

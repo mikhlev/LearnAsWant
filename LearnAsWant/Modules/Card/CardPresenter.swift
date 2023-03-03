@@ -15,19 +15,19 @@ class CardPresenter {
 
     private let router: CardRouter
 
-    private let model: TranslationModel
+    private let models: [TranslationModel]
 
     init(
         view: CardViewController,
         router: CardRouter,
-        model: TranslationModel
+        models: [TranslationModel]
     ) {
         self.view = view
         self.router = router
-        self.model = model
+        self.models = models
     }
 
     func viewDidLoad() {
-        view?.setupDetails(model: model)
+        view?.setupCards(models: models)
     }
 }

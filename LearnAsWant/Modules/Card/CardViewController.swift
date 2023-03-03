@@ -10,7 +10,19 @@ import UIKit
 
 final class CardViewController: UIViewController {
 
-    private let cardDetailsView = CardDetailsView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.isPagingEnabled = true
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
+    }()
+
+    private let contentStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        return stack
+    }()
 
     var presenter: CardPresenter!
 
@@ -27,18 +39,36 @@ final class CardViewController: UIViewController {
         super.viewDidLayoutSubviews()
     }
 
-    func setupDetails(model: TranslationModel) {
-        cardDetailsView.setupData(model: model)
+    func setupCards(models: [TranslationModel]) {
+        models.forEach { model in
+
+            let cardDetailsView = CardDetailsView()
+            cardDetailsView.setupData(model: model)
+
+            contentStack.addArrangedSubview(cardDetailsView)
+
+            cardDetailsView.snp.makeConstraints { make in
+                make.width.equalTo(self.view.frame.size.width)
+            }
+        }
     }
 
     private func setupViews() {
-        self.view.addSubview(cardDetailsView)
+
+        self.view.addSubview(scrollView)
+        self.scrollView.addSubview(contentStack)
     }
 
     private func setupConstraints() {
-        cardDetailsView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+        scrollView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
         }
+
+        contentStack.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalToSuperview()
+        }
+
+
 
     }
 }
