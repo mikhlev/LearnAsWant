@@ -49,6 +49,7 @@
 		C7C9D77C29B1C83F000B5E77 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D77829B1C83F000B5E77 /* CardViewController.swift */; };
 		C7C9D77D29B1C83F000B5E77 /* CardAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D77929B1C83F000B5E77 /* CardAssembly.swift */; };
 		C7C9D77F29B1CFCC000B5E77 /* CardDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D77E29B1CFCC000B5E77 /* CardDetailsView.swift */; };
+		C7C9D78129B1E398000B5E77 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D78029B1E398000B5E77 /* UIScrollView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		C7C9D77829B1C83F000B5E77 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		C7C9D77929B1C83F000B5E77 /* CardAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAssembly.swift; sourceTree = "<group>"; };
 		C7C9D77E29B1CFCC000B5E77 /* CardDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsView.swift; sourceTree = "<group>"; };
+		C7C9D78029B1E398000B5E77 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
 		CC405EF3C2660E8737C33142 /* Pods-LearnAsWant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.release.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.release.xcconfig"; sourceTree = "<group>"; };
 		D755E2A0C9DC4BD0FA5B8743 /* Pods-LearnAsWant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.debug.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,6 +203,7 @@
 				C79C8FE8298C18B5007E2AB5 /* UIView+Extensions.swift */,
 				C79C8FF1298C2071007E2AB5 /* UITableView+Extensions.swift */,
 				C79C8FF9298CFDDD007E2AB5 /* UserDefaults+Extensions.swift */,
+				C7C9D78029B1E398000B5E77 /* UIScrollView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				C722D17529899E8400347F1E /* MainScreenViewController.swift in Sources */,
 				C79C8FE4298C0EC0007E2AB5 /* LanguagesViewController.swift in Sources */,
 				C79C8FE2298C0EC0007E2AB5 /* LanguagesPresenter.swift in Sources */,
+				C7C9D78129B1E398000B5E77 /* UIScrollView+Extensions.swift in Sources */,
 				C7C9D77C29B1C83F000B5E77 /* CardViewController.swift in Sources */,
 				C7BB42E42994FB7200F5783B /* TranslationAPI.swift in Sources */,
 				C7C9D77F29B1CFCC000B5E77 /* CardDetailsView.swift in Sources */,
