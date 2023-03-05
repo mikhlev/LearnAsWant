@@ -42,11 +42,6 @@ final class AddTranslatePresenter {
 
         var allExistedCards = UserDefaults.cards ?? []
 
-        allExistedCards.append(TranslationModel(sourceLanguage: currentLanguage.sourceLanguage,
-                                      targetLanguage: currentLanguage.targetLanguage,
-                                      fromText: text,
-                                      toText: translatedText))
-
         UserDefaults.cards = allExistedCards
         
         NotificationService.postMessage(for: .newCardAdded)

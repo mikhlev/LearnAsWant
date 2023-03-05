@@ -41,10 +41,6 @@ class MainScreenPresenter {
         //        showOnboardingForsourceLanguage()
     }
 
-    func openAddTranslateScreen() {
-        router.openAddTranslateScreen(model: Singleton.currentLanguageModel)
-    }
-
     func openAddTranslateScreenForCell(row: Int) {
         guard row < cellModels.count else { return }
         router.openAddTranslateScreen(model: cellModels[row].languageModel)

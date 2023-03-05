@@ -15,6 +15,7 @@ final class CardViewController: UIViewController {
         scrollView.isPagingEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.isUserInteractionEnabled = false
         return scrollView
     }()
 
@@ -46,7 +47,6 @@ final class CardViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "chevron.right.circle"), for: .normal)
         button.tintColor = .link
-
         button.contentHorizontalAlignment = .fill
         button.contentVerticalAlignment = .fill
         return button

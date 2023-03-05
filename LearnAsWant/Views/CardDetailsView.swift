@@ -24,7 +24,7 @@ final class CardDetailsView: UIView {
     private let sourceTextLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.numberOfLines = 2
         return label
     }()
@@ -39,7 +39,7 @@ final class CardDetailsView: UIView {
     private let targetTextLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.numberOfLines = 2
         return label
     }()

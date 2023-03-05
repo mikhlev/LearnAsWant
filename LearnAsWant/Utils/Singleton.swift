@@ -7,15 +7,16 @@
 
 import Foundation
 
+
 final class Singleton {
 
     static var googleAPIKey: String = ""
 
-    static var currentLanguageModel: TranslationModel {
+    static var currentLanguageModel: LanguageModel {
         if let language = UserDefaults.lastUsedLanguageModel {
             return language
         } else {
-            let defaultModel = TranslationModel(sourceLanguage: .defaultEnglish, targetLanguage: .defaultSpanish)
+            let defaultModel = LanguageModel(sourceLanguage: .defaultEnglish, targetLanguage: .defaultSpanish)
 
             UserDefaults.lastUsedLanguageModel = defaultModel
             return defaultModel
@@ -43,18 +44,18 @@ final class Singleton {
             (!isMain && currentSourceLanguage.code == newLanguageCode)
         {
             // reverse model if language already set
-            UserDefaults.lastUsedLanguageModel = TranslationModel(sourceLanguage: currentTargetLanguage,
-                                                                  targetLanguage: currentSourceLanguage)
+            UserDefaults.lastUsedLanguageModel = LanguageModel(sourceLanguage: currentTargetLanguage,
+                                                               targetLanguage: currentSourceLanguage)
             return
         }
 
 
         if isMain {
-            UserDefaults.lastUsedLanguageModel = TranslationModel(sourceLanguage: language,
-                                                                  targetLanguage: currentTargetLanguage)
+            UserDefaults.lastUsedLanguageModel = LanguageModel(sourceLanguage: language,
+                                                               targetLanguage: currentTargetLanguage)
         } else {
-            UserDefaults.lastUsedLanguageModel = TranslationModel(sourceLanguage: currentSourceLanguage,
-                                                                  targetLanguage: language)
+            UserDefaults.lastUsedLanguageModel = LanguageModel(sourceLanguage: currentSourceLanguage,
+                                                               targetLanguage: language)
         }
     }
 

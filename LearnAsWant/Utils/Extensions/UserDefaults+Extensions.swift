@@ -22,11 +22,11 @@ extension UserDefaults {
         case lastUsedLanguageModel
     }
 
-    static var lastUsedLanguageModel: TranslationModel? {
+    static var lastUsedLanguageModel: LanguageModel? {
         get {
             if let data = UserDefaults.standard.data(forKey: Keys.lastUsedLanguageModel.rawValue) {
                 do {
-                    return try JSONDecoder().decode(TranslationModel.self, from: data)
+                    return try JSONDecoder().decode(LanguageModel.self, from: data)
                 } catch {
                     return nil
                 }
@@ -36,7 +36,7 @@ extension UserDefaults {
         }
         set {
             do {
-                let encodedDictionary = try JSONEncoder().encode(newValue ?? TranslationModel(sourceLanguage: .defaultEnglish, targetLanguage: .defaultSpanish))
+                let encodedDictionary = try JSONEncoder().encode(newValue ?? LanguageModel(sourceLanguage: .defaultEnglish, targetLanguage: .defaultSpanish))
                 print(encodedDictionary)
                 UserDefaults.standard.set(encodedDictionary, forKey: Keys.lastUsedLanguageModel.rawValue)
             } catch {
