@@ -31,6 +31,10 @@ class CardPresenter {
     func viewDidLoad() {
         view?.setupCards(models: models)
         view?.setPageControlNumberOfPages(models.count)
+
+        if models.count == 1 {
+            view?.hideNavigationButtons()
+        }
     }
 
     func deleteCurrentItem() {

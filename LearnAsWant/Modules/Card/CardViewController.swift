@@ -79,8 +79,9 @@ final class CardViewController: UIViewController {
         presenter.viewDidLoad()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateScrollViewContentConstraints()
     }
 
     func setupCards(models: [TranslationModel]) {
@@ -131,7 +132,10 @@ final class CardViewController: UIViewController {
         subviewForRemove.removeFromSuperview()
     }
 
-
+    func hideNavigationButtons() {
+        nextCardButton.isHidden = true
+        previousCardButton.isHidden = true
+    }
 }
 
 //MARK: - Menu button.
@@ -224,6 +228,15 @@ extension CardViewController {
             make.right.equalToSuperview().inset(30)
             make.height.width.equalTo(56)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20)
+        }
+    }
+
+    private func updateScrollViewContentConstraints() {
+
+        contentStack.arrangedSubviews.forEach { subview in
+            subview.snp.updateConstraints { make in
+                make.width.equalTo(self.view.frame.size.width)
+            }
         }
     }
 }
