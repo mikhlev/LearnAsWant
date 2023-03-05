@@ -20,7 +20,8 @@ final class CardsModel {
 
         var allExistedCards = UserDefaults.cards ?? []
 
-        allExistedCards.append(TranslationModel(sourceLanguage: currentLanguage.sourceLanguage,
+        allExistedCards.append(TranslationModel(id: Int.random(in: 1...1_000_000),
+                                                sourceLanguage: currentLanguage.sourceLanguage,
                                                 targetLanguage: currentLanguage.targetLanguage,
                                                 fromText: sourceText,
                                                 toText: translatedText))
@@ -34,13 +35,7 @@ final class CardsModel {
         var allExistedCards = UserDefaults.cards ?? []
 
         allExistedCards.removeAll { model in
-            let result =
-                model.sourceLanguage.code == card.sourceLanguage.code &&
-                model.targetLanguage.code == card.targetLanguage.code &&
-                model.fromText == card.fromText &&
-                model.toText == card.toText
-
-            return result
+            return model.id == card.id
         }
 
         UserDefaults.cards = allExistedCards

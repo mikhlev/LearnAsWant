@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		94B01A1C74104AA871A0F3C7 /* Pods_LearnAsWant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5CEB63F7EB6DEEDB9C58F6 /* Pods_LearnAsWant.framework */; };
+		C71655E029B46E05007BF92E /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71655DF29B46E05007BF92E /* LanguageModel.swift */; };
 		C722D17329899E8400347F1E /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C722D16F29899E8400347F1E /* MainScreenPresenter.swift */; };
 		C722D17429899E8400347F1E /* MainScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C722D17029899E8400347F1E /* MainScreenRouter.swift */; };
 		C722D17529899E8400347F1E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C722D17129899E8400347F1E /* MainScreenViewController.swift */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		9A5CEB63F7EB6DEEDB9C58F6 /* Pods_LearnAsWant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LearnAsWant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C71655DF29B46E05007BF92E /* LanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
 		C722D16F29899E8400347F1E /* MainScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
 		C722D17029899E8400347F1E /* MainScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenRouter.swift; sourceTree = "<group>"; };
 		C722D17129899E8400347F1E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			children = (
 				C79C8FF7298CF7CF007E2AB5 /* TranslationModel.swift */,
 				C79C8FFB298D002D007E2AB5 /* CardsModel.swift */,
+				C71655DF29B46E05007BF92E /* LanguageModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				C79C8FDC298BD2A4007E2AB5 /* AddTranslateAssembly.swift in Sources */,
 				C733C08229900EC80008FAD9 /* OnboardingView.swift in Sources */,
 				C79C8FFF298D17E9007E2AB5 /* TranslatedCardCellModel.swift in Sources */,
+				C71655E029B46E05007BF92E /* LanguageModel.swift in Sources */,
 				C79C8FDA298BD2A4007E2AB5 /* AddTranslateRouter.swift in Sources */,
 				C79C8FED298C1935007E2AB5 /* PTableViewCellModel.swift in Sources */,
 				C79C8FF2298C2071007E2AB5 /* UITableView+Extensions.swift in Sources */,
