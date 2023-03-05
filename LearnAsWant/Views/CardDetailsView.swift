@@ -9,6 +9,11 @@ import UIKit
 
 final class CardDetailsView: UIView {
 
+    enum ViewMode {
+        case screen
+        case cell
+    }
+
     private let contentStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -29,7 +34,6 @@ final class CardDetailsView: UIView {
         return label
     }()
 
-
     private let targetLanguageNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -44,10 +48,10 @@ final class CardDetailsView: UIView {
         return label
     }()
 
-    init() {
+    init(mode: ViewMode) {
         super.init(frame: .zero)
-        setupViews()
-        setupConstraints()
+        setupViews(mode: mode)
+        setupConstraints(mode: mode)
     }
 
     required init?(coder: NSCoder) {
@@ -61,22 +65,32 @@ final class CardDetailsView: UIView {
         targetTextLabel.text = model.toText
     }
 
-    private func setupViews() {
+    private func setupFont(mode: ViewMode) {
+        self.sourceTextLabel.font = UIFont.systemFont(ofSize: mode == .screen ? 24 : 18, weight: .bold)
+    }
+
+    private func setupViews(mode: ViewMode) {
         self.addSubview(contentStack)
         contentStack.addArrangedSubview(sourceLanguageNameLabel)
         contentStack.addArrangedSubview(sourceTextLabel)
-        contentStack.addArrangedSubview(targetLanguageNameLabel)
-        contentStack.addArrangedSubview(targetTextLabel)
+
+        if mode == .screen {
+            contentStack.addArrangedSubview(targetLanguageNameLabel)
+            contentStack.addArrangedSubview(targetTextLabel)
+        } else {
+            self.contentStack.layer.cornerRadius = 10
+            self.contentStack.backgroundColor = .red
+        }
 
         contentStack.setCustomSpacing(20, after: sourceTextLabel)
     }
 
-    private func setupConstraints() {
+    private func setupConstraints(mode: ViewMode) {
 
         contentStack.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(30)
-            make.top.equalToSuperview().inset(40)
-            make.bottom.equalToSuperview().inset(20)
+            make.left.right.equalToSuperview().inset(mode == .screen ? 30 : 16)
+            make.top.equalToSuperview().inset(mode == .screen ? 40 : 10)
+            make.bottom.equalToSuperview().inset(mode == .screen ? 20 : 10)
         }
 
         sourceLanguageNameLabel.snp.makeConstraints { make in
@@ -84,7 +98,7 @@ final class CardDetailsView: UIView {
         }
 
         sourceTextLabel.snp.makeConstraints { make in
-            make.height.equalTo(100)
+            make.height.equalTo(mode == .screen ? 100 : 80)
         }
 
         targetLanguageNameLabel.snp.makeConstraints { make in
@@ -92,7 +106,7 @@ final class CardDetailsView: UIView {
         }
 
         targetTextLabel.snp.makeConstraints { make in
-            make.height.equalTo(100)
+            make.height.equalTo(mode == .screen ? 100 : 80)
         }
     }
 }

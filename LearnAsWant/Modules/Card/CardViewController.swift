@@ -87,7 +87,7 @@ final class CardViewController: UIViewController {
 
         models.forEach { model in
 
-            let cardDetailsView = CardDetailsView()
+            let cardDetailsView = CardDetailsView(mode: .screen)
             cardDetailsView.setupData(model: model)
 
             contentStack.addArrangedSubview(cardDetailsView)

@@ -9,8 +9,19 @@ import UIKit
 
 class TranslatedCardCell: UITableViewCell {
 
-    private let topLabel = UILabel()
-    private let bottomLabel = UILabel()
+    private let sourceLanguageNameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        return label
+    }()
+
+    private let sourceTextLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.numberOfLines = 2
+        return label
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,9 +39,9 @@ class TranslatedCardCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func setupData(fromText: String?, toText: String?) {
-        topLabel.text = fromText
-        bottomLabel.text = toText
+    func setupData(translationModel: TranslationModel) {
+        sourceLanguageNameLabel.text = translationModel.sourceLanguage.name
+        sourceTextLabel.text = translationModel.fromText
     }
 }
 
@@ -39,21 +50,21 @@ class TranslatedCardCell: UITableViewCell {
 extension TranslatedCardCell {
 
     private func setupViews() {
-        self.contentView.addSubviews(topLabel, bottomLabel)
+        self.contentView.addSubviews(sourceLanguageNameLabel, sourceTextLabel)
     }
 
     private func setupConstraints() {
-        topLabel.snp.makeConstraints { make in
+        sourceLanguageNameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(10)
+            make.left.equalToSuperview().inset(16)
             make.height.equalTo(24)
-            make.top.equalToSuperview().inset(4)
-            make.left.right.equalToSuperview().inset(16)
         }
 
-        bottomLabel.snp.makeConstraints { make in
-            make.height.equalTo(24)
-            make.top.equalTo(topLabel.snp.bottom).offset(4)
-            make.bottom.equalToSuperview().inset(4)
+        sourceTextLabel.snp.makeConstraints { make in
+            make.top.equalTo(sourceLanguageNameLabel.snp.bottom).offset(10)
             make.left.right.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(10)
+            make.height.equalTo(50)
         }
     }
 }

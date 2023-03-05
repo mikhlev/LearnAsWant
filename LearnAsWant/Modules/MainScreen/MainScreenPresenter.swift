@@ -15,7 +15,7 @@ class MainScreenPresenter {
     private var cellModels: [TranslatedCardCellModel] {
         return model.cardList
             .reversed()
-            .map { TranslatedCardCellModel(languageModel: $0) }
+            .map { TranslatedCardCellModel(translationModel: $0) }
     }
 
     private var addTranslateIsOpened: Bool = false
@@ -43,7 +43,7 @@ class MainScreenPresenter {
 
     func openAddTranslateScreenForCell(row: Int) {
         guard row < cellModels.count else { return }
-        router.openAddTranslateScreen(model: cellModels[row].languageModel)
+        router.openAddTranslateScreen(model: cellModels[row].translationModel)
     }
 
     private func setupScreenData() {
