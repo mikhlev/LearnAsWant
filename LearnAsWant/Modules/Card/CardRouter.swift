@@ -14,4 +14,8 @@ import UIKit
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+
+     func closeScreen() {
+         self.navigationController.dismiss(animated: true)
+     }
  }

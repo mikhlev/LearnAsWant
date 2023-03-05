@@ -10,12 +10,11 @@ import Foundation
 
 class CardPresenter {
 
-
     private weak var view: CardViewController?
 
     private let router: CardRouter
 
-    private let models: [TranslationModel]
+    private var models: [TranslationModel]
 
     private var currentShowCardIndex: Int = 0
 
@@ -31,6 +30,32 @@ class CardPresenter {
 
     func viewDidLoad() {
         view?.setupCards(models: models)
+        view?.setPageControlNumberOfPages(models.count)
+    }
+
+    func deleteCurrentItem() {
+
+        CardsModel.shared.removeItem(models[currentShowCardIndex])
+
+        guard
+            models.count > 1
+        else {
+            router.closeScreen()
+            return
+        }
+
+        models.remove(at: currentShowCardIndex)
+        view?.removeCard(index: currentShowCardIndex)
+
+        if currentShowCardIndex == models.count {
+            currentShowCardIndex -= 1
+        }
+
+        view?.setPageControlNumberOfPages(models.count)
+    }
+
+    func closeScreen() {
+        router.closeScreen()
     }
 
     func showNextCard() {

@@ -20,7 +20,7 @@ class MainScreenPresenter {
 
     private var addTranslateIsOpened: Bool = false
 
-    private let model = CardsModel()
+    private let model = CardsModel.shared
 
     init(
         view: MainScreenViewController,

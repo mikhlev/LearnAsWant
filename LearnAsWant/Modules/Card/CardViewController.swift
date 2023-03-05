@@ -27,23 +27,38 @@ final class CardViewController: UIViewController {
     private let pageControl: UIPageControl = {
         let control = UIPageControl()
         control.hidesForSinglePage = true
-        control.pageIndicatorTintColor = .lightGray
-        control.currentPageIndicatorTintColor = .darkGray
+        control.pageIndicatorTintColor = .systemGray3
+        control.currentPageIndicatorTintColor = .systemGray
         control.isUserInteractionEnabled = false
         return control
     }()
 
     private lazy var previousCardButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        button.setImage(UIImage(systemName: "chevron.left.circle"), for: .normal)
         button.tintColor = .link
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
         return button
     }()
 
     private lazy var nextCardButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.setImage(UIImage(systemName: "chevron.right.circle"), for: .normal)
         button.tintColor = .link
+
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        return button
+    }()
+
+    private lazy var settingsButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+        button.tintColor = .link
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.showsMenuAsPrimaryAction = true
         return button
     }()
 
@@ -70,8 +85,6 @@ final class CardViewController: UIViewController {
 
     func setupCards(models: [TranslationModel]) {
 
-        pageControl.numberOfPages = models.count
-
         models.forEach { model in
 
             let cardDetailsView = CardDetailsView()
@@ -88,6 +101,7 @@ final class CardViewController: UIViewController {
     private func setupActions() {
         self.previousCardButton.addTarget(self, action: #selector(showPreviousCard), for: .touchUpInside)
         self.nextCardButton.addTarget(self, action: #selector(showNextCard), for: .touchUpInside)
+        self.closeButton.addTarget(self, action: #selector(closeScreen), for: .touchUpInside)
     }
 
     @objc private func showNextCard() {
@@ -98,12 +112,56 @@ final class CardViewController: UIViewController {
         presenter.showPreviousCard()
     }
 
+    @objc private func closeScreen() {
+        presenter.closeScreen()
+    }
+
     func scrollView(to page: Int) {
         self.scrollView.scrollTo(horizontalPage: page)
+        self.scrollView.layoutIfNeeded()
     }
+
+    private func deleteCurrentItem() {
+        presenter.deleteCurrentItem()
+    }
+
+    func removeCard(index: Int) {
+        let subviewForRemove = contentStack.arrangedSubviews[index]
+        contentStack.removeArrangedSubview(subviewForRemove)
+        subviewForRemove.removeFromSuperview()
+    }
+
+
+}
+
+//MARK: - Menu button.
+
+extension CardViewController {
+    private func createMenuButton() {
+
+        let delete = UIAction(title: "Remove",
+                              image: UIImage(systemName: "trash"),
+                              attributes: .destructive) {[weak self] _ in
+            self?.deleteCurrentItem()
+        }
+
+
+        let menu = UIMenu(children: [delete])
+
+        self.settingsButton.menu = menu
+    }
+}
+
+//MARK: - Page control.
+
+extension CardViewController {
 
     func updatePageControl(with page: Int) {
         self.pageControl.currentPage = page
+    }
+
+    func setPageControlNumberOfPages(_ number: Int) {
+        pageControl.numberOfPages = number
     }
 }
 
@@ -113,8 +171,15 @@ extension CardViewController {
     private func setupViews() {
 
         setupActions()
+        createMenuButton()
 
-        self.view.addSubviews(closeButton, scrollView, pageControl, previousCardButton, nextCardButton)
+        self.view.addSubviews(closeButton,
+                              scrollView,
+                              settingsButton,
+                              pageControl,
+                              previousCardButton,
+                              nextCardButton)
+
         self.scrollView.addSubview(contentStack)
     }
 
@@ -135,6 +200,12 @@ extension CardViewController {
             make.top.bottom.left.right.equalToSuperview()
         }
 
+        settingsButton.snp.makeConstraints { make in
+            make.height.width.equalTo(24)
+            make.right.equalToSuperview().inset(16)
+            make.top.equalTo(scrollView.snp.bottom)
+        }
+
         pageControl.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(scrollView.snp.bottom)
@@ -142,18 +213,17 @@ extension CardViewController {
         }
 
         previousCardButton.snp.makeConstraints { make in
-            make.top.equalTo(pageControl.snp.bottom).offset(30)
+            //make.top.equalTo(pageControl.snp.bottom).offset(40)
             make.left.equalToSuperview().inset(30)
             make.height.width.equalTo(56)
-            //make.bottom.greaterThanOrEqualTo(self.view.safeAreaLayoutGuide.snp.bottom)//.inset(30)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20)
         }
 
         nextCardButton.snp.makeConstraints { make in
-            make.top.equalTo(pageControl.snp.bottom).offset(30)
+            //make.top.equalTo(pageControl.snp.bottom).offset(40)
             make.right.equalToSuperview().inset(30)
             make.height.width.equalTo(56)
-            //make.bottom.greaterThanOrEqualToSuperview()//greaterThanOrEqualTo(self.view.safeAreaLayoutGuide.snp.bottom)//.inset(30)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20)
         }
     }
-
 }
