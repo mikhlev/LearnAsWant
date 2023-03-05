@@ -15,6 +15,14 @@ class TranslatedCardCell: UITableViewCell {
         return label
     }()
 
+    private lazy var translateArrowButton = UIButton()
+
+    private let targetLanguageNameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        return label
+    }()
+
     private let sourceTextLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -42,6 +50,7 @@ class TranslatedCardCell: UITableViewCell {
     func setupData(translationModel: TranslationModel) {
         sourceLanguageNameLabel.text = translationModel.sourceLanguage.name
         sourceTextLabel.text = translationModel.fromText
+        targetLanguageNameLabel.text = translationModel.targetLanguage.name
     }
 }
 
@@ -50,7 +59,13 @@ class TranslatedCardCell: UITableViewCell {
 extension TranslatedCardCell {
 
     private func setupViews() {
-        self.contentView.addSubviews(sourceLanguageNameLabel, sourceTextLabel)
+
+        self.translateArrowButton.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+
+        self.contentView.addSubviews(sourceLanguageNameLabel,
+                                     translateArrowButton,
+                                     targetLanguageNameLabel,
+                                     sourceTextLabel)
     }
 
     private func setupConstraints() {
@@ -58,6 +73,18 @@ extension TranslatedCardCell {
             make.top.equalToSuperview().inset(10)
             make.left.equalToSuperview().inset(16)
             make.height.equalTo(24)
+        }
+
+        translateArrowButton.snp.makeConstraints { make in
+            make.height.equalTo(24)
+            make.centerY.equalTo(sourceLanguageNameLabel.snp.centerY)
+            make.left.equalTo(sourceLanguageNameLabel.snp.right).offset(6)
+        }
+
+        targetLanguageNameLabel.snp.makeConstraints { make in
+            make.height.equalTo(24)
+            make.centerY.equalTo(translateArrowButton.snp.centerY)
+            make.left.equalTo(translateArrowButton.snp.right).offset(6)
         }
 
         sourceTextLabel.snp.makeConstraints { make in

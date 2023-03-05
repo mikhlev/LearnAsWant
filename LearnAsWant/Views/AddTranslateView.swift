@@ -149,7 +149,7 @@ extension AddTranslateView {
     private func setupConstraints() {
 
         addTranslateButton.snp.makeConstraints { make in
-            make.height.width.equalTo(24)
+            make.height.width.equalTo(28)
             make.top.equalToSuperview().inset(5)
             make.right.equalToSuperview().inset(5)
         }

@@ -17,7 +17,7 @@ final class LanguagesViewController: UIViewController {
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: 22)
         return label
     }()
 
@@ -107,7 +107,8 @@ extension LanguagesViewController {
     private func setupConstraints() {
 
         titleContainer.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.top.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.height.equalTo(50)
         }
 
@@ -123,8 +124,9 @@ extension LanguagesViewController {
         }
 
         searchTextField.snp.makeConstraints { make in
-            make.top.bottom.right.equalToSuperview()
+            make.top.bottom.equalToSuperview()
             make.left.equalTo(searchButton.snp.right)
+            make.right.equalToSuperview().inset(10)
         }
 
         titleLabel.snp.makeConstraints { make in
@@ -134,7 +136,9 @@ extension LanguagesViewController {
 
         closeButton.snp.makeConstraints { make in
             make.height.width.equalTo(40)
-            make.top.bottom.equalToSuperview()
+            make.top.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview()
+
             make.right.equalToSuperview().inset(10)
             make.left.equalTo(titleLabel.snp.right)
         }

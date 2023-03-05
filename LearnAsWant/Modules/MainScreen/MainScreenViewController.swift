@@ -45,9 +45,8 @@ class MainScreenViewController: UIViewController {
 
     private lazy var learnButton: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 6
-        button.backgroundColor = .link
-        button.setTitleColor(.white, for: .normal)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
         return button
     }()
 
@@ -89,7 +88,7 @@ extension MainScreenViewController {
 
     private func setupButtons() {
         self.changeLanguageButton.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        self.learnButton.setTitle(Strings.MainScreen.learnButtonButton, for: .normal)
+        self.learnButton.setImage(UIImage(systemName: "book.closed.circle"), for: .normal)
     }
 
     private func setupTable() {
@@ -112,8 +111,9 @@ extension MainScreenViewController {
         setupTopContainerConstraints()
 
         addTranslateView.snp.makeConstraints { make in
+            
             make.left.right.equalToSuperview().inset(16)
-            make.top.equalTo(topContainer.snp.bottom)
+            make.top.equalTo(topContainer.snp.bottom).offset(5)
         }
 
         tableView.snp.makeConstraints { make in
@@ -122,10 +122,9 @@ extension MainScreenViewController {
         }
 
         learnButton.snp.makeConstraints { make in
-            make.height.equalTo(40)
-            make.width.equalTo(130)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20)
-            make.right.equalToSuperview().inset(30)
+            make.height.width.equalTo(60)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(16)
+            make.right.equalToSuperview().inset(16)
         }
     }
 
