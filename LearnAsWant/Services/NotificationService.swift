@@ -23,4 +23,9 @@ final class NotificationService {
         let nc = NotificationCenter.default
         nc.post(name: Notification.Name(key.rawValue), object: nil)
     }
+
+    static func removeObserver(vc: Any) {
+        let nc = NotificationCenter.default
+        nc.removeObserver(vc)
+    }
 }

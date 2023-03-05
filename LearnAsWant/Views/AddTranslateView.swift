@@ -20,7 +20,7 @@ final class AddTranslateView: UIView {
         let textView = UITextView()
         textView.textAlignment = .center
         textView.font = UIFont.systemFont(ofSize: 20)
-        textView.text = " Text here "
+        textView.text = ""
         textView.backgroundColor = .clear
         return textView
     }()
@@ -67,7 +67,6 @@ final class AddTranslateView: UIView {
     var saveTextButtonTapped: ((String?, String?) -> Void)?
     var sourceTextChanged: ((String?) -> Void)?
 
-
     init() {
         super.init(frame: .zero)
         setupViews()
@@ -83,7 +82,7 @@ final class AddTranslateView: UIView {
     }
 
     func clearView() {
-        self.sourceTextView.text = " Text here "
+        self.sourceTextView.text = ""
         self.translatedTextLabel.text = " ... "
     }
 }
@@ -122,6 +121,9 @@ extension AddTranslateView {
 
     private func setupViews() {
 
+        self.layer.cornerRadius = 10
+        self.layer.borderColor = UIColor.red.cgColor
+
         self.backgroundColor = .clear//.label.withAlphaComponent(0.2)
         self.sourceTextView.delegate = self
 
@@ -144,8 +146,8 @@ extension AddTranslateView {
 
         addTranslateButton.snp.makeConstraints { make in
             make.height.width.equalTo(40)
-            make.top.equalToSuperview().inset(16)
-            make.right.equalToSuperview().inset(10)
+            make.top.equalToSuperview().inset(5)
+            make.right.equalToSuperview().inset(5)
         }
 
         setupFirstState()
@@ -222,7 +224,8 @@ extension AddTranslateView {
 
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {[weak self] in
             guard let self = self else { return }
-            self.backgroundColor = self.viewMode == .full ? .label.withAlphaComponent(0.3) : .clear
+            self.layer.borderWidth = self.viewMode == .full ? 1 : 0
+            self.backgroundColor = self.viewMode == .full ? .systemBackground : .clear
         })
 
         for index in 0..<actions.count {

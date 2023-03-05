@@ -37,10 +37,6 @@ class MainScreenPresenter {
         NotificationService.addObserver(vc: self, selector: #selector(refreshScreen), for: .languageChanged)
     }
 
-    func viewDidAppear() {
-        //        showOnboardingForsourceLanguage()
-    }
-
     func openAddTranslateScreenForCell(row: Int) {
         guard row < cellModels.count else { return }
         router.openAddTranslateScreen(model: cellModels[row].translationModel)
@@ -186,7 +182,7 @@ extension MainScreenPresenter {
     }
 
     private func setupTranslatedText(_ text: String?) {
-        if let translation = text {
+        if let translation = text, addTranslateIsOpened {
             DispatchQueue.main.async {
                 self.view?.setupTranslatedText(translation)
             }

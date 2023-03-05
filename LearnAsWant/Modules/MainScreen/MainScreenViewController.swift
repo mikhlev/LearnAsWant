@@ -71,15 +71,6 @@ class MainScreenViewController: UIViewController {
         setupButtons()
         presenter.viewDidLoad()
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        presenter.viewDidAppear()
-    }
 }
 
 extension MainScreenViewController {
@@ -121,7 +112,7 @@ extension MainScreenViewController {
         setupTopContainerConstraints()
 
         addTranslateView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(16)
             make.top.equalTo(topContainer.snp.bottom)
         }
 
@@ -263,7 +254,7 @@ extension MainScreenViewController {
 
     private func updateTableState(toDisable: Bool) {
 
-        tableView.alpha = toDisable ? 0.3 : 1
+        tableView.alpha = toDisable ? 0.1 : 1
         tableView.isUserInteractionEnabled = !toDisable
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
