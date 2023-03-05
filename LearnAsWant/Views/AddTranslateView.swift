@@ -14,12 +14,17 @@ final class AddTranslateView: UIView {
         case short
     }
 
-    private lazy var addTranslateButton = UIButton()
+    private lazy var addTranslateButton: UIButton = {
+        let button = UIButton()
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        return button
+    }()
 
     private lazy var sourceTextView: UITextView = {
         let textView = UITextView()
         textView.textAlignment = .center
-        textView.font = UIFont.systemFont(ofSize: 20)
+        textView.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         textView.text = ""
         textView.backgroundColor = .clear
         return textView
@@ -29,8 +34,8 @@ final class AddTranslateView: UIView {
         let label = CopyableLabel()
         label.textAlignment = .center
         label.numberOfLines = 2
-        label.text = " ... "
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.text = "..."
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         return label
     }()
 
@@ -38,8 +43,9 @@ final class AddTranslateView: UIView {
 
     private lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Save", for: .normal)
-        button.setTitleColor(.label, for: .normal)
+        button.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
         return button
     }()
 
@@ -52,8 +58,6 @@ final class AddTranslateView: UIView {
     private let heightForTextView: Double = 70
 
     private let heightForArrowButton: Double = 40
-
-    private let heightForSaveButton: Double = 70
 
     private var offsetForTextView: Double {
         return viewMode == .full ? heightForTextView + 10 : 0
@@ -83,7 +87,7 @@ final class AddTranslateView: UIView {
 
     func clearView() {
         self.sourceTextView.text = ""
-        self.translatedTextLabel.text = " ... "
+        self.translatedTextLabel.text = "..."
     }
 }
 
@@ -122,7 +126,7 @@ extension AddTranslateView {
     private func setupViews() {
 
         self.layer.cornerRadius = 10
-        self.layer.borderColor = UIColor.red.cgColor
+        self.layer.borderColor = UIColor.link.cgColor
 
         self.backgroundColor = .clear//.label.withAlphaComponent(0.2)
         self.sourceTextView.delegate = self
@@ -145,7 +149,7 @@ extension AddTranslateView {
     private func setupConstraints() {
 
         addTranslateButton.snp.makeConstraints { make in
-            make.height.width.equalTo(40)
+            make.height.width.equalTo(24)
             make.top.equalToSuperview().inset(5)
             make.right.equalToSuperview().inset(5)
         }
@@ -174,8 +178,8 @@ extension AddTranslateView {
         }
 
         saveButton.snp.makeConstraints { make in
-            make.height.equalTo(36)
-            make.width.equalTo(100)
+            make.height.equalTo(40)
+            make.width.equalTo(40)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().inset(20)
             make.bottom.equalTo(translatedTextLabel.snp.bottom).offset(offsetForButtons)
@@ -220,12 +224,15 @@ extension AddTranslateView {
 
         viewMode = toShow ? .full : .short
 
-        let actions = viewMode == .full ? commonActions : commonActions.reversed()
+        let actions = toShow ? commonActions : commonActions.reversed()
+
+        let buttonImage = toShow ? UIImage(systemName: "multiply.circle.fill") : UIImage(systemName: "plus.square.fill.on.square.fill")
 
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {[weak self] in
             guard let self = self else { return }
-            self.layer.borderWidth = self.viewMode == .full ? 1 : 0
-            self.backgroundColor = self.viewMode == .full ? .systemBackground : .clear
+            self.addTranslateButton.setImage(buttonImage, for: .normal)
+            self.layer.borderWidth = toShow ? 2 : 0
+            self.backgroundColor = toShow ? .systemBackground : .clear
         })
 
         for index in 0..<actions.count {
@@ -236,7 +243,7 @@ extension AddTranslateView {
 
             UIView.animate(withDuration: duration, delay: delay, options: [.curveEaseIn], animations: {[weak self] in
                 guard let self = self else { return }
-                animateView.alpha = self.viewMode == .full ? 1 : 0
+                animateView.alpha = toShow ? 1 : 0
                 self.superview?.layoutIfNeeded()
             })
         }
