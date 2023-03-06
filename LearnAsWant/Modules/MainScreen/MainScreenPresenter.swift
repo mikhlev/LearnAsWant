@@ -22,6 +22,12 @@ class MainScreenPresenter {
 
     private let model = CardsModel.shared
 
+    private var autoDetectedLanguage: TranslationLanguage?
+
+    private var autoDetectedModeisOn: Bool {
+        return Singleton.currentLanguageModel.sourceLanguage.code == TranslationLanguage.autoDetect.code
+    }
+
     init(
         view: MainScreenViewController,
         router: MainScreenRouter
@@ -138,7 +144,8 @@ extension MainScreenPresenter {
             !translatedText.isEmpty
         else { return }
 
-        model.setupNewCard(sourceText: sourceText, translatedText: translatedText)
+        let auto = autoDetectedModeisOn ? autoDetectedLanguage : nil
+        model.setupNewCard(autodetectedLanguage: auto, sourceText: sourceText, translatedText: translatedText)
         TranslationService.shared.clearTexts()
         self.hideTranslateView()
     }
@@ -164,7 +171,7 @@ extension MainScreenPresenter {
                 let lang = TranslationService.shared.supportedLanguages.first(where: { $0.code == language })
             else { return }
 
-            let name = lang.name
+            self?.autoDetectedLanguage = lang
             self?.translateWithLanguage(lang)
         }
     }

@@ -15,13 +15,13 @@ final class CardsModel {
         return UserDefaults.cards ?? []
     }
 
-    func setupNewCard(sourceText: String, translatedText: String) {
+    func setupNewCard(autodetectedLanguage: TranslationLanguage?, sourceText: String, translatedText: String) {
         let currentLanguage = Singleton.currentLanguageModel
 
         var allExistedCards = UserDefaults.cards ?? []
 
         allExistedCards.append(TranslationModel(id: Int.random(in: 1...1_000_000),
-                                                sourceLanguage: currentLanguage.sourceLanguage,
+                                                sourceLanguage: autodetectedLanguage ?? currentLanguage.sourceLanguage,
                                                 targetLanguage: currentLanguage.targetLanguage,
                                                 fromText: sourceText,
                                                 toText: translatedText))
