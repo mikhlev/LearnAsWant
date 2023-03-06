@@ -40,6 +40,7 @@ class MainScreenViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.contentInset.top = 60
+        tableView.separatorStyle = .none
         return tableView
     }()
 
