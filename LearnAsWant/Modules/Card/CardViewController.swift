@@ -217,14 +217,12 @@ extension CardViewController {
         }
 
         previousCardButton.snp.makeConstraints { make in
-            //make.top.equalTo(pageControl.snp.bottom).offset(40)
             make.left.equalToSuperview().inset(30)
             make.height.width.equalTo(56)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20)
         }
 
         nextCardButton.snp.makeConstraints { make in
-            //make.top.equalTo(pageControl.snp.bottom).offset(40)
             make.right.equalToSuperview().inset(30)
             make.height.width.equalTo(56)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20)
