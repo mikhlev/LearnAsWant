@@ -131,7 +131,9 @@ extension LanguagesViewController {
 
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview()
+            make.top.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview()
+
         }
 
         closeButton.snp.makeConstraints { make in
