@@ -39,7 +39,11 @@ final class AddTranslateView: UIView {
         return label
     }()
 
-    private lazy var translateArrowButton = UIButton()
+    private lazy var translateArrowButton: UIButton = {
+        let button = UIButton()
+        button.isUserInteractionEnabled = false
+        return button
+    }()
 
     private lazy var saveButton: UIButton = {
         let button = UIButton()

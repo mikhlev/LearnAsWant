@@ -30,7 +30,11 @@ class MainScreenViewController: UIViewController {
         return button
     }()
 
-    private lazy var changeLanguageButton = UIButton()
+    private lazy var changeLanguageButton: UIButton = {
+        let button = UIButton()
+        button.isUserInteractionEnabled = false
+        return button
+    }()
 
     // MARK: - AddTranslate container.
 
@@ -48,6 +52,8 @@ class MainScreenViewController: UIViewController {
         let button = UIButton()
         button.contentHorizontalAlignment = .fill
         button.contentVerticalAlignment = .fill
+        button.backgroundColor = .systemBackground
+        button.layer.cornerRadius = 25
         return button
     }()
 
@@ -123,7 +129,7 @@ extension MainScreenViewController {
         }
 
         learnButton.snp.makeConstraints { make in
-            make.height.width.equalTo(60)
+            make.height.width.equalTo(50)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(16)
             make.right.equalToSuperview().inset(16)
         }
