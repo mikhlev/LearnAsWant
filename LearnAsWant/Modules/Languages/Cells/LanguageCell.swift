@@ -9,11 +9,19 @@ import UIKit
 
 class LanguageCell: UITableViewCell {
 
-    private let titleLabel = UILabel()
+    private let containerView = UIView()
+
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        return label
+    }()
 
     private let labelForAutoDetectCell: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return label
     }()
 
@@ -66,16 +74,21 @@ class LanguageCell: UITableViewCell {
     }
 
     private func setupViews() {
-        self.contentView.addSubviews(titleLabel, labelForAutoDetectCell)
+        self.containerView.addSubviews(titleLabel, labelForAutoDetectCell)
+        self.contentView.addSubview(containerView)
         labelForAutoDetectCell.fadeTransition(0.5)
 
     }
 
     private func setupConstraints() {
+
+        containerView.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalToSuperview()
+        }
+        
         titleLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
+            make.top.bottom.equalToSuperview().inset(16)
             make.left.equalToSuperview().inset(16)
-            make.height.equalTo(40)
         }
 
         labelForAutoDetectCell.snp.makeConstraints { make in
