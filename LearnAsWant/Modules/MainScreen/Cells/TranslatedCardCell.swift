@@ -9,9 +9,18 @@ import UIKit
 
 class TranslatedCardCell: UITableViewCell {
 
+    private let languageContainer: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.layer.borderColor = UIColor.link.cgColor
+        view.layer.borderWidth = 1
+        return view
+    }()
+
     private let sourceLanguageNameLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
+        label.textAlignment = .right
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
 
@@ -20,6 +29,7 @@ class TranslatedCardCell: UITableViewCell {
     private let targetLanguageNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
 
@@ -62,36 +72,49 @@ extension TranslatedCardCell {
 
         self.translateArrowButton.setImage(UIImage(systemName: "arrow.right"), for: .normal)
 
-        self.contentView.addSubviews(sourceLanguageNameLabel,
-                                     translateArrowButton,
-                                     targetLanguageNameLabel,
-                                     sourceTextLabel)
+        languageContainer.addSubviews(sourceLanguageNameLabel,
+                                      translateArrowButton,
+                                      targetLanguageNameLabel,
+                                      sourceTextLabel)
+
+        self.contentView.addSubviews(languageContainer)
     }
 
     private func setupConstraints() {
+
+        languageContainer.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(14)
+            make.left.equalToSuperview().inset(10)
+            make.right.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(14)
+        }
+
         sourceLanguageNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(10)
-            make.left.equalToSuperview().inset(16)
+            make.top.equalToSuperview().inset(6)
             make.height.equalTo(24)
+            make.left.equalToSuperview().inset(6)
         }
 
         translateArrowButton.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.centerY.equalTo(sourceLanguageNameLabel.snp.centerY)
             make.left.equalTo(sourceLanguageNameLabel.snp.right).offset(6)
+            make.centerX.equalToSuperview()
         }
 
         targetLanguageNameLabel.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.centerY.equalTo(translateArrowButton.snp.centerY)
             make.left.equalTo(translateArrowButton.snp.right).offset(6)
+            make.right.equalToSuperview().inset(6)
         }
 
         sourceTextLabel.snp.makeConstraints { make in
             make.top.equalTo(sourceLanguageNameLabel.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().inset(10)
+            make.left.right.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(6)
             make.height.equalTo(50)
         }
     }
+
 }
