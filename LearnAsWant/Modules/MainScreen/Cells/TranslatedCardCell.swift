@@ -13,7 +13,7 @@ class TranslatedCardCell: UITableViewCell {
         let view = UIView()
         view.layer.cornerRadius = 10
         view.layer.borderColor = UIColor.link.cgColor
-        view.layer.borderWidth = 1
+        view.layer.borderWidth = 2
         return view
     }()
 
