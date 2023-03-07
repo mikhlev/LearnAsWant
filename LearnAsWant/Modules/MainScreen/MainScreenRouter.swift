@@ -15,12 +15,6 @@ import UIKit
         self.navigationController = navigationController
     }
 
-     func openAddTranslateScreen(model: TranslationModel) {
-         let addTranslateVC = AddTranslateAssembly(navigationController: navigationController,
-                                                   translationModel: model).create()
-         navigationController.present(addTranslateVC, animated: true)
-     }
-
      func openCardScreen(models: [TranslationModel]) {
          guard models.count > 0 else { return }
          let cardVC = CardAssembly(navigationController: navigationController, models: models).create()

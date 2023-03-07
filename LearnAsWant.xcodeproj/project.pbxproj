@@ -14,10 +14,6 @@
 		C722D17529899E8400347F1E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C722D17129899E8400347F1E /* MainScreenViewController.swift */; };
 		C722D17629899E8400347F1E /* MainScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C722D17229899E8400347F1E /* MainScreenAssembly.swift */; };
 		C733C08229900EC80008FAD9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C733C08129900EC80008FAD9 /* OnboardingView.swift */; };
-		C79C8FD9298BD2A4007E2AB5 /* AddTranslatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FD5298BD2A4007E2AB5 /* AddTranslatePresenter.swift */; };
-		C79C8FDA298BD2A4007E2AB5 /* AddTranslateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FD6298BD2A4007E2AB5 /* AddTranslateRouter.swift */; };
-		C79C8FDB298BD2A4007E2AB5 /* AddTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FD7298BD2A4007E2AB5 /* AddTranslateViewController.swift */; };
-		C79C8FDC298BD2A4007E2AB5 /* AddTranslateAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FD8298BD2A4007E2AB5 /* AddTranslateAssembly.swift */; };
 		C79C8FE2298C0EC0007E2AB5 /* LanguagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FDE298C0EC0007E2AB5 /* LanguagesPresenter.swift */; };
 		C79C8FE3298C0EC0007E2AB5 /* LanguagesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FDF298C0EC0007E2AB5 /* LanguagesRouter.swift */; };
 		C79C8FE4298C0EC0007E2AB5 /* LanguagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8FE0298C0EC0007E2AB5 /* LanguagesViewController.swift */; };
@@ -61,10 +57,6 @@
 		C722D17129899E8400347F1E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		C722D17229899E8400347F1E /* MainScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenAssembly.swift; sourceTree = "<group>"; };
 		C733C08129900EC80008FAD9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		C79C8FD5298BD2A4007E2AB5 /* AddTranslatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTranslatePresenter.swift; sourceTree = "<group>"; };
-		C79C8FD6298BD2A4007E2AB5 /* AddTranslateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTranslateRouter.swift; sourceTree = "<group>"; };
-		C79C8FD7298BD2A4007E2AB5 /* AddTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTranslateViewController.swift; sourceTree = "<group>"; };
-		C79C8FD8298BD2A4007E2AB5 /* AddTranslateAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTranslateAssembly.swift; sourceTree = "<group>"; };
 		C79C8FDE298C0EC0007E2AB5 /* LanguagesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesPresenter.swift; sourceTree = "<group>"; };
 		C79C8FDF298C0EC0007E2AB5 /* LanguagesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesRouter.swift; sourceTree = "<group>"; };
 		C79C8FE0298C0EC0007E2AB5 /* LanguagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesViewController.swift; sourceTree = "<group>"; };
@@ -161,21 +153,9 @@
 			children = (
 				C7C9D77529B1C6FE000B5E77 /* Card */,
 				C79C8FDD298C0E93007E2AB5 /* Languages */,
-				C79C8FD4298BD275007E2AB5 /* AddTranslate */,
 				C722D16E29899E7300347F1E /* MainScreen */,
 			);
 			path = Modules;
-			sourceTree = "<group>";
-		};
-		C79C8FD4298BD275007E2AB5 /* AddTranslate */ = {
-			isa = PBXGroup;
-			children = (
-				C79C8FD5298BD2A4007E2AB5 /* AddTranslatePresenter.swift */,
-				C79C8FD6298BD2A4007E2AB5 /* AddTranslateRouter.swift */,
-				C79C8FD7298BD2A4007E2AB5 /* AddTranslateViewController.swift */,
-				C79C8FD8298BD2A4007E2AB5 /* AddTranslateAssembly.swift */,
-			);
-			path = AddTranslate;
 			sourceTree = "<group>";
 		};
 		C79C8FDD298C0E93007E2AB5 /* Languages */ = {
@@ -460,7 +440,6 @@
 				C79C9006298D6750007E2AB5 /* NotificationService.swift in Sources */,
 				C7C9D77429B1B2BF000B5E77 /* CopyableLabel.swift in Sources */,
 				C722D17629899E8400347F1E /* MainScreenAssembly.swift in Sources */,
-				C79C8FDB298BD2A4007E2AB5 /* AddTranslateViewController.swift in Sources */,
 				C79C8FE9298C18B5007E2AB5 /* UIView+Extensions.swift in Sources */,
 				C79C8FFA298CFDDD007E2AB5 /* UserDefaults+Extensions.swift in Sources */,
 				C722D17329899E8400347F1E /* MainScreenPresenter.swift in Sources */,
@@ -469,14 +448,11 @@
 				C79C9008298D6B4F007E2AB5 /* Singleton.swift in Sources */,
 				C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */,
 				C7C9D77B29B1C83F000B5E77 /* CardRouter.swift in Sources */,
-				C79C8FDC298BD2A4007E2AB5 /* AddTranslateAssembly.swift in Sources */,
 				C733C08229900EC80008FAD9 /* OnboardingView.swift in Sources */,
 				C79C8FFF298D17E9007E2AB5 /* TranslatedCardCellModel.swift in Sources */,
 				C71655E029B46E05007BF92E /* LanguageModel.swift in Sources */,
-				C79C8FDA298BD2A4007E2AB5 /* AddTranslateRouter.swift in Sources */,
 				C79C8FED298C1935007E2AB5 /* PTableViewCellModel.swift in Sources */,
 				C79C8FF2298C2071007E2AB5 /* UITableView+Extensions.swift in Sources */,
-				C79C8FD9298BD2A4007E2AB5 /* AddTranslatePresenter.swift in Sources */,
 				C79C9001298D1803007E2AB5 /* TranslatedCardCell.swift in Sources */,
 				C79C8FF4298C2420007E2AB5 /* LanguageCell.swift in Sources */,
 				C722D17429899E8400347F1E /* MainScreenRouter.swift in Sources */,
@@ -648,7 +624,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "Aleksei-Mikhlev.LearnAsWant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -680,7 +656,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "Aleksei-Mikhlev.LearnAsWant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

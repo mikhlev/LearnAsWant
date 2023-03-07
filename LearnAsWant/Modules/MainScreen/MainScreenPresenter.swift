@@ -43,11 +43,6 @@ class MainScreenPresenter {
         NotificationService.addObserver(vc: self, selector: #selector(refreshScreen), for: .languageChanged)
     }
 
-    func openAddTranslateScreenForCell(row: Int) {
-        guard row < cellModels.count else { return }
-        router.openAddTranslateScreen(model: cellModels[row].translationModel)
-    }
-
     private func setupScreenData() {
         self.view?.showData(with: cellModels)
         self.view?.setupData(sourceLanguage: Singleton.currentLanguageModel.sourceLanguage,
