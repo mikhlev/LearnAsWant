@@ -14,7 +14,13 @@ final class AddTranslateView: UIView {
         case short
     }
 
-    private lazy var addTranslateButton: UIButton = {
+    lazy var lineButton: DashedView = {
+        let view = DashedView()
+        view.backgroundColor = .clear
+        return view
+    }()
+
+    lazy var addTranslateButton: UIButton = {
         let button = UIButton()
         button.contentHorizontalAlignment = .fill
         button.contentVerticalAlignment = .fill
@@ -82,7 +88,13 @@ final class AddTranslateView: UIView {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setupViews()
+        setupConstraints()
+    }
+
+    func updateOnboardingLineState(isHidden: Bool) {
+        lineButton.isHidden = isHidden
     }
 
     func setupTranslatedText(_ text: String) {
@@ -132,13 +144,16 @@ extension AddTranslateView {
         self.layer.cornerRadius = 10
         self.layer.borderColor = UIColor.link.cgColor
 
-        self.backgroundColor = .clear//.label.withAlphaComponent(0.2)
+        self.backgroundColor = .clear
         self.sourceTextView.delegate = self
 
         self.addTranslateButton.setImage(UIImage(systemName: "plus.square.fill.on.square.fill"), for: .normal)
         translateArrowButton.setImage(UIImage(systemName: "arrow.down"), for: .normal)
 
+        self.addSubview(lineButton)
+
         // EACH VIEW MUST HAVE THIS POSITION!!!
+
         self.addSubviews(saveButton,
                          translatedTextLabel,
                          translateArrowButton,
@@ -146,11 +161,19 @@ extension AddTranslateView {
                          addTranslateButton)
 
         [translatedTextLabel, translateArrowButton, sourceTextView, saveButton].forEach { $0.alpha = 0 }
+        lineButton.alpha = 1
 
         addActions()
     }
 
     private func setupConstraints() {
+
+        lineButton.snp.makeConstraints { make in
+            make.centerY.equalTo(addTranslateButton.snp.centerY)
+            make.left.equalTo(self.snp.centerX)
+            make.right.equalTo(addTranslateButton.snp.left).inset(-6)
+            make.height.equalTo(1)
+        }
 
         addTranslateButton.snp.makeConstraints { make in
             make.height.width.equalTo(28)
@@ -227,6 +250,7 @@ extension AddTranslateView {
                              showOrHideSaveButton]
 
         viewMode = toShow ? .full : .short
+        self.lineButton.alpha = toShow ? 0: 1
 
         let actions = toShow ? commonActions : commonActions.reversed()
 
