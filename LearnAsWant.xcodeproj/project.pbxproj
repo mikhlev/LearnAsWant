@@ -47,6 +47,7 @@
 		C7C9D77D29B1C83F000B5E77 /* CardAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D77929B1C83F000B5E77 /* CardAssembly.swift */; };
 		C7C9D77F29B1CFCC000B5E77 /* CardDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D77E29B1CFCC000B5E77 /* CardDetailsView.swift */; };
 		C7C9D78129B1E398000B5E77 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D78029B1E398000B5E77 /* UIScrollView+Extensions.swift */; };
+		C7E41B3929B84EDC00C971E1 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E41B3829B84EDC00C971E1 /* OnboardingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 		C7C9D77929B1C83F000B5E77 /* CardAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAssembly.swift; sourceTree = "<group>"; };
 		C7C9D77E29B1CFCC000B5E77 /* CardDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsView.swift; sourceTree = "<group>"; };
 		C7C9D78029B1E398000B5E77 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
+		C7E41B3829B84EDC00C971E1 /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		CC405EF3C2660E8737C33142 /* Pods-LearnAsWant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.release.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.release.xcconfig"; sourceTree = "<group>"; };
 		D755E2A0C9DC4BD0FA5B8743 /* Pods-LearnAsWant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.debug.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				C79C9000298D1803007E2AB5 /* TranslatedCardCell.swift */,
+				C7E41B3829B84EDC00C971E1 /* OnboardingCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				C79C8FF8298CF7CF007E2AB5 /* TranslationModel.swift in Sources */,
 				C79C9008298D6B4F007E2AB5 /* Singleton.swift in Sources */,
 				C7A836BD29892AED00DE0805 /* AppDelegate.swift in Sources */,
+				C7E41B3929B84EDC00C971E1 /* OnboardingCell.swift in Sources */,
 				C7C9D77B29B1C83F000B5E77 /* CardRouter.swift in Sources */,
 				C733C08229900EC80008FAD9 /* OnboardingView.swift in Sources */,
 				C79C8FFF298D17E9007E2AB5 /* TranslatedCardCellModel.swift in Sources */,
@@ -619,7 +623,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -651,7 +655,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
