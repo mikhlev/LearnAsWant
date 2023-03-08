@@ -49,6 +49,7 @@
 		C7C9D78129B1E398000B5E77 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9D78029B1E398000B5E77 /* UIScrollView+Extensions.swift */; };
 		C7E41B3929B84EDC00C971E1 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E41B3829B84EDC00C971E1 /* OnboardingCell.swift */; };
 		C7E41B3D29B85D2E00C971E1 /* DashedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E41B3C29B85D2E00C971E1 /* DashedView.swift */; };
+		C7E41B3F29B85E9800C971E1 /* OnboardingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E41B3E29B85E9800C971E1 /* OnboardingCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		C7C9D78029B1E398000B5E77 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
 		C7E41B3829B84EDC00C971E1 /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		C7E41B3C29B85D2E00C971E1 /* DashedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedView.swift; sourceTree = "<group>"; };
+		C7E41B3E29B85E9800C971E1 /* OnboardingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCellModel.swift; sourceTree = "<group>"; };
 		CC405EF3C2660E8737C33142 /* Pods-LearnAsWant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.release.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.release.xcconfig"; sourceTree = "<group>"; };
 		D755E2A0C9DC4BD0FA5B8743 /* Pods-LearnAsWant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAsWant.debug.xcconfig"; path = "Target Support Files/Pods-LearnAsWant/Pods-LearnAsWant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -237,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				C79C8FFE298D17E9007E2AB5 /* TranslatedCardCellModel.swift */,
+				C7E41B3E29B85E9800C971E1 /* OnboardingCellModel.swift */,
 			);
 			path = CellModels;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				C79C8FE2298C0EC0007E2AB5 /* LanguagesPresenter.swift in Sources */,
 				C7C9D78129B1E398000B5E77 /* UIScrollView+Extensions.swift in Sources */,
 				C7C9D77C29B1C83F000B5E77 /* CardViewController.swift in Sources */,
+				C7E41B3F29B85E9800C971E1 /* OnboardingCellModel.swift in Sources */,
 				C7BB42E42994FB7200F5783B /* TranslationAPI.swift in Sources */,
 				C7C9D77F29B1CFCC000B5E77 /* CardDetailsView.swift in Sources */,
 				C7C9D77A29B1C83F000B5E77 /* CardPresenter.swift in Sources */,
