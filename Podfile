@@ -6,7 +6,9 @@ target 'LearnAsWant' do
   use_frameworks!
 
   # Pods for LearnAsWant
-
+  
+pod 'Firebase/Crashlytics'
+pod 'Firebase/Analytics'
 pod 'FirebaseCore'
 pod 'FirebaseMessaging'
 
