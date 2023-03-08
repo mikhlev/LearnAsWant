@@ -43,7 +43,7 @@ class MainScreenViewController: UIViewController {
     // MARK: - Other UI elements.
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.contentInset.top = 60
+        tableView.contentInset.bottom = 60
         tableView.separatorStyle = .none
         return tableView
     }()
@@ -77,9 +77,15 @@ class MainScreenViewController: UIViewController {
         setupButtons()
         presenter.viewDidLoad()
     }
+
 }
 
 extension MainScreenViewController {
+
+    func setupTableContentOffset(top: CGFloat) {
+         self.tableView.contentInset.top = top
+    }
+
     func showData(with cellModels: [PTableViewCellAnyModel]) {
         self.cellModels = cellModels
     }
@@ -87,6 +93,10 @@ extension MainScreenViewController {
     func setupData(sourceLanguage: TranslationLanguage, targetLanguage: TranslationLanguage) {
         sourceLanguageButton.setTitle(sourceLanguage.name, for: .normal)
         targetLanguageButton.setTitle(targetLanguage.name, for: .normal)
+    }
+
+    func updateOnboardingLineState(isHidden: Bool) {
+        addTranslateView.updateOnboardingLineState(isHidden: isHidden)
     }
 }
 
@@ -102,7 +112,7 @@ extension MainScreenViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.register(models: [TranslatedCardCellModel.self])
-        self.tableView.contentInset.bottom = 60
+        tableView.register(models: [OnboardingCellModel.self])
     }
 
     private func setupViews() {
@@ -124,7 +134,7 @@ extension MainScreenViewController {
         }
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(topContainer.snp.bottom).offset(16)
+            make.top.equalTo(topContainer.snp.bottom).offset(24)
             make.left.right.bottom.equalToSuperview()
         }
 
@@ -235,12 +245,8 @@ extension MainScreenViewController: UITableViewDataSource {
 
 extension MainScreenViewController {
 
-    func showOnboardingForsourceLanguage(with description: String) {
-        self.showOnboarding(description: description, viewForCopy: sourceLanguageButton)
-    }
-
-    func showOnboardingFortargetLanguage(with description: String) {
-        self.showOnboarding(description: description, viewForCopy: targetLanguageButton)
+    func showOnboardingForAddButton(with description: String) {
+        self.showOnboarding(description: description, viewForCopy: addTranslateView)
     }
 
     private func showOnboarding(description: String, viewForCopy: UIView) {

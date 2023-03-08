@@ -12,7 +12,7 @@ class MainScreenPresenter {
     
     private weak var view: MainScreenViewController?
     private let router: MainScreenRouter
-    private var cellModels: [TranslatedCardCellModel] {
+    private var cardCellModels: [TranslatedCardCellModel] {
         return model.cardList
             .reversed()
             .map { TranslatedCardCellModel(translationModel: $0) }
@@ -44,7 +44,15 @@ class MainScreenPresenter {
     }
 
     private func setupScreenData() {
-        self.view?.showData(with: cellModels)
+
+        let tableCells: [PTableViewCellAnyModel] = cardCellModels.isEmpty ? [OnboardingCellModel()] : cardCellModels
+        let tableContentTopOffset: CGFloat = cardCellModels.isEmpty ? 0 : 20
+
+        self.view?.updateOnboardingLineState(isHidden: !cardCellModels.isEmpty)
+        
+        self.view?.showData(with: tableCells)
+        self.view?.setupTableContentOffset(top: tableContentTopOffset)
+
         self.view?.setupData(sourceLanguage: Singleton.currentLanguageModel.sourceLanguage,
                              targetLanguage: Singleton.currentLanguageModel.targetLanguage)
     }
@@ -84,20 +92,6 @@ extension MainScreenPresenter {
 
     func openCardScreen(index: Int) {
         router.openCardScreen(models: [model.cardList.reversed()[index]])
-    }
-}
-
-// MARK: - Onboarding.
-
-extension MainScreenPresenter {
-
-    private func showOnboardingForsourceLanguage() {
-        self.view?.showOnboardingForsourceLanguage(with: "Please choose first language")
-
-    }
-
-    private func showOnboardingFortargetLanguage() {
-        self.view?.showOnboardingFortargetLanguage(with: "Please choose second language")
     }
 }
 
