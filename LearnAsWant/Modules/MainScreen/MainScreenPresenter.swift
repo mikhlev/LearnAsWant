@@ -110,19 +110,7 @@ extension MainScreenPresenter {
 
     func fetchSupportedLanguages() {
         TranslationService.shared.fetchSupportedLanguages(completion: { (success) in
-                    if success {
-                        // Display languages in the tableview.
-//                        DispatchQueue.main.async { [unowned self] in
-//                            router.openLanguagesScreen(languages: TranslationService.shared.supportedLanguages)
-//                        }
-                    } else {
-                        // Show an alert saying that something went wrong.
-//                        self.alertCollection.presentSingleButtonAlert(withTitle: "Supported Languages", message: "Oops! It seems that something went wrong and supported languages cannot be fetched.", buttonTitle: "OK", actionHandler: {
-//
-//                        })
-                    }
-
-                })
+        })
     }
 }
 
