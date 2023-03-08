@@ -80,7 +80,7 @@ class TranslationService: NSObject {
 
         var urlParams = [String: String]()
         urlParams["key"] = apiKey
-        urlParams["target"] = Locale.current.language.languageCode?.identifier ?? "en"
+        urlParams["target"] = "en"
 
         makeRequest(usingTranslationAPI: .supportedLanguages, urlParams: urlParams) { (results) in
             guard
