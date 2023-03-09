@@ -98,6 +98,10 @@ extension MainScreenViewController {
     func updateOnboardingLineState(isHidden: Bool) {
         addTranslateView.updateOnboardingLineState(isHidden: isHidden)
     }
+
+    func updateLearnButtonState(isEnabled: Bool) {
+        self.learnButton.isEnabled = isEnabled
+    }
 }
 
 // MARK: - Setup UI.
@@ -259,7 +263,7 @@ extension MainScreenViewController {
 
 extension MainScreenViewController {
 
-    func updateViewState(toShow: Bool) {
+    func updateAddTranslateViewState(toShow: Bool) {
         self.addTranslateView.updateViewState(toShow: toShow)
         self.updateTableState(toDisable: toShow)
     }

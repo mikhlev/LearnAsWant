@@ -49,7 +49,8 @@ class MainScreenPresenter {
         let tableContentTopOffset: CGFloat = cardCellModels.isEmpty ? 0 : 20
 
         self.view?.updateOnboardingLineState(isHidden: !cardCellModels.isEmpty)
-        
+        self.view?.updateLearnButtonState(isEnabled: !cardCellModels.isEmpty)
+
         self.view?.showData(with: tableCells)
         self.view?.setupTableContentOffset(top: tableContentTopOffset)
 
@@ -63,13 +64,13 @@ class MainScreenPresenter {
 
     private func hideTranslateView() {
         addTranslateIsOpened = false
-        view?.updateViewState(toShow: addTranslateIsOpened)
+        view?.updateAddTranslateViewState(toShow: addTranslateIsOpened)
         self.view?.clearTranslateView()
     }
 
     private func showTranslateView() {
         addTranslateIsOpened = true
-        view?.updateViewState(toShow: addTranslateIsOpened)
+        view?.updateAddTranslateViewState(toShow: addTranslateIsOpened)
     }
 }
 
