@@ -92,7 +92,11 @@ extension MainScreenPresenter {
     }
 
     func openCardScreen(index: Int) {
-        router.openCardScreen(models: [model.cardList.reversed()[index]])
+        if cardCellModels.isEmpty {
+            showTranslateView()
+        } else if index < cardCellModels.count {
+            router.openCardScreen(models: [model.cardList.reversed()[index]])
+        }
     }
 }
 
